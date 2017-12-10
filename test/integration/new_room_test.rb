@@ -8,9 +8,10 @@ class NewRoomTest < ActionDispatch::IntegrationTest
     # Submit form with name
     post rooms_path,
          params: { user: { name: "James" } }
-    # room = assigns(:room)
-    # # Should be redirected to the settings page
-    # assert_redirected_to edit_settings_path(room.code)
-    # assert_template 'settings/edit'
+    room = assigns(:room)
+    # Should be redirected to the settings page
+    assert_redirected_to edit_settings_path(room.code)
+    follow_redirect!
+    assert_template 'settings/edit'
   end
 end

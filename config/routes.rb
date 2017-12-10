@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   # Users
   get '/rooms/:room_code/users/new', to: 'user#new', as: 'new_user'  
   post '/rooms/:room_code/users',    to: 'user#create'
+
+  # Settings
+  get '/rooms/:room_code/settings',  to: 'settings#edit', as: 'edit_settings'
 end
