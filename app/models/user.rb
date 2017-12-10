@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   belongs_to :room
 
-  attr_accessor :authentication_token
+  attr_accessor :remember_token
 
-  before_create :create_authentication_digest
+  before_create :create_remember_digest
 
   # Returns a random token
   def User.new_token
@@ -19,8 +19,8 @@ class User < ApplicationRecord
 
   private
 
-    def create_authentication_digest
-      self.authentication_token = User.new_token
-      self.authentication_digest = User.digest(authentication_token)
+    def create_remember_digest
+      self.remember_token = User.new_token
+      self.remember_digest = User.digest(remember_token)
     end
 end

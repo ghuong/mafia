@@ -6,12 +6,11 @@ class ActiveSupport::TestCase
   fixtures :all
 
   def is_authenticated?
-    !cookies.signed['user_token'].nil?
+    !cookies['user_id'].nil? && !cookies['remember_token'].nil?
   end
 
   def authenticate_as(user)
     cookies.signed['user_id'] = user.id
     cookies['authentication_token'] = user.authentication_token
-    cookies['host_token'] = user.host_token unless user.host_token.nil?
   end
 end

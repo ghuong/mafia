@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
     if @room.save
       @user = User.new(name: params[:name], room_id: @room.id)
       if @user.save
+        remember @user
         redirect_to edit_settings_path(@room.code)
       else
         @room.destroy
