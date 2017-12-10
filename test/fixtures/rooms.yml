@@ -8,3 +8,13 @@ pregame_room:
   id: 1
   code: "LEGO"
   state: "pregame"
+
+finished_room:
+  id: 2
+  code: "MAGE"
+  state: "finished"
+
+playing_room:
+  id: 3
+  code: "LACK"
+  state: "playing"

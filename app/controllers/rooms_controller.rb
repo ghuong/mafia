@@ -20,16 +20,18 @@ class RoomsController < ApplicationController
   end
 
   def show
+    create_session if Rails.env.test?
+
     params[:room_code] ||= params[:room][:code]
     @room = Room.find_by(code: params[:room_code])
     if !@room
       @room = Room.new
       @room.errors.add(:code, "does not exist.")
       render 'static_pages/home'
-    # elsif @room.is_in_progress
-    #   redirect_to edit_actions_path
-    # elsif @room.is_finished
-    #   redirect_to verdict_path
+    elsif @room.is_in_progress
+      redirect_to edit_actions_path(@room.code)
+    elsif @room.is_finished
+      redirect_to verdict_path(@room.code)
     elsif is_host?(@room)
       redirect_to edit_settings_path(@room.code)
     elsif has_already_joined?(@room)
@@ -38,4 +40,13 @@ class RoomsController < ApplicationController
       redirect_to new_user_path(@room.code)
     end
   end
+
+  private
+
+    def create_session
+      user = User.find_by(id: params[:user_id])
+      if user && user.authenticated?(:remember, params[:remember_token])
+        remember(user)
+      end
+    end
 end

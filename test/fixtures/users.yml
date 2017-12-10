@@ -10,3 +10,8 @@ host_user:
   room_id: 1
   remember_digest: <%= User.digest('my_token') %>
   is_host: true
+
+user_in_finished_room:
+  name: "Edison"
+  room_id: 2
+  remember_digest: <%= User.digest('my_token') %>

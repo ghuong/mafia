@@ -14,4 +14,10 @@ Rails.application.routes.draw do
 
   # Settings
   get '/rooms/:room_code/settings',  to: 'settings#edit', as: 'edit_settings'
+
+  # Actions
+  get '/rooms/:room_code/actions/edit', to: 'actions#edit', as: 'edit_actions'
+
+  # Verdicts
+  get '/rooms/:room_code/verdict',  to: 'verdicts#show', as: 'verdict'
 end
