@@ -65,11 +65,4 @@ class JoinRoomTest < ActionDispatch::IntegrationTest
   #   get room_path(@pregame_room_code)
   #   assert_template 'rooms/wait'
   # end
-
-  # test "re-join room in pre-game phase as host" do
-  #   authenticate_as(@host_user)
-  #   # Join existing room with its Room Code
-  #   get room_path(@pregame_room_code)
-  #   assert_template 'settings/edit'
-  # end
 end

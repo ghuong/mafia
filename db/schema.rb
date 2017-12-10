@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20171210032824) do
     t.integer "room_id"
     t.string "name"
     t.string "remember_digest"
+    t.boolean "is_host", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

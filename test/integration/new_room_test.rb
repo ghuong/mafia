@@ -19,5 +19,10 @@ class NewRoomTest < ActionDispatch::IntegrationTest
     # Ensure page displays the room code
     assert_select "p", "#{room.code}"
     assert is_authenticated?
+    # Access room again, should still redirect to settings page
+    get room_path(room.code)
+    assert_redirected_to edit_settings_path(room.code)
+    follow_redirect!
+    assert_template 'settings/edit'
   end
 end

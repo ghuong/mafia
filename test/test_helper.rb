@@ -8,9 +8,4 @@ class ActiveSupport::TestCase
   def is_authenticated?
     !cookies['user_id'].nil? && !cookies['remember_token'].nil?
   end
-
-  def authenticate_as(user)
-    cookies.signed['user_id'] = user.id
-    cookies['authentication_token'] = user.authentication_token
-  end
 end

@@ -7,19 +7,16 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new
     if @room.save
-      @user = User.new(name: params[:name], room_id: @room.id)
+      @user = User.new(name: params[:name], room_id: @room.id, is_host: true)
       if @user.save
         remember @user
-        redirect_to edit_settings_path(@room.code)
-      else
-        @room.destroy
-        flash[:danger] = "Something went wrong."
-        redirect_to root_path
+        redirect_to edit_settings_path(@room.code) and return
       end
-    else
-      flash[:danger] = "Something went wrong."
-      render :new
     end
+
+    @room.destroy unless @room.nil?
+    flash.now[:danger] = "Something went wrong."
+    render :new
   end
 
   def show

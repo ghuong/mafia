@@ -32,6 +32,6 @@ module SessionsHelper
   # Returns true if the current user is the host of the given room 
   def is_host?(room, user = nil)
     user ||= current_user
-    has_already_joined?(room, user) && room.host_id == user.id
+    has_already_joined?(room, user) && user.is_host
   end
 end

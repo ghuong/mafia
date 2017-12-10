@@ -1,12 +1,23 @@
 class Room < ApplicationRecord
-  has_many :users
-  # belongs_to :user, foreign_key: :host_id, class_name: "User"
+  has_many :users, dependent: :destroy
 
-  before_create :generate_code
+  before_create :generate_room_code
+
+  ROOM_CODE_LENGTH = 4
 
   private
 
-    def generate_code
-      self.code = "1234"
+    # Generate unique room code
+    def generate_room_code
+      self.code = loop do
+        random_code = get_random_code(ROOM_CODE_LENGTH)
+        break random_code unless Room.exists?(code: random_code)
+      end
+    end
+
+    # Returns a random string of capitalized letters
+    def get_random_code(length)
+      o = [('A'..'Z')].map(&:to_a).flatten
+      (0...length).map { o[rand(o.length)] }.join
     end
 end
