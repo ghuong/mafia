@@ -11,9 +11,9 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get show" do
+  test "should redirect from show when joining room for the first time" do
     get room_path(@pregame_room_code)
-    assert_response :success
+    assert_redirected_to new_user_url(@pregame_room_code)
   end
 
 end

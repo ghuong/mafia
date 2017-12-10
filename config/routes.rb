@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/rooms/new',          to: 'rooms#new', as: 'new_room'
   post '/rooms',             to: 'rooms#create'
   get '/rooms/:room_code',   to: 'rooms#show', as: 'room'
+  post '/rooms/join',        to: 'rooms#show', as: 'join'
 
   # Users
   get '/rooms/:room_code/users/new', to: 'user#new', as: 'new_user'  

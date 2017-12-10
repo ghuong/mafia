@@ -2,22 +2,20 @@ require 'test_helper'
 
 class JoinRoomTest < ActionDispatch::IntegrationTest
 
-  # def setup
-  #   @host_user = users(:host_user)
-  #   @nonexistent_room_code = "0000"
-  #   @pregame_room_code = rooms(:pregame_room).code
-  #   @finished_room_code = rooms(:ended_room).code
-  #   @playing_room_code = rooms(:playing_room).code
-  # end
+  def setup
+    @host_user = users(:host_user)
+    @nonexistent_room_code = "0000"
+    @pregame_room_code = rooms(:pregame_room).code
+    # @finished_room_code = rooms(:ended_room).code
+    # @playing_room_code = rooms(:playing_room).code
+  end
 
-  # test "attempt to join non-existent room" do
-  #   get room_path(@nonexistent_room_code)
-  #   assert_redirected_to root_url
-  #   follow_redirect!
-  #   assert_template 'static_pages/home'
-  #   assert_select 'div#field_with_errors'
-  #   assert_select 'div.field_with_errors'
-  # end
+  test "attempt to join non-existent room" do
+    get room_path(@nonexistent_room_code)
+    assert_template 'static_pages/home'
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
+  end
 
   # test "attempt to join a finished game room" do
   #   get room_path(@finished_room_code)

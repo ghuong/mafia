@@ -5,3 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 
+host_user:
+  name: "George"
+  room_id: 1
+  remember_digest: <%= User.digest('my_token') %>
