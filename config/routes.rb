@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   post '/rooms/join',        to: 'rooms#show', as: 'join'
 
   # Users
-  get '/rooms/:room_code/users/new', to: 'user#new', as: 'new_user'  
-  post '/rooms/:room_code/users',    to: 'user#create'
+  get '/rooms/:room_code/users/new', to: 'users#new', as: 'new_user'  
+  post '/rooms/:room_code/users',    to: 'users#create', as: 'users'
 
   # Settings
   get '/rooms/:room_code/settings',  to: 'settings#edit', as: 'edit_settings'

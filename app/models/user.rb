@@ -3,7 +3,10 @@ class User < ApplicationRecord
 
   attr_accessor :remember_token
 
-  before_create :create_remember_digest
+  before_create :create_remember_digest, :remove_trailing_spaces
+
+  validates :name, presence: true, length: { maximum: 20 }
+  validate :room_exists, :name_is_unique_in_room
 
   # Returns true if the given token matches the digest
   def authenticated?(attribute, token)
@@ -29,5 +32,22 @@ class User < ApplicationRecord
     def create_remember_digest
       self.remember_token = User.new_token
       self.remember_digest = User.digest(remember_token)
+    end
+
+    def remove_trailing_spaces
+      self.name.strip!
+    end
+
+    def room_exists
+      if !Room.exists?(self.room_id)
+        errors.add(:room_id, "does not exist")
+      end
+    end
+
+    def name_is_unique_in_room
+      room = Room.find_by(id: room_id)
+      if room.users.any? { |user| user.name.downcase == self.name.strip.downcase }
+        errors.add(:name, "is already taken")
+      end
     end
 end

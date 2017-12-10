@@ -1,0 +1,13 @@
+<%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user, url: users_path(params[:room_code])) do |f| %>
+      <%= render 'shared/error_messages', object: @user %>
+
+      <%= f.label :name, "What's your actual name?" %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "Your Name" %>
+      <%= submit_tag "Join Room", class: "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
+</div>

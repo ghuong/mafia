@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserControllerTest < ActionDispatch::IntegrationTest
+class UsersControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @pregame_room_code = rooms(:pregame_room).code

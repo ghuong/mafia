@@ -20,8 +20,8 @@ class RoomsController < ApplicationController
   end
 
   def show
-    room_code = params[:room_code] || params[:room][:code]
-    @room = Room.find_by(code: room_code)
+    params[:room_code] ||= params[:room][:code]
+    @room = Room.find_by(code: params[:room_code])
     if !@room
       @room = Room.new
       @room.errors.add(:code, "does not exist.")
