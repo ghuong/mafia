@@ -1,11 +1,20 @@
 class RoomsController < ApplicationController
+  
   def new
+    @room = Room.new
   end
 
   def create
     @room = Room.new
     if @room.save
-      redirect_to edit_settings_path(@room.code)
+      @user = User.new(name: params[:name], room_id: @room.id)
+      if @user.save
+        redirect_to edit_settings_path(@room.code)
+      else
+        @room.destroy
+        flash[:danger] = "Something went wrong."
+        redirect_to root_path
+      end
     else
       flash[:danger] = "Something went wrong."
       render :new
@@ -14,10 +23,4 @@ class RoomsController < ApplicationController
 
   def show
   end
-
-  private
-
-    def room_params
-
-    end
 end
