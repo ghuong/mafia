@@ -1,10 +1,11 @@
 require 'test_helper'
 
 class SiteLayoutTestTest < ActionDispatch::IntegrationTest
-  test "home page" do
+
+  test "home page links" do
     get root_path
     assert_template 'static_pages/home'
     assert_select "a[href=?]", help_path
-    # TODO: create room, join room paths
+    assert_select "a[href=?]", new_room_path
   end
 end

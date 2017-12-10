@@ -1,6 +1,11 @@
 <div class="center jumbotron">
   <h1>Play Mafia</h1>
-  <%= link_to "Join Room", '#', class: "btn btn-lg btn-primary" %><br>
-  <%= link_to "Create Room", '#', class: "btn btn-lg btn-primary" %><br>
+
+  <%= form_for(:room, method: :get) do |f| %>
+    <%= f.text_field :code, class: 'form-control', placeholder: "Room Code" %>
+    <%= f.submit "Join", class: "btn btn-lg btn-primary" %>
+  <% end %>
+
+  <%= link_to "New Room", new_room_path, class: "btn btn-lg btn-primary" %><br>
   <%= link_to "How to Play", help_path, class: "btn btn-lg btn-primary" %><br>
 </div>
