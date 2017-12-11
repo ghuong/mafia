@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @room = Room.find_by(code: params[:room_code])
     if @room
-      if !@room.is_pregame
+      if !@room.is_pregame?
         flash.now[:danger] = "You can no longer join that room."
         render 'static_pages/home' and return
       end

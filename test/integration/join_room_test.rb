@@ -6,6 +6,7 @@ class JoinRoomTest < ActionDispatch::IntegrationTest
   def setup
     @host_user = users(:host_user)
     @nonexistent_room_code = "0000"
+    
     @pregame_room_code = rooms(:pregame_room).code
     @finished_room_code = rooms(:finished_room).code
     @playing_room_code = rooms(:playing_room).code
@@ -20,16 +21,16 @@ class JoinRoomTest < ActionDispatch::IntegrationTest
 
   test "cannot join finished game" do
     get room_path(@finished_room_code)
-    follow_redirect!
     assert_template 'static_pages/home'
-    assert_not flash.empty?
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
   end
 
   test "cannot join game in-progress" do
     get room_path(@playing_room_code)
-    follow_redirect!
     assert_template 'static_pages/home'
-    assert_not flash.empty?
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
   end
 
   test "can join new game" do

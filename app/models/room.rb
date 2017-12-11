@@ -5,15 +5,15 @@ class Room < ApplicationRecord
 
   ROOM_CODE_LENGTH = 4
 
-  def is_pregame
+  def is_pregame?
     state == 'pregame'
   end
 
-  def is_in_progress
+  def is_in_progress?
     state == 'playing'
   end
 
-  def is_finished
+  def is_finished?
     state == 'finished'
   end
 

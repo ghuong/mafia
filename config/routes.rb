@@ -17,7 +17,4 @@ Rails.application.routes.draw do
 
   # Actions
   get '/rooms/:room_code/actions/edit', to: 'actions#edit', as: 'edit_actions'
-
-  # Verdicts
-  get '/rooms/:room_code/verdict',  to: 'verdicts#show', as: 'verdict'
 end

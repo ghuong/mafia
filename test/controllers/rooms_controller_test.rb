@@ -5,11 +5,12 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @pregame_room_code = rooms(:pregame_room).code
-    @playing_room_code = rooms(:playing_room).code
     @finished_room_code = rooms(:finished_room).code
     @nonexistent_room_code = "0000"
+
     @host_user = users(:host_user)
     @guest_user = users(:guest_user)
+    @user_in_finished_room = users(:user_in_finished_room)
   end
 
   test "should get new" do
@@ -34,18 +35,15 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to edit_settings_path(@pregame_room_code)
   end
 
-  test "should redirect show when game already started" do
-    get room_path(@playing_room_code)
-    assert_response :redirect
-  end
-
-  test "should redirect show when game already finished" do
+  test "should show verdict when game finished" do
+    authenticate_as(@user_in_finished_room, @finished_room_code)
     get room_path(@finished_room_code)
-    assert_response :redirect
+    assert_template 'rooms/verdict'
   end
 
   test "should show when game non-existent" do
     get room_path(@nonexistent_room_code)
+    assert_template 'static_pages/home'
     assert_select 'div#error_explanation'
   end
 

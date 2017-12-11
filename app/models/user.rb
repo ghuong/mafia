@@ -46,7 +46,7 @@ class User < ApplicationRecord
 
     def name_is_unique_in_room
       room = Room.find_by(id: room_id)
-      if room.users.any? { |user| user.name.downcase == self.name.strip.downcase }
+      if room && room.users.any? { |user| user.name.downcase == self.name.strip.downcase }
         errors.add(:name, "is already taken")
       end
     end

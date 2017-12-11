@@ -24,21 +24,28 @@ class RoomsController < ApplicationController
 
     params[:room_code] ||= params[:room][:code]
     @room = Room.find_by(code: params[:room_code])
-    if !@room
-      @room = Room.new
-      @room.errors.add(:code, "does not exist.")
-      render 'static_pages/home'
-    elsif @room.is_in_progress
-      redirect_to edit_actions_path(@room.code)
-    elsif @room.is_finished
-      redirect_to verdict_path(@room.code)
-    elsif is_host?(@room)
-      redirect_to edit_settings_path(@room.code)
-    elsif has_already_joined?(@room)
-      render :show
-    else
-      redirect_to new_user_path(@room.code)
+
+    if @room
+      if @room.is_pregame?
+        if is_host?(@room) # host accesses settings page for room
+          redirect_to edit_settings_path(@room.code) and return
+        elsif has_already_joined?(@room) # guest user gets waiting room
+          render :show and return
+        else # new people must create a new user
+          redirect_to new_user_path(@room.code) and return
+        end
+      elsif has_already_joined?(@room)
+        if @room.is_in_progress? # game already started
+          redirect_to edit_actions_path(@room.code) and return
+        elsif @room.is_finished? # render the game verdict
+          render_verdict and return
+        end
+      end
     end
+
+    @room = Room.new
+    @room.errors.add(:code, "cannot be joined.")
+    render 'static_pages/home'
   end
 
   private
@@ -49,5 +56,9 @@ class RoomsController < ApplicationController
       if user && user.authenticated?(:remember, params[:remember_token])
         remember(user)
       end
+    end
+
+    def render_verdict
+      render :verdict
     end
 end
