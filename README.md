@@ -1,24 +1,59 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+=== Preparation ===
 
-Things you may want to cover:
+* Ruby version:
+ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-darwin16]
 
-* Ruby version
+Run the following:
+  `bundle install`
+  `bundle update`
 
-* System dependencies
+Migrate the database in development and test environments:
+  `rails db:migrate`
+  `rails db:migrate RAILS_ENV=test`
 
-* Configuration
+Verify all tests pass:
+  `rails test`
 
-* Database creation
+Run:
+  `rails server`
 
-* Database initialization
+Visit 'localhost:3000/' to visit homepage
 
-* How to run the test suite
+=== What is this? ===
 
-* Services (job queues, cache servers, search engines, etc.)
+This is a web app that allows a group of friends who are hanging out in the same real-life room to play a game of Mafia without a host. The only requirement is that each person has a phone with an internet connection, and can access this web app through a browser. No sign-up is required.
 
-* Deployment instructions
+=== Architecture ===
 
-* ...
+-- Controllers --
+
+StaticPagesController:
+- Handles requests for simple static pages (home and help pages)
+
+RoomsController:
+- Handles requests to create new rooms, or to join existing rooms
+- Upon creating or joining a room, one is authenticated with a throwaway User model (without sign-up), tied to the Room; the room creator is the "host"
+- Rooms begin in 'pre-game' state
+- Non-hosts join rooms with a 4-letter code
+
+UsersController:
+- Handles requests to create a throwaway User account, no password required
+
+SettingsController:
+- While game is in 'pre-game' state, the host can tweak various game settings
+
+ActionsController:
+- Handles all game-related requests
+
+-- Models --
+
+Room:
+- Represents a single play session of Mafia
+- Begins in pre-game state
+- Has a random unique 4-letter "code", which is required in the URL to access the room
+
+User:
+- Represents a player in a Room
+- Not having to sign-up is intentional: it is not necessary for this application
