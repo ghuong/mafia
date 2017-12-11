@@ -1,7 +1,8 @@
 require 'test_helper'
 
+# Models a user trying to create a new room
 class NewRoomTest < ActionDispatch::IntegrationTest
-  test "create new room" do
+  test "can create new room" do
     # Get new room page
     get new_room_path
     assert_template 'rooms/new'

@@ -11,6 +11,11 @@ host_user:
   remember_digest: <%= User.digest('my_token') %>
   is_host: true
 
+guest_user:
+  name: "Jessica"
+  room_id: 1
+  remember_digest: <%= User.digest('my_token') %>
+
 user_in_finished_room:
   name: "Edison"
   room_id: 2

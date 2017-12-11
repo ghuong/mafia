@@ -43,6 +43,7 @@ class RoomsController < ApplicationController
 
   private
 
+    # Re-establish session for user
     def create_session
       user = User.find_by(id: params[:user_id])
       if user && user.authenticated?(:remember, params[:remember_token])
