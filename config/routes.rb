@@ -17,4 +17,8 @@ Rails.application.routes.draw do
 
   # Actions
   get '/rooms/:room_code/actions/edit', to: 'actions#edit', as: 'edit_actions'
+
+  # private_pub channels
+  # get '/publish/:room_code/room_users', to: 'publish#show_room_users', as: 'room_users'
+  post '/publish/:room_code/room_users', to: 'publish#push_room_users'
 end

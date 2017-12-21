@@ -5,18 +5,30 @@
 * Ruby version:
 ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-darwin16]
 
-Run the following:
+--- Setup ---
+
+Run:
   `bundle install`
   `bundle update`
 
-Migrate the database in development and test environments:
+Migrate database:
   `rails db:migrate`
   `rails db:migrate RAILS_ENV=test`
+
+Run the private_pub generator:
+  `rails generate private_pub:install`
+
+--- Test ---
 
 Verify all tests pass:
   `rails test`
 
-Run:
+--- Run ---
+
+Start Rack server:
+  `rackup private_pub.ru -s thin -E production`
+
+Start Rails server (in separate terminal):
   `rails server`
 
 Visit 'localhost:3000/' to visit homepage

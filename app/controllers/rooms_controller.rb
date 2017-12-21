@@ -10,6 +10,7 @@ class RoomsController < ApplicationController
       @user = User.new(name: params[:name], room_id: @room.id, is_host: true)
       if @user.save
         remember @user
+        @users = @room.users
         redirect_to edit_settings_path(@room.code) and return
       end
     end
@@ -22,10 +23,11 @@ class RoomsController < ApplicationController
   def show
     create_session if Rails.env.test?
 
-    params[:room_code] ||= params[:room][:code]
+    params[:room_code] ||= params[:room][:code].upcase
     @room = Room.find_by(code: params[:room_code])
 
     if @room
+      @users = @room.users
       if @room.is_pregame?
         if is_host?(@room) # host accesses settings page for room
           redirect_to edit_settings_path(@room.code) and return

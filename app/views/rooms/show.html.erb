@@ -1,4 +1,7 @@
 <%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
 
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<h1>Waiting Room</h1>
+<h2>Users:</h2>
+<ul><%= render partial: 'shared/user', collection: @users %></ul>
+
+<%= subscribe_to '/blah' %>
