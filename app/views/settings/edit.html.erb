@@ -1,6 +1,4 @@
 <%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
 
-<h2>Users:</h2>
-<ul id="user-list"><%= render partial: 'shared/user', collection: @users %></ul>
-
-<%#= subscribe_to room_users_path(params[:room_code]) %>
+<h1>Game Setup</h1>
+<%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel } %>

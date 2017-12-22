@@ -29,6 +29,7 @@ class RoomsController < ApplicationController
     if @room
       @users = @room.users
       if @room.is_pregame?
+        @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list]
         if is_host?(@room) # host accesses settings page for room
           redirect_to edit_settings_path(@room.code) and return
         elsif has_already_joined?(@room) # guest user gets waiting room
