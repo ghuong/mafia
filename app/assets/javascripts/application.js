@@ -14,6 +14,7 @@
 //= require bootstrap
 //= require private_pub
 //= require jquery-readyselector
+//= require jquery-http-request
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .

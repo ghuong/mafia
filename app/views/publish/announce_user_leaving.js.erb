@@ -1,0 +1,4 @@
+<% publish_to @channel do %>
+  // Remove user that is leaving from list
+  $('#users-list').children('li#user-<%= @user.id %>').remove();
+<% end %>

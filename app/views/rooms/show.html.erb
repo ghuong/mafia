@@ -3,4 +3,4 @@
 <h1>Waiting Room</h1>
 <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel } %>
 
-<%= link_to "Leave", users_path, method: :delete %>
+<%= link_to "Leave", '#', id: "leave" %>
