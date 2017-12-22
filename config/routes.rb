@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # Users
   get '/rooms/:room_code/users/new', to: 'users#new', as: 'new_user'  
   post '/rooms/:room_code/users',    to: 'users#create', as: 'users'
+  delete '/rooms/:room_code/users',  to: 'users#destroy'
 
   # Settings
   get '/rooms/:room_code/settings',  to: 'settings#edit', as: 'edit_settings'

@@ -29,6 +29,12 @@ module SessionsHelper
     return nil
   end
 
+  # Return true iff the given user is the current user
+  def current_user?(user)
+    user == current_user
+  end
+
+  # Returns current user id, or -1 if there is no user
   def get_current_user_id
     user = current_user
     if user

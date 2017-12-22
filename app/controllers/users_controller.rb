@@ -26,4 +26,13 @@ class UsersController < ApplicationController
       render 'static_pages/home'
     end
   end
+
+  def destroy
+    user = current_user
+    if user
+      forget
+      user.destroy
+      redirect_to root_path
+    end
+  end
 end
