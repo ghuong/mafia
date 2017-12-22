@@ -29,6 +29,15 @@ module SessionsHelper
     return nil
   end
 
+  def get_current_user_id
+    user = current_user
+    if user
+      user.id
+    else
+      -1
+    end
+  end
+
   # Returns true if the current user has previously joined the given room
   def has_already_joined?(room, user = nil)
     user ||= current_user

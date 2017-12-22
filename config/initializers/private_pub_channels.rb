@@ -1,3 +1,3 @@
 PRIVATE_PUB_CHANNELS = {
-  users_list: "/blah"
+  users_list: "/users_list"
 }.freeze
