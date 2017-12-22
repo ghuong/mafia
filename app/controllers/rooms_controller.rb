@@ -23,7 +23,8 @@ class RoomsController < ApplicationController
   def show
     create_session if Rails.env.test?
 
-    params[:room_code] ||= params[:room][:code].upcase
+    params[:room_code] ||= params[:room][:code]
+    params[:room_code].upcase!
     @room = Room.find_by(code: params[:room_code])
 
     if @room
