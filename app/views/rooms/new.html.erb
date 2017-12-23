@@ -5,7 +5,7 @@
     <%= form_tag rooms_path do %>
       <%= label_tag :name, "What's your actual name?" %>
       <%= text_field_tag :name, "", class: 'form-control', placeholder: "Your Name" %>
-      <%= submit_tag "Create Game", class: "btn btn-lg btn-primary" %>
+      <%= submit_tag "Create Game", id: 'submit', class: "btn btn-lg btn-primary" %>
     <% end %>
   </div>
 </div>
