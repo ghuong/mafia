@@ -25,7 +25,7 @@ Verify all tests pass:
 
 --- Run ---
 
-Start Rack server:
+Start Rack server for private_pub:
   `rackup private_pub.ru -s thin -E production`
 
 Start Rails server (in separate terminal):

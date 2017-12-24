@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <div class="container <%= controller_name %>_controller <%= action_name %>_action">
+    <div id="container" class="container <%= controller_name %>_controller <%= action_name %>_action">
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>

@@ -20,10 +20,12 @@ class RoomsController < ApplicationController
     render :new
   end
 
-  def show
+  def join
     create_session if Rails.env.test?
+    redirect_to room_path(params[:room][:code])
+  end
 
-    params[:room_code] ||= params[:room][:code]
+  def show
     params[:room_code].upcase!
     @room = Room.find_by(code: params[:room_code])
 
