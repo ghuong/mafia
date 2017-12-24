@@ -107,6 +107,7 @@ class ActionDispatch::IntegrationTest
     click_on 'join-room'
   end
 
+  # Assert the controller action that was used to render the page
   def assert_controller_action(controller_name, action_name)
     assert page.has_css?("#container.#{controller_name}_controller.#{action_name}_action")
   end

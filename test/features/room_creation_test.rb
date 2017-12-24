@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RoomCreationTest < ActionDispatch::IntegrationTest
-  def test_it_creates_a_room
+  test "it creates a room" do
     room_code = ""
     host_name = "Richard Rich"
     # Creates a new User and Room

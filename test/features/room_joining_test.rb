@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RoomJoiningTest < ActionDispatch::IntegrationTest
-  def test_it_allows_guests_to_join
+  test "it allows guests to join room" do
     room_code = ""
     host_name = "George"
     within_session :hosts_window do
