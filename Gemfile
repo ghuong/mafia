@@ -36,6 +36,7 @@ group :test do
   gem 'guard-minitest',           '2.4.4'
   gem 'capybara'
   gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 group :production do

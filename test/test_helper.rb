@@ -25,11 +25,27 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Rails.application.routes.url_helpers
 
+  # Use the capybara javascript driver
+  # def use_javascript_driver
+  #   Capybara.current_driver = :selenium
+  # end
+
   # Reset sessions and driver between tests
   # Use super wherever this method is redefined in your individual test classes
   def teardown
     Capybara.reset_sessions!
     Capybara.use_default_driver
+
+    # browser = Capybara.current_session.driver.browser
+    # if browser.respond_to?(:clear_cookies)
+    #   # Rack::MockSession
+    #   browser.clear_cookies
+    # elsif browser.respond_to?(:manage) and browser.manage.respond_to?(:delete_all_cookies)
+    #   # Selenium::WebDriver
+    #   browser.manage.delete_all_cookies
+    # else
+    #   raise "Don't know how to clear cookies. Weird driver?"
+    # end
   end
 
   # Initialize a new window
@@ -69,6 +85,7 @@ class ActionDispatch::IntegrationTest
     end
   end
 
+  # Refresh the page
   def refresh_page
     visit current_path
   end
@@ -108,7 +125,23 @@ class ActionDispatch::IntegrationTest
   end
 
   # Assert the controller action that was used to render the page
-  def assert_controller_action(controller_name, action_name)
-    assert page.has_css?("#container.#{controller_name}_controller.#{action_name}_action")
-  end
+  # def assert_controller_action(controller_name, action_name)
+  #   assert page.has_css?("#container.#{controller_name}_controller.#{action_name}_action")
+  # end
+
+  # Wait for AJAX requests to finish
+  # Source: https://robots.thoughtbot.com/automatically-wait-for-ajax-with-capybara
+  # def wait_for_ajax
+  #   Timeout.timeout(Capybara.default_max_wait_time) do
+  #     loop while finished_all_ajax_requests? # Wait for first request,
+  #     loop until finished_all_ajax_requests? # then wait until they all finish.
+  #   end
+  # end
+
+  private 
+
+    # Returns true iff there are no active AJAX requests (tracked by jQuery)
+    # def finished_all_ajax_requests?
+    #   page.evaluate_script('jQuery.active').zero?
+    # end
 end

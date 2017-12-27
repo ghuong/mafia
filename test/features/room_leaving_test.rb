@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class RoomLeavingTest < ActionDispatch::IntegrationTest
-  test "it allows guests to join room" do
+  test "it allows guests to leave room" do    
     room_code = ""
     within_session :hosts_window do
-      room_code = create_room
+      room_code = create_room("Ryan")
     end
 
     guest_name = "John"
