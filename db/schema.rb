@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171210032824) do
+ActiveRecord::Schema.define(version: 20171227233551) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "code"
     t.string "state", default: "pregame"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "roles"
   end
 
   create_table "users", force: :cascade do |t|
