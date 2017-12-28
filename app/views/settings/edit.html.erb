@@ -7,7 +7,7 @@
 
 <%= form_tag(add_role_path(params[:room_code])) do %>
   <%= label_tag :role, "Add Role:" %>
-  <%= select_tag "role", options_for_select(@role_options) %>
+  <%= select_tag "role", options_for_select(@role_options.map {|role| [role[:name], role[:id]]}) %>
   <%= submit_tag "Add Role", id: 'add-role', class: "btn btn-lg btn-primary" %>
 <% end %>
 

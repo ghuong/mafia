@@ -22,26 +22,36 @@ class Room < ApplicationRecord
 
   # Returns a list of roles
   def get_roles
-    roles.split(",").each_with_index.map do |role, idx|
-      { id: idx, name: role }
+    result = roles.split(",").each_with_index.map do |count, idx|
+      { id: idx, name: MAFIA_ROLES[idx], count: count.to_i }
+    end
+
+    if result.length < MAFIA_ROLES.length
+      MAFIA_ROLES.each_with_index.map do |role, idx|
+        { id: idx, name: role, count: 0 }
+      end
+    else
+      result
     end
   end
 
   # Add role to the room's setup
-  def add_role(role)
-    if MAFIA_ROLES.include?(role)
-      if !roles.empty?
-        roles << ","
-      end
-      
-      roles << role
+  def add_role(id)
+    if id < MAFIA_ROLES.length
+      roles = get_roles
+      roles[id][:count] += 1
+      set_roles(roles)
     end
   end
 
   # Remove role from the room's setup
-  # def remove_role(role)
-
-  # end
+  def remove_role(id)
+    if id < MAFIA_ROLES.length
+      roles = get_roles
+      roles[id][:count] -= roles[id][:count] > 0 ? 1 : 0
+      set_roles(roles)
+    end
+  end
 
   private
 
@@ -57,5 +67,10 @@ class Room < ApplicationRecord
     def get_random_code(length)
       o = [('A'..'Z')].map(&:to_a).flatten
       (0...length).map { o[rand(o.length)] }.join
+    end
+
+    # Set the roles field
+    def set_roles(roles)
+      self.roles = roles.map { |role| role[:count].to_s }.join(",")
     end
 end
