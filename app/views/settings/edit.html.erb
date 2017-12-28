@@ -5,8 +5,10 @@
 
 <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel } %>
 
-<%= form_tag(add_role_path(params[:room_code]), remote: true) do %>
+<%= form_tag(add_role_path(params[:room_code])) do %>
   <%= label_tag :role, "Add Role:" %>
   <%= select_tag "role", options_for_select(@role_options) %>
   <%= submit_tag "Add Role", id: 'add-role', class: "btn btn-lg btn-primary" %>
 <% end %>
+
+<p id="new-role" class="hidden" data-name="<%= @new_role %>">Yoyo</p>

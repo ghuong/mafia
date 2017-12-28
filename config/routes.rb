@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   # Publish messages with private_pub
   post '/publish/:room_code/announce_user_joining', to: 'publish#announce_user_joining'
   post '/publish/:room_code/announce_user_leaving', to: 'publish#announce_user_leaving'
+  post '/publish/:room_code/announce_new_role',     to: 'publish#announce_new_role'
 end

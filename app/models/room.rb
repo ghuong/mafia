@@ -22,13 +22,21 @@ class Room < ApplicationRecord
 
   # Returns a list of roles
   def get_roles
-    roles.split(",")
+    roles.split(",").each_with_index.map do |role, idx|
+      { id: idx, name: role }
+    end
   end
 
   # Add role to the room's setup
-  # def add_role(role)
-
-  # end
+  def add_role(role)
+    if MAFIA_ROLES.include?(role)
+      if !roles.empty?
+        roles << ","
+      end
+      
+      roles << role
+    end
+  end
 
   # Remove role from the room's setup
   # def remove_role(role)
