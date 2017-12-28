@@ -1,3 +1,5 @@
-<li id="role-<%= role[:id] %>">
-  Role: <%= role[:name] %> x<%= role[:count] %>
-</li>
+<% if role[:count] > 0 %>
+  <li id="role-<%= role[:id] %>">
+    Role: <%= role[:name] %> x<%= role[:count] %>
+  </li>
+<% end %>
