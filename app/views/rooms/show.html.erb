@@ -3,4 +3,6 @@
 <h1>Waiting Room</h1>
 <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel } %>
 
+<%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel } %>
+
 <%= link_to "Leave", '#', id: "leave" %>

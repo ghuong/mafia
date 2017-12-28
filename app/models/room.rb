@@ -5,17 +5,35 @@ class Room < ApplicationRecord
 
   ROOM_CODE_LENGTH = 4
 
+  # Return true iff game is in "pregame" state
   def is_pregame?
     state == 'pregame'
   end
 
+  # Return true iff game is in "playing" state
   def is_in_progress?
     state == 'playing'
   end
 
+  # Return true iff game is in "finished" state
   def is_finished?
     state == 'finished'
   end
+
+  # Returns a list of roles
+  def get_roles
+    roles.split(",")
+  end
+
+  # Add role to the room's setup
+  # def add_role(role)
+
+  # end
+
+  # Remove role from the room's setup
+  # def remove_role(role)
+
+  # end
 
   private
 

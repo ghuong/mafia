@@ -32,7 +32,10 @@ class RoomsController < ApplicationController
     if @room
       @users = @room.users
       if @room.is_pregame?
+        @roles = @room.get_roles
         @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list]
+        @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list]
+
         if is_host?(@room) # host accesses settings page for room
           redirect_to edit_settings_path(@room.code) and return
         elsif has_already_joined?(@room) # guest user gets waiting room
@@ -40,6 +43,7 @@ class RoomsController < ApplicationController
         else # new people must create a new user
           redirect_to new_user_path(@room.code) and return
         end
+        
       elsif has_already_joined?(@room)
         if @room.is_in_progress? # game already started
           redirect_to edit_actions_path(@room.code) and return

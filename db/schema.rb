@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20171227233551) do
     t.string "state", default: "pregame"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "roles"
+    t.string "roles", default: ""
   end
 
   create_table "users", force: :cascade do |t|
