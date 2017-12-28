@@ -22,6 +22,17 @@ class SettingsController < ApplicationController
     end
   end
 
+  def remove_role
+    role = params[:role_id].to_i
+    @room.remove_role(role)
+    if @room.save
+      redirect_to edit_settings_path(params[:room_code])
+    else
+      flash.now[:danger] = "Failed to remove role"
+      render :edit
+    end
+  end
+
   private
 
     # Redirect to home page if user is not authorized

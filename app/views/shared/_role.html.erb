@@ -1,5 +1,8 @@
 <% if role[:count] > 0 %>
   <li id="role-<%= role[:id] %>">
     Role: <%= role[:name] %> x<%= role[:count] %>
+    <% if !hide_remove_links && is_host?(@room) %>
+      <%= link_to "Decrement", remove_role_path(params[:room_code], role[:id]), method: :post, id: "remove-role-#{role[:id]}" %>
+    <% end %>
   </li>
 <% end %>

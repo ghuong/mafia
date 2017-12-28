@@ -1,6 +1,8 @@
 <h2>Roles:</h2>
 <ul id="roles-list">
-  <%= render partial: 'shared/role', collection: roles %>
+  <%= render partial: 'shared/role', collection: roles, locals: { hide_remove_links: false } %>
 </ul>
 
-<%= subscribe_to channel %>
+<% if !is_host?(@room) %>
+  <%= subscribe_to channel %>
+<% end %>
