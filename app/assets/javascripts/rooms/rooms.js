@@ -18,9 +18,6 @@ $(".rooms_controller.show_action, .settings_controller.edit_action").ready(funct
 $('.settings_controller.edit_action').ready(function() {
   room_code = $('#room-code').data('room-code');
 
-  // Announce to other users if a new role was just added
-  new_role = $('#new-role').data('name');
-  if (new_role) {
-    $.post('/publish/' + room_code + '/announce_new_role', { "role": new_role });
-  }
+  // Update all guest user's role counts
+  $.post('/publish/' + room_code + '/announce_roles_updated');
 });

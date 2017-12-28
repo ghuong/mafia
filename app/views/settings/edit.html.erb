@@ -10,5 +10,3 @@
   <%= select_tag "role", options_for_select(@role_options.map {|role| [role[:name], role[:id]]}) %>
   <%= submit_tag "Add Role", id: 'add-role', class: "btn btn-lg btn-primary" %>
 <% end %>
-
-<p id="new-role" class="hidden" data-name="<%= @new_role %>">Yoyo</p>

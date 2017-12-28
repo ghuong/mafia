@@ -1,0 +1,4 @@
+<% publish_to @channel do %>
+  // Update roles list
+  $('#roles-list').empty().append("<%= j render(partial: 'shared/role', collection: @roles) %>");
+<% end %>
