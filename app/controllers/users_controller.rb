@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  def index
-  end
-
   def new
     @user = User.new
   end
@@ -29,8 +26,8 @@ class UsersController < ApplicationController
 
   def destroy
     user = current_user
+    forget
     if user
-      forget
       user.destroy
       redirect_to root_path
     end
