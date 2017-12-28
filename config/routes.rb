@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   # Settings
   get '/rooms/:room_code/settings',  to: 'settings#edit', as: 'edit_settings'
+  post '/rooms/:room_code/add_role',  to: 'settings#add_role', as: 'add_role'
 
   # Actions
   get '/rooms/:room_code/actions/edit', to: 'actions#edit', as: 'edit_actions'

@@ -6,9 +6,13 @@ class SettingsController < ApplicationController
       @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list]
       @users = @room.users
       @roles = @room.get_roles
+      @role_options = MAFIA_ROLES
     else
       flash.now[:danger] = "That page is unavailable."
       render 'static_pages/home'
     end
+  end
+
+  def add_role
   end
 end
