@@ -34,6 +34,25 @@ $('.actions_controller.edit_action').ready(function() {
 
   // Announce to all guests that game has started
   $.post('/publish/' + room_code + '/announce_game_started');
+
+  // Convert Ready button to 'Not Ready' if user is ready
+  var is_ready = $('#is_ready').val();
+  setSubmitActionsButton(is_ready);
+
+  // When submit clicked, toggle Ready button
+  $('#actions-form').on('submit', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(response) {
+        var is_ready = response["is_ready"];
+        setSubmitActionsButton(is_ready);
+      }      
+    });
+  });
 });
 
 function setStartGameButtonDisabledClass() {
@@ -44,4 +63,9 @@ function setStartGameButtonDisabledClass() {
   } else {
     $('#start-game').addClass('disabled');
   }
+}
+
+function setSubmitActionsButton(is_ready) {
+  $('#is_ready').val(!is_ready);
+  $('#submit-actions').val(is_ready ? "Not Ready" : "Ready");
 }

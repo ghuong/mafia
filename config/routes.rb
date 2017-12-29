@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   # Actions
   get '/rooms/:room_code/actions/edit',     to: 'actions#edit', as: 'edit_actions'
-  post '/rooms/:room_code/actions/update',  to: 'actions#update', as: 'actions'
+  post '/rooms/:room_code/actions',         to: 'actions#update', as: 'actions'
 
   # Publish messages with private_pub
   post '/publish/:room_code/announce_user_joining',     to: 'publish#announce_user_joining'

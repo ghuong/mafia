@@ -1,4 +1,5 @@
-<%= form_tag(actions_path(params[:room_code])) do %>
+<%= form_tag actions_path(params[:room_code]), id: 'actions-form' do %>
+  <%= hidden_field_tag :is_ready, is_ready %>
   <%= render partial: 'action', collection: actions %>
-  <%= submit_tag "Ready", id: "submit", class: "btn btn-lg btn-primary" %>
+  <%= submit_tag "Ready", id: "submit-actions", class: "btn btn-lg btn-primary", data: { disable_with: false } %>
 <% end %>
