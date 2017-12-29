@@ -1,4 +1,8 @@
 <% publish_to @channel do %>
   // Remove user that is leaving from list
   $('#users-list').children('li#user-<%= @user.id %>').remove();
+  // In host's "edit settings" page, toggle the start game button
+  if ($('#start-game').length) {
+    setStartGameButtonDisabledClass();
+  }
 <% end %>

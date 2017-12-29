@@ -15,6 +15,7 @@
 //= require private_pub
 //= require jquery-readyselector
 //= require jquery-http-request
+//= require jquery-append-event
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .

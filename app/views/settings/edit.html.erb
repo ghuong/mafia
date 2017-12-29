@@ -10,3 +10,5 @@
   <%= select_tag "role", options_for_select(@role_options.map {|role| [role[:name], role[:id]]}) %>
   <%= submit_tag "Add Role", id: 'add-role', class: "btn btn-lg btn-primary" %>
 <% end %>
+
+<%= link_to "Start Game", start_game_path, { class: "btn btn-lg btn-primary disabled", id: "start-game" } %>

@@ -1,7 +1,8 @@
 <% publish_to @channel do %>
   // var current_user_id = $('meta[name=user-id]').attr('content');
   var users_list = $('#users-list');
-  if (users_list.children('li#user-<%= @user.id %>').length == 0) {
+  // Add new user to list
+  if (users_list.children('li#user-<%= @user.id %>').length === 0) {
     users_list.append("<%= j render(partial: 'shared/user', object: @user) %>");
   }
 <% end %>

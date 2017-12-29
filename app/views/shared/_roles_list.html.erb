@@ -1,5 +1,5 @@
 <h2>Roles:</h2>
-<ul id="roles-list">
+<ul id="roles-list" data-num-roles="<%= roles.reduce(0){|sum, role| sum + role[:count] } %>">
   <%= render partial: 'shared/role', collection: roles, locals: { hide_remove_links: false } %>
 </ul>
 
