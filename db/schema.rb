@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171229011615) do
+ActiveRecord::Schema.define(version: 20171229023310) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "code"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20171229011615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "roles", default: ""
+    t.string "day_phase"
   end
 
   create_table "users", force: :cascade do |t|
