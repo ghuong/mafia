@@ -80,6 +80,28 @@ class Room < ApplicationRecord
     end
   end
 
+  # Progress to next day phase
+  def next_day_phase
+    # Process all user actions
+    # ...
+    
+    # Progress to next day phase
+    self.day_phase = self.day_phase == 'night' ? 'day' : 'night'
+    # Clear all user actions
+    self.users.each do |user|
+      user.is_ready = false
+      # user.actions = ''
+    end
+
+    # Save users to DB
+    Room.transaction do
+      self.save
+      User.transaction do
+        self.users.each(&:save)
+      end
+    end
+  end
+
   private
 
     # Generate unique room code

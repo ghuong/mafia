@@ -6,3 +6,5 @@ Role: <p id="role" name="<%= @role %>"><%= @role %></p>
 <p>Day Phase: <%= @room.day_phase %></p>
 
 <%= render partial: 'actions_list', locals: { actions: @actions, is_ready: @is_ready } %>
+
+<%= subscribe_to @day_phase_changed_channel %>

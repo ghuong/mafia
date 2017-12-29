@@ -24,8 +24,9 @@ Rails.application.routes.draw do
   post '/rooms/:room_code/actions',         to: 'actions#update', as: 'actions'
 
   # Publish messages with private_pub
-  post '/publish/:room_code/announce_user_joining',     to: 'publish#announce_user_joining'
-  post '/publish/:room_code/announce_user_leaving',     to: 'publish#announce_user_leaving'
-  post '/publish/:room_code/announce_roles_updated',    to: 'publish#announce_roles_updated'
-  post '/publish/:room_code/announce_game_started',     to: 'publish#announce_game_started'
+  post '/publish/:room_code/announce_user_joining',        to: 'publish#announce_user_joining'
+  post '/publish/:room_code/announce_user_leaving',        to: 'publish#announce_user_leaving'
+  post '/publish/:room_code/announce_roles_updated',       to: 'publish#announce_roles_updated'
+  post '/publish/:room_code/announce_game_started',        to: 'publish#announce_game_started'
+  post '/publish/:room_code/announce_day_phase_changed',   to: 'publish#announce_day_phase_changed'
 end

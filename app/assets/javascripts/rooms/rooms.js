@@ -36,8 +36,8 @@ $('.actions_controller.edit_action').ready(function() {
   $.post('/publish/' + room_code + '/announce_game_started');
 
   // Convert Ready button to 'Not Ready' if user is ready
-  var is_ready = $('#is_ready').val();
-  setSubmitActionsButton(is_ready);
+  var should_submit_ready = $('#is_ready').val();
+  setSubmitActionsButton(!should_submit_ready);
 
   // When submit clicked, toggle Ready button
   $('#actions-form').on('submit', function(e) {
@@ -48,13 +48,19 @@ $('.actions_controller.edit_action').ready(function() {
       url: this.action,
       data: $(this).serialize(),
       success: function(response) {
-        var is_ready = response["is_ready"];
-        setSubmitActionsButton(is_ready);
+        var all_ready = response["all_ready"];
+        if (all_ready) {
+          nextDayPhase(room_code);
+        } else {
+          var is_ready = response["is_ready"];
+          setSubmitActionsButton(is_ready);
+        }
       }      
     });
   });
 });
 
+// Toggle 'disabled' class on 'Start Game' button depending on if number of roles and users matches
 function setStartGameButtonDisabledClass() {
   var num_roles = parseInt($('#roles-list').data('num-roles'));
   var num_users = $('#users-list').children().length;
@@ -65,7 +71,13 @@ function setStartGameButtonDisabledClass() {
   }
 }
 
+// Toggle whether the actions form submits is_ready as true or false
 function setSubmitActionsButton(is_ready) {
   $('#is_ready').val(!is_ready);
   $('#submit-actions').val(is_ready ? "Not Ready" : "Ready");
+}
+
+function nextDayPhase(room_code) {
+  // Announce to everyone that the day phase has changed, forcing everyone to page refresh
+  $.post('/publish/' + room_code + '/announce_day_phase_changed');
 }

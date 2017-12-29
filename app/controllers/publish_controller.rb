@@ -22,6 +22,11 @@ class PublishController < ApplicationController
     @channel = PRIVATE_PUB_CHANNELS[:game_started]
   end
 
+  # Announce to all users in room that day phase has changed
+  def announce_day_phase_changed
+    @channel = PRIVATE_PUB_CHANNELS[:day_phase_changed]
+  end
+
   private
 
     # Ignore unauthorized requests

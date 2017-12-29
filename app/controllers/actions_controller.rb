@@ -7,15 +7,21 @@ class ActionsController < ApplicationController
     @role = MAFIA_ROLES[@user.role_id]
     @actions = get_actions(@user.role_id, @room.day_phase, @room.users)
     @is_ready = @user.is_ready
+    @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed]
   end
 
   def update
     is_currently_ready = @user.is_ready
     @user.is_ready = params[:is_ready]
+    
     if @user.save
-      render json: { is_ready: @user.is_ready }
+      all_ready = @room.users.all? { |user| user.is_ready }
+      if all_ready
+        @room.next_day_phase
+      end
+      render json: { is_ready: @user.is_ready, all_ready: all_ready }
     else
-      render json: { is_ready: is_currently_ready }
+      render json: { is_ready: is_currently_ready, all_ready: false }
     end
   end
 
