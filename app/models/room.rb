@@ -56,6 +56,7 @@ class Room < ApplicationRecord
   # Starts the game
   def start_game
     self.state = 'playing'
+    self.day_phase = 'night'
 
     roles = get_roles
 

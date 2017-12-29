@@ -2,4 +2,7 @@
 
 <h1>Edit Actions</h1>
 
-<p>Role: <%= @role %></p>
+Role: <p id="role" name="<%= @role %>"><%= @role %></p>
+<p>Day Phase: <%= @room.day_phase %></p>
+
+<%= render partial: 'actions_list', locals: { actions: @actions } %>

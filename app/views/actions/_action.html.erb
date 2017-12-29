@@ -1,0 +1,2 @@
+<%= label_tag action[:name], action[:description] %>
+<%= select_tag action[:name], options_for_select(action[:targets].map {|target| [target[:name], target[:user_id]]}) %>

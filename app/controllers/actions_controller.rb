@@ -1,8 +1,12 @@
 class ActionsController < ApplicationController
+  include ActionsHelper
+
   before_action :is_playing_in_room
 
   def edit
-    @role = MAFIA_ROLES[current_user.role_id]
+    user = current_user
+    @role = MAFIA_ROLES[user.role_id]
+    @actions = get_actions(user.role_id, @room.day_phase, @room.users)
   end
 
   private

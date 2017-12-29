@@ -1,0 +1,4 @@
+<%= form_tag(actions_path(params[:room_code])) do %>
+  <%= render partial: 'action', collection: actions %>
+  <%= submit_tag "Ready", id: "submit", class: "btn btn-lg btn-primary" %>
+<% end %>
