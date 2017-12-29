@@ -6,13 +6,20 @@ class PublishController < ApplicationController
     @channel = PRIVATE_PUB_CHANNELS[:users_list]
   end
 
+  # Announce to all users in room that this user left
   def announce_user_leaving
     @channel = PRIVATE_PUB_CHANNELS[:users_list]
   end
 
+  # Announce to all users in room that the roles list has been updated
   def announce_roles_updated
     @channel = PRIVATE_PUB_CHANNELS[:roles_list]
     @roles = @room.get_roles
+  end
+
+  # Announce to guests that game has started
+  def announce_game_started
+    @channel = PRIVATE_PUB_CHANNELS[:game_started]
   end
 
   private

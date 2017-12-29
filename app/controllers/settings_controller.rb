@@ -33,6 +33,25 @@ class SettingsController < ApplicationController
     end
   end
 
+  def start_game
+    roles = @room.get_roles
+    users = @room.users
+    num_roles = roles.reduce(0){|sum, role| sum + role[:count] }
+    
+    if users.length == num_roles
+      # Set game state to start
+      if @room.start_game
+        redirect_to edit_actions_path(params[:room_code])
+      else
+        flash[:danger] = "Game failed to start."
+        redirect_to edit_settings_path(params[:room_code])
+      end
+    else
+      flash[:danger] = "Number of players and roles must match."
+      redirect_to edit_settings_path(params[:room_code])
+    end
+  end
+
   private
 
     # Redirect to home page if user is not authorized

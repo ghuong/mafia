@@ -6,7 +6,8 @@ class User < ApplicationRecord
   before_create :create_remember_digest, :remove_trailing_spaces
 
   validates :name, presence: true, length: { maximum: 20 }
-  validate :room_exists, :name_is_unique_in_room
+  validate :room_exists, on: :create
+  validate :name_is_unique_in_room, on: :create
 
   # Returns true if the given token matches the digest
   def authenticated?(attribute, token)

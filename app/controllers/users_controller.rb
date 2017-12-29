@@ -1,26 +1,17 @@
 class UsersController < ApplicationController
+  before_action :room_is_pregame
+
   def new
     @user = User.new
   end
 
   def create
-    @room = Room.find_by(code: params[:room_code])
-    if @room
-      if !@room.is_pregame?
-        flash.now[:danger] = "You can no longer join that room."
-        render 'static_pages/home' and return
-      end
-
-      @user = User.new(name: params[:user][:name], room_id: @room.id)
-      if @user.save
-        remember @user
-        redirect_to room_path(@room.code) and return
-      else
-        render :new
-      end
+    @user = User.new(name: params[:user][:name], room_id: @room.id)
+    if @user.save
+      remember @user
+      redirect_to room_path(@room.code) and return
     else
-      flash.now[:danger] = "Room no longer exists."
-      render 'static_pages/home'
+      render :new
     end
   end
 
@@ -32,4 +23,14 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  private
+
+    def room_is_pregame
+      @room = Room.find_by(code: params[:room_code])
+      if !@room || !@room.is_pregame?
+        flash.now[:danger] = "That game has already started, or does not exist."
+        render 'static_pages/home'
+      end
+    end
 end

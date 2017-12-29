@@ -53,6 +53,32 @@ class Room < ApplicationRecord
     end
   end
 
+  # Starts the game
+  def start_game
+    self.state = 'playing'
+
+    roles = get_roles
+
+    role_deck = []
+    roles.each do |role|
+      role[:count].times { role_deck << role[:id] }
+    end
+    role_deck.shuffle!
+
+    # Assign role to each user
+    self.users.each_with_index do |user, idx|
+      user.role_id = role_deck[idx]
+    end
+
+    # Save users to DB
+    Room.transaction do
+      self.save
+      User.transaction do
+        self.users.each(&:save)
+      end
+    end
+  end
+
   private
 
     # Generate unique room code

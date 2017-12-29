@@ -29,6 +29,13 @@ $('.settings_controller.edit_action').ready(function() {
   });
 });
 
+$('.actions_controller.edit_action').ready(function() {
+  var room_code = $('#room-code').data('room-code');
+
+  // Announce to all guests that game has started
+  $.post('/publish/' + room_code + '/announce_game_started');
+});
+
 function setStartGameButtonDisabledClass() {
   var num_roles = parseInt($('#roles-list').data('num-roles'));
   var num_users = $('#users-list').children().length;

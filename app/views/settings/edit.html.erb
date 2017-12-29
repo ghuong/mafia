@@ -11,4 +11,4 @@
   <%= submit_tag "Add Role", id: 'add-role', class: "btn btn-lg btn-primary" %>
 <% end %>
 
-<%= link_to "Start Game", start_game_path, { class: "btn btn-lg btn-primary disabled", id: "start-game" } %>
+<%= link_to "Start Game", start_game_path, method: :post, class: "btn btn-lg btn-primary disabled", id: "start-game" %>

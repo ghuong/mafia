@@ -1,0 +1,5 @@
+<% publish_to @channel do %>
+  <% if @room.is_in_progress? %>
+    window.location.reload(true);
+  <% end %>
+<% end %>

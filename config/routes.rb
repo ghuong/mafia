@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   post '/publish/:room_code/announce_user_joining',     to: 'publish#announce_user_joining'
   post '/publish/:room_code/announce_user_leaving',     to: 'publish#announce_user_leaving'
   post '/publish/:room_code/announce_roles_updated',    to: 'publish#announce_roles_updated'
+  post '/publish/:room_code/announce_game_started',     to: 'publish#announce_game_started'
 end

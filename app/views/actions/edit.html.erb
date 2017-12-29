@@ -1,1 +1,5 @@
-<%= render 'shared/room_header', locals: { room_code: params[:room_code] } %>
+<%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
+
+<h1>Edit Actions</h1>
+
+<p>Role: <%= @role %></p>
