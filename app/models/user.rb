@@ -41,6 +41,26 @@ class User < ApplicationRecord
     self.actions = targets.join(",")
   end
 
+  # Returns true iff user is on Mafia team
+  def is_mafia?
+    ['Mafia'].include? MAFIA_ROLES[role_id]
+  end
+
+  # Returns the user's target for a specific action
+  def get_target(action_name)
+    action_options = get_action_options(id, role_id, room.day_phase, room.users)
+    action_index = action_options.find_index do |option|
+      option[:name] == action_name
+    end
+    get_action_targets[action_index]
+  end
+
+  # Kill this user
+  def kill
+    self.is_alive = false
+    self.save!
+  end
+
   private
 
     # Generate a token, and store a hash digest of it in database to authenticate user in future
@@ -73,7 +93,6 @@ class User < ApplicationRecord
     def action_targets_are_valid
       return true if !is_ready || role_id.nil?
 
-      room = Room.find_by(id: room_id)
       valid_actions = get_action_options(id, role_id, room.day_phase, room.users)
       chosen_targets = get_action_targets
       is_valid = chosen_targets.length == valid_actions.length &&

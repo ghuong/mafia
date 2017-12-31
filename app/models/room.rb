@@ -1,4 +1,6 @@
 class Room < ApplicationRecord
+  include RoomsHelper
+
   has_many :users, dependent: :destroy
 
   before_create :generate_room_code
@@ -83,7 +85,7 @@ class Room < ApplicationRecord
   # Progress to next day phase
   def next_day_phase
     # Process all user actions
-    # ...
+    process_user_actions(self.day_phase, self.users)
     
     # Progress to next day phase
     self.day_phase = self.day_phase == 'night' ? 'day' : 'night'

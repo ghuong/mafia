@@ -1,13 +1,15 @@
 module ActionsHelper
+
   # Get array of actions for the given role_id
-  def get_action_options(user_id, role_id, day_phase, users)
+  def get_action_options(user_id, role_id, day_phase, all_users)
     actions = []
-    role = MAFIA_ROLES[role_id].downcase
+    role = MAFIA_ROLES[role_id]
+    living_users = all_users.select { |user| user.is_alive }
 
     if day_phase == "night"
       case role
-      when "mafia"
-        actions.push(*get_mafia_actions(users))
+      when "Mafia"
+        actions.push(*get_mafia_actions(living_users))
       end
 
     elsif day_phase == "day"
@@ -21,15 +23,14 @@ module ActionsHelper
   private
 
     # Returns a list of mafia actions
-    def get_mafia_actions(users)
-      non_targets = ['mafia']
-      targets = users.select do |user|
-        !(non_targets.include? MAFIA_ROLES[user.role_id].downcase)
+    def get_mafia_actions(living_users)
+      targets = living_users.select do |user|
+        !user.is_mafia?
       end.map do |user|
         format_target(user)
       end
 
-      [format_action("kill", "Kill", targets)]
+      [format_action(ACTIONS[:kill][:name], ACTIONS[:kill][:description], targets)]
     end
 
     # Returns a hash representing an action for a role

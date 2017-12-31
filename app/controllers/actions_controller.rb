@@ -2,6 +2,8 @@ class ActionsController < ApplicationController
   include ActionsHelper
 
   before_action :is_playing_in_room
+  before_action :is_alive, except: [:death]
+  before_action :is_dead, only: [:death]
 
   def edit
     @role = MAFIA_ROLES[@user.role_id]
@@ -28,6 +30,10 @@ class ActionsController < ApplicationController
     end
   end
 
+  # Show death page if user is dead
+  def death
+  end
+
   private
 
     # Redirect unauthorized users
@@ -39,6 +45,18 @@ class ActionsController < ApplicationController
         flash.now[:danger] = "That page is unavailable."
         render 'static_pages/home'
       end
+    end
+
+    # If user is dead, redirect to death page
+    def is_alive
+      @user = current_user
+      redirect_to death_path(params[:room_code]) unless @user.is_alive
+    end
+
+    # If user is alive, redirect to room show page
+    def is_dead
+      @user = current_user
+      redirect_to room_path(params[:room_code]) unless !@user.is_alive
     end
 
     # Returns the safe parameters
