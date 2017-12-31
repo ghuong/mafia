@@ -19,7 +19,6 @@ module RoomsHelper
       end
       majority_vote = mode(mafia_kill_votes).shuffle.first
       victim = living_users.find { |user| user.id == majority_vote }
-      byebug
       if victim
         victim.kill
       end
