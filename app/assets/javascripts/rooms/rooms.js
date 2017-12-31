@@ -36,7 +36,7 @@ $('.actions_controller.edit_action').ready(function() {
   $.post('/publish/' + room_code + '/announce_game_started');
 
   // Convert Ready button to 'Not Ready' if user is ready
-  var should_submit_ready = $('#is_ready').val();
+  var should_submit_ready = $('#is_ready').val() == 'true';
   setSubmitActionsButton(!should_submit_ready);
 
   // When submit clicked, toggle Ready button

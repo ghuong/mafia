@@ -90,7 +90,7 @@ class Room < ApplicationRecord
     # Clear all user actions
     self.users.each do |user|
       user.is_ready = false
-      # user.actions = ''
+      user.actions = ''
     end
 
     # Save users to DB

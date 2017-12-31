@@ -5,7 +5,7 @@ class ActionsController < ApplicationController
 
   def edit
     @role = MAFIA_ROLES[@user.role_id]
-    @actions = get_actions(@user.role_id, @room.day_phase, @room.users)
+    @action_options = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)
     @is_ready = @user.is_ready
     @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed]
   end
@@ -13,7 +13,10 @@ class ActionsController < ApplicationController
   def update
     is_currently_ready = @user.is_ready
     @user.is_ready = params[:is_ready]
-    
+    if params[:player_action]
+      @user.set_action_targets(player_action_params.to_hash.sort.to_h.values)
+    end
+
     if @user.save
       all_ready = @room.users.all? { |user| user.is_ready }
       if all_ready
@@ -36,5 +39,10 @@ class ActionsController < ApplicationController
         flash.now[:danger] = "That page is unavailable."
         render 'static_pages/home'
       end
+    end
+
+    # Returns the safe parameters
+    def player_action_params
+      params.require(:player_action).permit!
     end
 end

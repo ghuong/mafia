@@ -1,2 +1,2 @@
-<%= label_tag action[:name], action[:description] %>
-<%= select_tag action[:name], options_for_select(action[:targets].map {|target| [target[:name], target[:user_id]]}) %>
+<%= label_tag "player_action[#{action[:id]}]", action[:description] %>
+<%= select_tag "player_action[#{action[:id]}]", options_for_select(action[:targets].map {|target| [target[:name], target[:user_id]]}) %>
