@@ -82,6 +82,10 @@ class Room < ApplicationRecord
     end
   end
 
+  def all_ready?
+    self.users.all? { |user| user.is_ready || !user.is_alive }
+  end
+
   # Progress to next day phase
   def next_day_phase
     # Process all user actions

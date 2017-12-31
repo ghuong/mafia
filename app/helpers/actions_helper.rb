@@ -13,7 +13,7 @@ module ActionsHelper
       end
 
     elsif day_phase == "day"
-
+      actions.push(*get_day_actions(living_users))
     end
 
     actions.each_with_index { |action, idx| action[:id] = idx }
@@ -31,6 +31,12 @@ module ActionsHelper
       end
 
       [format_action(ACTIONS[:kill][:name], ACTIONS[:kill][:description], targets)]
+    end
+
+    # Returns a list of the day actions
+    def get_day_actions(living_users)
+      targets = living_users.map { |user| format_target(user) }
+      [format_action(ACTIONS[:lynch][:name], ACTIONS[:lynch][:description], targets)]
     end
 
     # Returns a hash representing an action for a role

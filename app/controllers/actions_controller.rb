@@ -20,7 +20,7 @@ class ActionsController < ApplicationController
     end
 
     if @user.save
-      all_ready = @room.users.all? { |user| user.is_ready }
+      all_ready = @room.all_ready?
       if all_ready
         @room.next_day_phase
       end
