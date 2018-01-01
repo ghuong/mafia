@@ -46,6 +46,11 @@ class User < ApplicationRecord
     ['Mafia'].include? MAFIA_ROLES[role_id]
   end
 
+  # Returns true iff user is on Villager team
+  def is_villager?
+    ['Villager'].include? MAFIA_ROLES[role_id]
+  end
+
   # Returns the user's target for a specific action
   def get_target(action_name)
     action_options = get_action_options(id, role_id, room.day_phase, room.users)

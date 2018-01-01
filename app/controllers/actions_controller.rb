@@ -41,6 +41,10 @@ class ActionsController < ApplicationController
       @room = Room.find_by(code: params[:room_code])
       @user = current_user
 
+      if @room && @room.is_finished?
+        redirect_to room_path(params[:room_code]) and return
+      end
+
       if !@room || !@room.is_in_progress? || !has_already_joined?(@room, @user)
         flash.now[:danger] = "That page is unavailable."
         render 'static_pages/home'

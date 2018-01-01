@@ -82,6 +82,7 @@ class Room < ApplicationRecord
     end
   end
 
+  # Returns true iff all living users are ready
   def all_ready?
     self.users.all? { |user| user.is_ready || !user.is_alive }
   end
@@ -91,6 +92,9 @@ class Room < ApplicationRecord
     # Process all user actions
     process_user_actions(self.day_phase, self.users)
     
+    # Determine if the game is over
+    process_game_over(self, self.users)
+
     # Progress to next day phase
     self.day_phase = self.day_phase == 'night' ? 'day' : 'night'
     # Clear all user actions

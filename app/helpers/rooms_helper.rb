@@ -11,6 +11,28 @@ module RoomsHelper
     end
   end
 
+  # Process if the game is over
+  def process_game_over(room, all_users)
+    living_users = all_users.select { |user| user.is_alive }
+    winners = []
+    if do_villagers_win?(living_users)
+      winners << "Villagers"
+      all_users.select { |user| user.is_villager? }.each do |user|
+        user.is_winner = true
+      end
+    elsif do_mafia_win?(living_users)
+      winners << "Mafia"
+      all_users.select { |user| user.is_mafia? }.each do |user|
+        user.is_winner = true
+      end
+    else
+      return
+    end
+
+    room.state = 'finished'
+    room.winners = winners.join(",")
+  end
+
   private
 
     # Process mafia kill
@@ -46,5 +68,15 @@ module RoomsHelper
       freq = arr.inject(Hash.new(0)) { |h, v| h[v] += 1; h }
       max = freq.values.max
       return freq.select { |k, f| f == max }.keys, max
+    end
+
+    # Returns true iff all Mafia are dead, and at least one villager is alive
+    def do_villagers_win?(living_users)
+      living_users.none? { |user| user.is_mafia? } && !living_users.empty?
+    end
+
+    # Returns true iff at least half of the living players are Mafia
+    def do_mafia_win?(living_users)
+      living_users.count { |user| user.is_mafia? } >= (living_users.length + 1) / 2
     end
 end
