@@ -13,6 +13,7 @@
 
 body {
   padding-top: 60px;
+  background-color: $gray-darker;
 }
 
 section {
@@ -26,7 +27,7 @@ textarea {
 .center {
   text-align: center;
   h1 {
-    margin-bottom: 10px;
+    margin-bottom: 2em;
   }
 }
 
@@ -34,12 +35,13 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+  color: $gray-lighter;
 }
 
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
+  margin-bottom: 2em;
   text-align: center;
 }
 
@@ -49,7 +51,6 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $gray-light;
 }
 
 p {
@@ -90,6 +91,7 @@ input {
 
 .field_with_errors {
   @extend .has-error;
+  display: inline;
   .form-control {
     color: $state-danger-text;
   }
@@ -102,4 +104,35 @@ input {
     margin-left: 20px;
     font-weight: normal;
   }
+}
+
+/* Button */
+
+.btn-gray {
+  background-color: $gray-light;
+  color: $gray-lighter;
+}
+
+/* static_pages/home page form */
+
+form#new_room {
+  margin-bottom: 1.4em;
+}
+
+#btnNewRoom, #btnHelp {
+  width: 57%;
+  margin: 0 auto;
+}
+
+#room_code {
+  width: 40%;
+  display: inline-block;
+  font-size: 1.5em;
+  padding: 0.5em 0.8em;
+  margin-right: 0.2em;
+}
+
+#join-room {
+  width: 15%;
+  display: inline-block;
 }

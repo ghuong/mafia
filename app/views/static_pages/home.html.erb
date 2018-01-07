@@ -1,5 +1,5 @@
 <div class="center">
-  <h1>Play Mafia</h1>
+  <h1>Mafia</h1>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -7,11 +7,11 @@
         <%= render 'shared/error_messages', object: @room %>
 
         <%= f.text_field :code, class: 'form-control', placeholder: "Room Code" %>
-        <%= f.submit "Join", id: "join-room", class: "btn btn-lg btn-primary" %>
+        <%= f.submit "GO", id: "join-room", class: "btn btn-lg btn-default btn-gray" %>
       <% end %>
+
+      <%= link_to "New Room", new_room_path, id: "btnNewRoom", class: "btn btn-lg btn-default btn-block btn-gray" %><br>
+      <%= link_to "How to Play", help_path, id: "btnHelp", class: "btn btn-lg btn-default btn-block btn-gray" %><br>
     </div>
   </div>
-
-  <%= link_to "New Room", new_room_path, id: "new-room", class: "btn btn-lg btn-primary" %><br>
-  <%= link_to "How to Play", help_path, class: "btn btn-lg btn-primary" %><br>
 </div>
