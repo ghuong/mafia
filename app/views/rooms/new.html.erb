@@ -1,11 +1,15 @@
-<h1 class="center">New Game</h1>
+<div class="center">
+  <h1>New Room</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_tag rooms_path do %>
-      <%= label_tag :name, "What's your actual name?" %>
-      <%= text_field_tag :name, "", class: 'form-control', placeholder: "Your Name" %>
-      <%= submit_tag "Create Game", id: 'submit', class: "btn btn-lg btn-primary" %>
-    <% end %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_tag rooms_path, id: 'new-user' do %>
+        <div id='name-fields'>
+          <%= label_tag :name, "What's your actual name?", id: 'name-label' %>
+          <%= text_field_tag :name, "", class: 'form-control', placeholder: "Your Name", id: 'name-field' %>
+        </div>
+        <%= submit_tag "GO", id: 'submit', class: "btn btn-lg btn-default btn-gray" %>
+      <% end %>
+    </div>
   </div>
 </div>

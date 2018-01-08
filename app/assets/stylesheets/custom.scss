@@ -136,3 +136,27 @@ form#new_room {
   width: 15%;
   display: inline-block;
 }
+
+/* New user form */
+
+form#new-user {
+  #name-label {
+    color: $gray-lighter;
+  }
+
+  #name-fields {
+    width: 60%;
+    display: inline-block;
+    margin-right: 0.2em;
+    text-align: left;
+    #name-field {
+      font-size: 1.5em;
+      padding: 0.5em 0.8em;
+    }
+  }
+
+  #submit {
+    width: 15%;
+    display: inline-block;
+  }
+}
