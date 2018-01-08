@@ -1,2 +1,47 @@
-<h1>StaticPages#help</h1>
-<p>Find me in app/views/static_pages/help.html.erb</p>
+<div id="helpContainer" class="container">
+  <h1>How to Play</h1>
+
+  <%= link_to "← Back", root_path, class: "btn" %>
+
+  <div class="help-section">
+    <h3>What is this website?</h3>
+
+    <p>If you are hanging out with a group of friends, this website allows your group to play the party game, Mafia. The only requirement is that everyone has their own phone and can access this website. No sign-up required.</p>
+  </div>
+
+  <div class="help-section">
+    <h3>What is Mafia?</h3>
+
+    <p>Mafia is a party game that best supports 5-15 players.</p>
+    <p>At the start of the game, each player is secretly assigned a role affiliated with either one of two teams: Village or Mafia. The game alternates between two phases: Night and Day. The Mafia know one another, but the Villagers are in the dark.</p>
+    <p>At Night, the Mafia murder a member of the Village.</p>
+    <p>During the Day, the surviving players discuss who they believe are the Mafia and each player votes for a suspect. The player who receives a majority of the votes is lynched. Dead players cannot speak until the game ends.</p>
+    <p>The Village wins the game once all the Mafia are dead. The Mafia win the game once half the surviving players are Mafia.</p>
+  </div>
+
+  <div class="help-section">
+    <h3>How do we start a game?</h3>
+
+    <p>One person, the "Host", clicks "New Room" to start a game. Once in the room, they announce the four-letter code at the top to everyone else. Everyone else types that code and clicks "GO". Everyone should enter their real name. If two people share a first name, they should include their last name too.</p>
+    <p>The Host adds Roles to the game. The number of Roles must equal the number of players. It is suggested to have 1 Mafia role for games with 4-6 players, 2 Mafia roles for games with 7-11 players, and 3 Mafia roles for games with 12+ players. It is recommended to have 1 Cop and 1 Doctor role. Of course, you can customize however you want.</p>
+    <p>Once satisfied, click "Start Game".</p>
+  </div>
+
+  <div class="help-section">
+    <h3>How do we play once we start?</h3>
+
+    <p>Everyone will be secretly assigned one of the Roles. Click "Role" to see your Role. Players must never show their phone screens to others and should try to keep their phones hidden. Do not send texts to other players.</p>
+    <p>At Night, if you have a special action, choose a target. Then click "Ready". Once all players are ready, the game progresses to Day. Players should not speak nor look at others during Night.</p>
+    <p>During the Day, surviving players talk openly. Dead players may not speak until the game ends. When ready, players vote for who they suspect to be Mafia. Once players have voted, if any player has received the majority of votes, they are lynched, and the game progresses back to Night.</p>
+    <p>The game continues until all Mafia are dead, or half the surviving players are Mafia.</p>
+  </div>
+
+  <div class="help-section">
+    <h3>Special Roles</h3>
+
+    <p>The Cop belongs to the Village. He investigates a player at night, and learns whether that player is Mafia.</p>
+    <p>The Doctor belongs to the Village. He chooses another player to protect at night. If the Mafia target that player, they survive.</p>
+  </div>
+
+  <%= link_to "← Back", root_path, class: "btn" %>
+</div>
