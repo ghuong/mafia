@@ -131,26 +131,32 @@ input {
 
 /* static_pages/home page form */
 
-form#new_room {
-  margin-bottom: 1.6em;
-}
+
 
 #new-room, #btnHelp {
   width: 57%;
   margin: 0 auto;
 }
 
-#room_code {
-  width: 40%;
-  display: inline-block;
-  font-size: 1.5em;
-  padding: 0.5em 0.8em;
-  margin-right: 0.2em;
+#new-room {
+  margin-bottom: 1.6em;
 }
 
-#join-room {
-  width: 15%;
-  display: inline-block;
+form#new_room {
+  margin-bottom: 1.8em;
+
+  #room_code {
+    width: 40%;
+    display: inline-block;
+    font-size: 1.5em;
+    padding: 0.5em 0.8em;
+    margin-right: 0.2em;
+  }
+
+  #join-room {
+    width: 15%;
+    display: inline-block;
+  }
 }
 
 /* New user form */
