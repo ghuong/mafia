@@ -113,7 +113,7 @@ class ActionDispatch::IntegrationTest
     visit root_path
     fill_in 'room_code', with: room_code
     click_on 'join-room'
-    fill_in 'name', with: guest_name
+    fill_in 'name-field', with: guest_name
     click_on 'submit'
   end
 

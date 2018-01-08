@@ -11,7 +11,7 @@
 
 @mixin vertical-align($position: relative) {
   position: $position;
-  top: 40%;
+  top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -45,9 +45,6 @@ textarea {
 .center {
   @include vertical-align();
   text-align: center;
-  h1 {
-    margin-bottom: 2em;
-  }
 }
 
 /* typography */
@@ -60,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 2em;
+  margin-bottom: 1.9em;
   text-align: center;
 }
 
@@ -135,7 +132,7 @@ input {
 /* static_pages/home page form */
 
 form#new_room {
-  margin-bottom: 1.4em;
+  margin-bottom: 1.6em;
 }
 
 #new-room, #btnHelp {
@@ -169,7 +166,7 @@ form#new_user {
     margin-right: 0.2em;
     text-align: left;
     #name-field {
-      font-size: 1.5em;
+      font-size: 1.6em;
       padding: 0.5em 0.8em;
     }
   }
@@ -185,7 +182,7 @@ form#new_user {
 #room-header {
   width: 100%;
   background-color: $gray-dark;
-  border-bottom: 1px solid $gray;
+  border-bottom: 1px solid $gray-light;
   padding-top: 8px;
   p {
     font-size: 1.2em;
@@ -193,7 +190,7 @@ form#new_user {
     color: $gray-light;
   }
   #room-code {
-    font-size: 1.7em;
+    font-size: 1.8em;
     color: $gray-lighter;
     text-transform: uppercase;
     font-weight: bold;
