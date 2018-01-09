@@ -1,5 +1,4 @@
 <% publish_to @channel do %>
-  // var current_user_id = $('meta[name=user-id]').attr('content');
   var users_list = $('#users-list');
   // Add new user to list
   if (users_list.children('li#user-<%= @user.id %>').length === 0) {

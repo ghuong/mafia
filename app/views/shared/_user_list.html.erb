@@ -1,6 +1,10 @@
-<h2>Users:</h2>
-<ul id="users-list">
-  <%= render partial: 'shared/user', collection: users %>
-</ul>
+<div id='users-container' class='jumbotron'>
+  <h2>Players</h2>
+
+  <hr>
+  <ul id="users-list">
+    <%= render partial: 'shared/user', collection: users %>
+  </ul>
+</div>
 
 <%= subscribe_to channel %>

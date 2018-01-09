@@ -1,14 +1,15 @@
 <%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
 
-<h1>Game Setup</h1>
-<%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel } %>
+<div class="below-header container">
+  <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel } %>
 
-<%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel } %>
+  <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel } %>
 
-<%= form_tag(add_role_path(params[:room_code])) do %>
-  <%= label_tag :role, "Add Role:" %>
-  <%= select_tag :role, options_for_select(@role_options.map {|role| [role[:name], role[:id]]}) %>
-  <%= submit_tag "Add Role", id: 'add-role', class: "btn btn-lg btn-primary" %>
-<% end %>
+  <%= form_tag(add_role_path(params[:room_code])) do %>
+    <%= label_tag :role, "Add Role:" %>
+    <%= select_tag :role, options_for_select(@role_options.map {|role| [role[:name], role[:id]]}) %>
+    <%= submit_tag "Add Role", id: 'add-role', class: "btn btn-lg btn-primary" %>
+  <% end %>
 
-<%= link_to "Start Game", start_game_path, method: :post, class: "btn btn-lg btn-primary disabled", id: "start-game" %>
+  <%= link_to "Start Game", start_game_path, method: :post, class: "btn btn-lg btn-primary disabled", id: "start-game" %>
+</div>

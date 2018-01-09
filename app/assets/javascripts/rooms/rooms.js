@@ -1,4 +1,5 @@
 $(".rooms_controller.show_action").ready(function() {
+  // var current_user_id = $('meta[name=user-id]').attr('content');
   var room_code = $('#room-code').data('room-code');
   
   // Announce that we joined the room to the other users
