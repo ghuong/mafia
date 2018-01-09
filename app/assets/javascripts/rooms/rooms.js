@@ -1,5 +1,4 @@
 $(".rooms_controller.show_action").ready(function() {
-  // var current_user_id = $('meta[name=user-id]').attr('content');
   var room_code = $('#room-code').data('room-code');
   
   // Announce that we joined the room to the other users
@@ -14,6 +13,12 @@ $(".rooms_controller.show_action").ready(function() {
       httpRequest('/rooms/' + room_code + '/users', {}, 'delete');
     });
   });
+
+  // Highlight current user in user list
+  var current_user_id = $('meta[name=user-id]').attr('content');
+  var current_user_li = $('#user-' + current_user_id);
+  current_user_li.addClass('yourself');
+  current_user_li.find('.user-title').text('YOU');
 });
 
 $('.settings_controller.edit_action').ready(function() {

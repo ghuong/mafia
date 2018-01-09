@@ -1,6 +1,4 @@
 <li id="user-<%= user.id %>" class="<%= "host" if user.is_host %>">
   <div class='user-name'><%= user.name %></div>
-  <% if user.is_host %>
-    <div class='user-title'>HOST</div>
-  <% end %>
+  <div class='user-title'><%= "HOST" if user.is_host %></div>
 </li>
