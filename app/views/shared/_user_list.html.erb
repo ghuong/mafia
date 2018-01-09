@@ -3,7 +3,11 @@
 
   <hr>
   <ul id="users-list">
-    <%= render partial: 'shared/user', collection: users %>
+    <%= render partial: 'shared/user', object: users.find { |user| user.is_host } %>
+    <% if !current_user.is_host %>
+      <%= render partial: 'shared/user', object: current_user %>
+    <% end %>
+    <%= render partial: 'shared/user', collection: users.select { |user| current_user != user && !user.is_host } %>
   </ul>
 </div>
 
