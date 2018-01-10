@@ -277,10 +277,10 @@ form#new_user {
     margin-bottom: 0.3em;
     line-height: 1.9em;
     vertical-align: middle;
-    .user-name, .user-title, .role-name, .role-team, .role-count {
+    .user-name, .user-title, .role-name, .role-team, .role-count, .kick-user {
       display: inline-block;
     }
-    .user-name, .role-name, .role-count {
+    .user-name, .role-name, .role-count, .kick-user {
       font-weight: bold;
     }
     .user-name, .role-name {
@@ -296,18 +296,25 @@ form#new_user {
       color: $gray-light;
       font-size: 1.2em;
     }
-    .add-role, .remove-role {
+    .add-role, .remove-role, .kick-user {
       font-size: 2em;
       font-weight: bold;
       position: absolute;
       color: #b5d161;
-      left: 0.7em;
+      text-shadow: 1.5px 1.5px $gray;
       &:hover, &:active, &:visited, &:focus {
         text-decoration: none;
       }
     }
+    .add-role {
+      left: 0.7em;
+    }
     .remove-role {
       left: 2.7em;
+    }
+    .kick-user {
+      color: #c63939;
+      right: 0.7em;
     }
   }
 
