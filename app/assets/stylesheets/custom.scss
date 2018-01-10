@@ -272,15 +272,17 @@ form#new_user {
     .user-title {
       display: inline-block;
       float: right;
-      color: $gray-light;
+      color: $gray;
     }
   }
 
   li.host {
-    background-color: #a68d3f;
+    background-color: #c0a659;
+    border: 1px solid $gray-lighter;
   }
 
   li.yourself {
-    background-color: #3f59a6;
+    background-color: #6f9f60;
+    border: 1px solid $gray-light;
   }
 }
