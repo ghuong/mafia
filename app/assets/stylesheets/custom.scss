@@ -61,14 +61,6 @@ h1 {
   text-align: center;
 }
 
-// h2 {
-//   font-size: 1.2em;
-//   letter-spacing: -1px;
-//   margin-bottom: 30px;
-//   text-align: center;
-//   font-weight: normal;
-// }
-
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -249,7 +241,7 @@ form#new_user {
   }
 }
 
-/* Users List */
+/* Users & Roles List */
 
 #users-container {
   background-color: #4d7043;
@@ -258,6 +250,7 @@ form#new_user {
 #users-list, #roles-list {
   padding-left: 0;
   li {
+    position: relative;
     list-style-type: none;
     background-color: #59804d;
     color: $gray-lighter;
@@ -290,13 +283,13 @@ form#new_user {
       font-weight: bold;
       position: absolute;
       color: #b5d161;
-      left: 2em;
+      left: 0.7em;
       &:hover {
         text-decoration: none;
       }
     }
     .remove-role {
-      left: 4em;
+      left: 2.7em;
     }
   }
 
@@ -328,5 +321,28 @@ form#new_user {
     .role-count {
       margin: 0 2em;
     }
+  }
+}
+
+/* New Role form */
+
+form#new-role {
+  #name-label {
+    color: $gray-lighter;
+  }
+
+  #role-options {
+    width: 70%;
+    display: inline-block;
+    font-size: 1.6em;
+    margin: 0.5em 0.5em;
+  }
+
+  #add-role {
+    width: 20%;
+    display: inline-block;
+    color: $gray-lighter;
+    background-color: #5989c0;
+    border-color: $gray-light;
   }
 }

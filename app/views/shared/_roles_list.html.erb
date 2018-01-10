@@ -8,6 +8,16 @@
     <%= render partial: 'shared/role', collection: roles.select { |role| role[:team] == MAFIA_TEAMS[:mafia] }, locals: { hide_remove_links: false } %>
     <%= render partial: 'shared/role', collection: roles.select { |role| role[:team] == MAFIA_TEAMS[:solo] }, locals: { hide_remove_links: false } %>
   </ul>
+
+  
+  <% if is_host?(@room) %>
+    <hr>
+
+    <%= form_tag(add_role_path(params[:room_code]), id: 'new-role') do %>
+      <%= select_tag :role, options_for_select(@role_options.map {|role| [role[:name], role[:id]]}), id: 'role-options' %>
+      <%= submit_tag "Add", id: 'add-role', class: "btn btn-lg btn-default" %>
+    <% end %>
+  <% end %>
 </div>
 
 <% if !is_host?(@room) %>
