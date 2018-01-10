@@ -193,6 +193,24 @@ form#new_user {
     margin-left: 0.2em;
     letter-spacing: 3px;
   }
+  #start-game, #leave {
+    display: inline-block;
+    float: right;
+    background-color: #804d4d;
+    border-color: $gray-lighter;
+    width: 5em;
+  }
+  #start-game {
+    margin-right: 0.9em;
+  }
+  #start-game.disabled {
+    background-color: #339933;
+    border-color: $gray;
+  }
+  #start-game:not(.disabled) {
+    background-color: #0ac20a;
+    border-color: $gray-lighter;
+  }
 }
 
 .below-header {

@@ -6,8 +6,6 @@
 
   <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel, current_user: @user } %>
 
-  <%= link_to "Leave", '#', id: "leave" %>
-
 </div>
 
 <%= subscribe_to @game_started_channel %>

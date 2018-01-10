@@ -1,9 +1,14 @@
-
 <header id='room-header' class='navbar navbar-fixed-top'>
   <div class="container">
     <p>Room </p>
     <p id="room-code" data-room-code="<%= room_code %>">
       <%= room_code %>
     </p>
+    
+    <%= link_to "Leave", '#', id: "leave", class: "btn btn-lg btn-default btn-gray" %>
+
+    <% if is_host?(@room) %>
+      <%= link_to "Start", start_game_path, method: :post, class: "btn btn-lg btn-default btn-gray disabled", id: "start-game" %>
+    <% end %>
   </div>
 </header>
