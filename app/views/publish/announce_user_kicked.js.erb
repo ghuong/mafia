@@ -1,0 +1,9 @@
+<% publish_to @channel do %>
+  // Remove user that is being kicked from list
+  $('#users-list').children('li#user-<%= @user_kicked_id %>').remove();
+  // In host's "edit settings" page, toggle the start game button
+  if ($('#start-game').length) {
+    setStartGameButtonDisabledClass();
+  }
+  getKicked('<%= @user_kicked_id %>');
+<% end %>

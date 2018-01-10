@@ -26,9 +26,10 @@ Rails.application.routes.draw do
   get '/rooms/:room_code/death',            to: 'actions#death', as: 'death'
 
   # Publish messages with private_pub
-  post '/publish/:room_code/announce_user_joining',        to: 'publish#announce_user_joining'
-  post '/publish/:room_code/announce_user_leaving',        to: 'publish#announce_user_leaving'
-  post '/publish/:room_code/announce_roles_updated',       to: 'publish#announce_roles_updated'
-  post '/publish/:room_code/announce_game_started',        to: 'publish#announce_game_started'
-  post '/publish/:room_code/announce_day_phase_changed',   to: 'publish#announce_day_phase_changed'
+  post '/publish/:room_code/announce_user_joining',         to: 'publish#announce_user_joining'
+  post '/publish/:room_code/announce_user_leaving',         to: 'publish#announce_user_leaving'
+  post '/publish/:room_code/announce_roles_updated',        to: 'publish#announce_roles_updated'
+  post '/publish/:room_code/announce_game_started',         to: 'publish#announce_game_started'
+  post '/publish/:room_code/announce_day_phase_changed',    to: 'publish#announce_day_phase_changed'
+  post '/publish/:room_code/announce_user_kicked/:user_id', to: 'publish#announce_user_kicked'
 end

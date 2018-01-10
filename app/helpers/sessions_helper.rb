@@ -44,6 +44,12 @@ module SessionsHelper
     end
   end
 
+  # Retuns true iff the current user is a host
+  def is_current_user_a_host?
+    user = current_user
+    user && user.is_host
+  end
+
   # Returns true if the current user has previously joined the given room
   def has_already_joined?(room, user = nil)
     user ||= current_user

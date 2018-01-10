@@ -3,5 +3,7 @@
   // Add new user to list
   if (users_list.children('li#user-<%= @user.id %>').length === 0) {
     users_list.append("<%= j render(partial: 'shared/user', object: @user) %>");
+    // Show kick user buttons for host user
+    showKickUserButtons();
   }
 <% end %>

@@ -1,5 +1,6 @@
 class PublishController < ApplicationController
   before_action :has_joined_room
+  before_action :is_host_of_room, only: [:announce_user_kicked, :announce_roles_updated, :announce_game_started]
 
   # Announce to all users in room that a new user has joined
   def announce_user_joining
@@ -28,6 +29,14 @@ class PublishController < ApplicationController
     @channel = PRIVATE_PUB_CHANNELS[:day_phase_changed]
   end
 
+  # Kick user from room and announce to all
+  def announce_user_kicked
+    @channel = PRIVATE_PUB_CHANNELS[:users_list]
+    user_kicked = @room.users.find_by(id: params[:user_id])
+    @user_kicked_id = user_kicked.id
+    user_kicked.destroy
+  end
+
   private
 
     # Ignore unauthorized requests
@@ -35,6 +44,13 @@ class PublishController < ApplicationController
       @user = current_user
       @room = Room.find_by(code: params[:room_code])
       if !@room || !has_already_joined?(@room, @user)
+        render nothing: true
+      end
+    end
+
+    # Ignore non-host requests
+    def is_host_of_room
+      if !is_host?(@room)
         render nothing: true
       end
     end

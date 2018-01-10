@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content='<%= get_current_user_id %>' name='user-id'/>
+    <%= tag :meta, name: 'user-id', content: get_current_user_id %>
+    <%= tag :meta, name: 'is_host', content: is_current_user_a_host? %>
 
     <title>Mafia</title>
     <%= csrf_meta_tags %>

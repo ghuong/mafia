@@ -1,4 +1,7 @@
 <li id="user-<%= user.id %>" class="<%= "user-host" if user.is_host %>">
   <div class='user-name'><%= user.name %></div>
   <div class='user-title'><%= "HOST" if user.is_host %></div>
+  <% if !user.is_host %>
+    <%= link_to "X", "#", data: { user_id: user.id }, class: "kick-user disabled hide" %>  
+  <% end %>
 </li>

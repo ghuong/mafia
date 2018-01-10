@@ -24,15 +24,22 @@ $(".rooms_controller.show_action").ready(function() {
 $('.settings_controller.edit_action').ready(function() {
   var room_code = $('#room-code').data('room-code');
 
+  // Enable Kick-User buttons
+  showKickUserButtons();
+
   // Update all guest user's role counts
   $.post('/publish/' + room_code + '/announce_roles_updated');
 
   // Enable 'Start Game' button if number of roles matches number of users
   setStartGameButtonDisabledClass();
-
+  // When new users join, check if 'Start Game' should be enabled/disabled
   $('#users-list').on('append', function() {
     setStartGameButtonDisabledClass();
+    // add Kick User listener
+    addKickUserListener(room_code);
   });
+
+  addKickUserListener(room_code);
 });
 
 $('.actions_controller.edit_action').ready(function() {
@@ -86,4 +93,33 @@ function setSubmitActionsButton(is_ready) {
 function nextDayPhase(room_code) {
   // Announce to everyone that the day phase has changed, forcing everyone to page refresh
   $.post('/publish/' + room_code + '/announce_day_phase_changed');
+}
+
+// Show kick user buttons for the host
+function showKickUserButtons() {
+  var is_host = $('meta[name=is_host]').attr('content') == 'true';
+  if (is_host) {
+    $('.kick-user').removeClass('hide');
+    $('.kick-user').removeClass('disabled');
+  }
+}
+
+// Redirect user to homepage if they are kicked
+function getKicked(user_id) {
+  var current_user_id = $('meta[name=user-id]').attr('content');
+  if (current_user_id == user_id) {
+    httpRequest('/', {}, 'get');
+  }
+}
+
+// Add Kick User Listener
+function addKickUserListener(room_code) {
+  // When Kick User button clicked
+  $('.kick-user').on('click', function(e) {
+    e.preventDefault();
+
+    var user_id = $(this).data('userId');
+    // alert('kicking user ' + user_id);
+    $.post('/publish/' + room_code + '/announce_user_kicked/' + user_id);
+  });
 }

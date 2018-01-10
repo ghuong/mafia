@@ -68,6 +68,7 @@ class SettingsController < ApplicationController
     # Redirect to home page if user is not authorized
     def is_host_of_room
       @room = Room.find_by(code: params[:room_code])
+      @user = current_user
       if !@room || !@room.is_pregame? || !is_host?(@room)
         flash.now[:danger] = "That page is unavailable."
         render 'static_pages/home'
