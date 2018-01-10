@@ -25,12 +25,12 @@ class Room < ApplicationRecord
   # Returns a list of roles
   def get_roles
     result = roles.split(",").each_with_index.map do |count, idx|
-      { id: idx, name: MAFIA_ROLES[idx], count: count.to_i }
+      { id: idx, name: MAFIA_ROLES[idx][:name], count: count.to_i, team: MAFIA_ROLES[idx][:team] }
     end
 
     if result.length < MAFIA_ROLES.length
       MAFIA_ROLES.each_with_index.map do |role, idx|
-        { id: idx, name: role, count: 0 }
+        { id: idx, name: role[:name], count: 0, team: role[:team] }
       end
     else
       result

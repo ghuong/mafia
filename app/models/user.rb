@@ -43,12 +43,12 @@ class User < ApplicationRecord
 
   # Returns true iff user is on Mafia team
   def is_mafia?
-    ['Mafia'].include? MAFIA_ROLES[role_id]
+    MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:mafia]
   end
 
   # Returns true iff user is on Villager team
   def is_villager?
-    ['Villager'].include? MAFIA_ROLES[role_id]
+    MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:village]
   end
 
   # Returns the user's target for a specific action

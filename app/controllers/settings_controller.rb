@@ -7,7 +7,7 @@ class SettingsController < ApplicationController
     @users = @room.users
     @roles = @room.get_roles
     @role_options = MAFIA_ROLES.each_with_index.map do |role, idx|
-      { id: idx, name: role }
+      { id: idx, name: role[:name] }
     end
   end
 

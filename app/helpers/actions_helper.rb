@@ -3,7 +3,7 @@ module ActionsHelper
   # Get array of actions for the given role_id
   def get_action_options(user_id, role_id, day_phase, all_users)
     actions = []
-    role = MAFIA_ROLES[role_id]
+    role = MAFIA_ROLES[role_id][:name]
     living_users = all_users.select { |user| user.is_alive }
 
     if day_phase == "night"
