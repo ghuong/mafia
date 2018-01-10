@@ -22,6 +22,17 @@ class SettingsController < ApplicationController
     end
   end
 
+  def increment_role
+    role = params[:role_id].to_i
+    @room.add_role(role)
+    if @room.save
+      redirect_to edit_settings_path(params[:room_code])
+    else
+      flash.now[:danger] = "Failed to add role"
+      render :edit
+    end
+  end
+
   def remove_role
     role = params[:role_id].to_i
     @room.remove_role(role)

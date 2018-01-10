@@ -1,7 +1,10 @@
 <%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
 
 <div class="below-header container">
-  <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel } %>
+  
+  <div id="roles-list-parent">
+    <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel, hide_admin_controls: false } %>
+  </div>
 
   <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel } %>
 </div>

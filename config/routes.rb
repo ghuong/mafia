@@ -14,10 +14,11 @@ Rails.application.routes.draw do
   delete '/rooms/:room_code/users',  to: 'users#destroy'
 
   # Settings
-  get '/rooms/:room_code/settings',                        to: 'settings#edit', as: 'edit_settings'
-  post '/rooms/:room_code/settings/add_role',              to: 'settings#add_role', as: 'add_role'
-  post '/rooms/:room_code/settings/remove_role/:role_id',  to: 'settings#remove_role', as: 'remove_role'
-  post '/rooms/:room_code/settings/start_game',            to: 'settings#start_game', as: 'start_game'
+  get '/rooms/:room_code/settings',                             to: 'settings#edit', as: 'edit_settings'
+  post '/rooms/:room_code/settings/increment_role/:role_id',    to: 'settings#increment_role', as: 'increment_role'
+  post '/rooms/:room_code/settings/add_role',                   to: 'settings#add_role', as: 'add_role'
+  post '/rooms/:room_code/settings/remove_role/:role_id',       to: 'settings#remove_role', as: 'remove_role'
+  post '/rooms/:room_code/settings/start_game',                 to: 'settings#start_game', as: 'start_game'
 
   # Actions
   get '/rooms/:room_code/actions/edit',     to: 'actions#edit', as: 'edit_actions'

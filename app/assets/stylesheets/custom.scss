@@ -302,7 +302,7 @@ form#new_user {
       position: absolute;
       color: #b5d161;
       left: 0.7em;
-      &:hover {
+      &:hover, &:active, &:visited, &:focus {
         text-decoration: none;
       }
     }

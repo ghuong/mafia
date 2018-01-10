@@ -2,7 +2,9 @@
 
 <div class="below-header container">
 
-  <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel } %>
+  <div id="roles-list-parent">
+    <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel, hide_admin_controls: true } %>
+  </div>
 
   <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel, current_user: @user } %>
 

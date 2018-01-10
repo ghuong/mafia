@@ -15,6 +15,7 @@ class PublishController < ApplicationController
   def announce_roles_updated
     @channel = PRIVATE_PUB_CHANNELS[:roles_list]
     @roles = @room.get_roles
+    @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list]
   end
 
   # Announce to guests that game has started

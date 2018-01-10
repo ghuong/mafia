@@ -1,4 +1,4 @@
 <% publish_to @channel do %>
   // Update roles list
-  $('#roles-list').empty().append("<%= j render(partial: 'shared/role', collection: @roles, locals: { hide_remove_links: true }) %>");
+  $('#roles-list-parent').empty().append("<%= j render(partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel, hide_admin_controls: true }) %>");
 <% end %>

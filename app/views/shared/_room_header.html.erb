@@ -5,10 +5,12 @@
       <%= room_code %>
     </p>
     
-    <%= link_to "Leave", '#', id: "leave", class: "btn btn-lg btn-default btn-gray" %>
+    <% if @room.is_pregame? && has_already_joined?(@room) %>
+      <%= link_to "Leave", '#', id: "leave", class: "btn btn-lg btn-default btn-gray" %>
 
-    <% if is_host?(@room) %>
-      <%= link_to "Start", start_game_path, method: :post, class: "btn btn-lg btn-default btn-gray disabled", id: "start-game" %>
+      <% if is_host?(@room) %>
+        <%= link_to "Start", start_game_path, method: :post, class: "btn btn-lg btn-default btn-gray disabled", id: "start-game" %>
+      <% end %>
     <% end %>
   </div>
 </header>
