@@ -1,8 +1,14 @@
 <% if role[:count] > 0 %>
-  <li id="role-<%= role[:id] %>">
-    Role: <%= role[:name] %> x<%= role[:count] %>
+  <li id="role-<%= role[:id] %>" class="team-<%= role[:team] %> <%= "host" if !hide_remove_links && is_host?(@room) %>">
     <% if !hide_remove_links && is_host?(@room) %>
-      <%= link_to "Decrement", remove_role_path(params[:room_code], role[:id]), method: :post, id: "remove-role-#{role[:id]}" %>
+      <%= link_to "+", add_role_path(params[:room_code], role[:id]), method: :post, id: "add-role-#{role[:id]}", class: "add-role" %>
     <% end %>
+    <div class="role-count">x <%= role[:count] %></div>
+    <% if !hide_remove_links && is_host?(@room) %>
+      <%= link_to "–", remove_role_path(params[:room_code], role[:id]), method: :post, id: "remove-role-#{role[:id]}", class: "remove-role" %>
+    <% end %>
+    <span class='vertical-divider'>&#124;</span>
+    <div class='role-name'><%= role[:name] %></div>
+    <div class="role-team"><%= role[:team] %></div>
   </li>
 <% end %>

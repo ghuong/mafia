@@ -240,6 +240,7 @@ form#new_user {
     text-align: left;
     color: $gray-lighter;
     margin-bottom: 0.1em;
+    font-weight: bold;
   }
 
   hr {
@@ -254,7 +255,7 @@ form#new_user {
   background-color: #4d7043;
 }
 
-#users-list {
+#users-list, #roles-list {
   padding-left: 0;
   li {
     list-style-type: none;
@@ -265,24 +266,67 @@ form#new_user {
     margin-bottom: 0.3em;
     line-height: 1.9em;
     vertical-align: middle;
-    .user-name {
+    .user-name, .user-title, .role-name, .role-team, .role-count {
       display: inline-block;
+    }
+    .user-name, .role-name, .role-count {
+      font-weight: bold;
+    }
+    .user-name, .role-name {
       font-size: 1.2em;
     }
-    .user-title {
-      display: inline-block;
+    .user-title, .role-team {
       float: right;
       color: $gray;
+      text-transform: uppercase;
+    }
+    .vertical-divider {
+      margin: 0 0.8em;
+      color: $gray-light;
+      font-size: 1.2em;
+    }
+    .add-role, .remove-role {
+      font-size: 2em;
+      font-weight: bold;
+      position: absolute;
+      color: #b5d161;
+      left: 2em;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .remove-role {
+      left: 4em;
     }
   }
 
-  li.host {
+  li.user-host {
     background-color: #c0a659;
     border: 1px solid $gray-lighter;
   }
 
-  li.yourself {
+  li.user-yourself {
     background-color: #6f9f60;
     border: 1px solid $gray-light;
+  }
+
+  li.team-Village {
+    background-color: #59a6c0;
+  }
+
+  li.team-Mafia {
+    background-color: #c05959;
+  }
+
+  li.team-Solo {
+    background-color: #c0c059;
+  }
+}
+
+#roles-list {
+  li.host {
+    .role-count {
+      margin: 0 2em;
+    }
   }
 }

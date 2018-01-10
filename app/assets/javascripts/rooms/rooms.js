@@ -17,7 +17,7 @@ $(".rooms_controller.show_action").ready(function() {
   // Highlight current user in user list
   var current_user_id = $('meta[name=user-id]').attr('content');
   var current_user_li = $('#user-' + current_user_id);
-  current_user_li.addClass('yourself');
+  current_user_li.addClass('user-yourself');
   current_user_li.find('.user-title').text('YOU');
 });
 
