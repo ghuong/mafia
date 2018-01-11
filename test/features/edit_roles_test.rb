@@ -5,17 +5,13 @@ class EditRolesTest < ActionDispatch::IntegrationTest
     room_code = create_room
 
     # No roles added yet
-    within('#roles-list') do
-      assert_not page.has_css?('li', text: MAFIA_ROLES[1][:name])
-    end
+    assert_not page.has_css?('#roles-list')
 
     # Guest user sees no roles too
     within_session :guests_window do
       join_room(room_code, "Helen")
 
-      within('#roles-list') do
-        assert_not page.has_css?('li', text: MAFIA_ROLES[1][:name])
-      end
+      assert_not page.has_css?('#roles-list')
     end
 
     # Add new role

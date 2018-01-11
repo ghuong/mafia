@@ -277,6 +277,12 @@ form#new_user {
     border-color: $gray-light;
     margin: 1em 0;
   }
+
+  #no-roles-msg {
+    font-size: 1.2em;
+    color: $gray-lighter;
+    text-align: center;
+  }
 }
 
 /* Users & Roles List */
