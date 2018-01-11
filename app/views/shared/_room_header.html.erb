@@ -1,15 +1,37 @@
 <header id='room-header' class='navbar navbar-fixed-top'>
   <div class="container">
-    <p>Room </p>
-    <p id="room-code" data-room-code="<%= room_code %>">
+    <% if @room.is_pregame? %>
+      <p>Room </p>
+    <% elsif @room.is_in_progress? %>
+
+      <% if @room.day_phase == 'night' %>
+        <p id="day-phase-icon" class="night">☾</p>
+      <% elsif @room.day_phase == 'day' %>
+        <p id="day-phase-icon" class="day">☀</p>
+      <% end %>
+
+      <p id="day-phase">
+        <% if @room.day_phase == 'night' %>
+          Night
+        <% elsif @room.day_phase == 'day' %>
+          Day
+        <% end %>
+      </p>
+    <% end %>
+
+    <p id="room-code" data-room-code="<%= room_code %>" class="<%= 'hide' if !@room.is_pregame? %>">
       <%= room_code %>
     </p>
     
-    <% if @room.is_pregame? && has_already_joined?(@room) %>
-      <%= link_to "Leave", '#', id: "leave", class: "btn btn-lg btn-default btn-gray" %>
+    <% if has_already_joined?(@room) %>
+      <% if @room.is_pregame? %>
+        <%= link_to "Leave", '#', id: "leave", class: "btn btn-lg btn-default btn-gray" %>
 
-      <% if is_host?(@room) %>
-        <%= link_to "Start", start_game_path, method: :post, class: "btn btn-lg btn-default btn-gray disabled", id: "start-game" %>
+        <% if is_host?(@room) %>
+          <%= link_to "Start", start_game_path(room_code), method: :post, class: "btn btn-lg btn-default btn-gray disabled", id: "start-game" %>
+        <% end %>
+      <% elsif @room.is_in_progress? %>
+        <%= link_to "Role", '#', id: "role-button", class: "btn btn-lg btn-default btn-gray" %>
       <% end %>
     <% end %>
   </div>

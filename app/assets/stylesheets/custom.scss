@@ -180,10 +180,13 @@ form#new_user {
   background-color: $gray-dark;
   border-bottom: 2px solid $gray;
   padding-top: 0.5em;
+  height: 4.5em;
+  vertical-align: middle;
   p {
     font-size: 1.2em;
     display: inline-block;
     color: $gray-light;
+    margin: 0;
   }
   #room-code {
     font-size: 1.8em;
@@ -193,7 +196,21 @@ form#new_user {
     margin-left: 0.2em;
     letter-spacing: 3px;
   }
-  #start-game, #leave {
+  #day-phase {
+    font-size: 1.8em;
+    color: $gray-lighter;
+    margin-left: 2.3em;
+  }
+  #day-phase-icon {
+    font-size: 3em;
+    position: absolute;
+    top: -0.1em;
+    color: #a3b1dc;
+  }
+  #day-phase-icon.day {
+    color: #fcde83;
+  }
+  #start-game, #leave, #role-button {
     display: inline-block;
     float: right;
     background-color: #804d4d;
@@ -210,6 +227,9 @@ form#new_user {
   #start-game:not(.disabled) {
     background-color: #0ac20a;
     border-color: $gray-lighter;
+  }
+  #role-button {
+    background-color: #7334b2;
   }
 }
 

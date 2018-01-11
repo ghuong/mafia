@@ -33,9 +33,9 @@ class RoomsController < ApplicationController
       @users = @room.users
       if @room.is_pregame?
         @roles = @room.get_roles
-        @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list]
-        @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list]
-        @game_started_channel = PRIVATE_PUB_CHANNELS[:game_started]
+        @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list] + "/#{@room.code}"
+        @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list] + "/#{@room.code}"
+        @game_started_channel = PRIVATE_PUB_CHANNELS[:game_started] + "/#{@room.code}"
         @user = current_user
 
         if is_host?(@room) # host accesses settings page for room

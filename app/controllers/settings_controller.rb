@@ -2,8 +2,8 @@ class SettingsController < ApplicationController
   before_action :is_host_of_room
 
   def edit
-    @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list]
-    @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list]
+    @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list] + "/#{@room.code}"
+    @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list] + "/#{@room.code}"
     @users = @room.users
     @roles = @room.get_roles
     @role_options = MAFIA_ROLES.each_with_index.map do |role, idx|

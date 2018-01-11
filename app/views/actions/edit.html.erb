@@ -1,11 +1,15 @@
 <%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
 
-<h1>Edit Actions</h1>
+<div class="below-header container">
 
-User: <p id="user" name="<%= @user.name %>"><%= @user.name %></p>
-Role: <p id="role" name="<%= @role[:name] %>"><%= @role[:name] %></p>
-<p>Day Phase: <%= @room.day_phase %></p>
+  <h1>Edit Actions</h1>
 
-<%= render partial: 'actions_list', locals: { action_options: @action_options, is_ready: @is_ready } %>
+  User: <p id="user" name="<%= @user.name %>"><%= @user.name %></p>
+  Role: <p id="role" name="<%= @role[:name] %>"><%= @role[:name] %></p>
+  <p>Day Phase: <%= @room.day_phase %></p>
+
+  <%= render partial: 'actions_list', locals: { action_options: @action_options, is_ready: @is_ready } %>
+  
+</div>
 
 <%= subscribe_to @day_phase_changed_channel %>

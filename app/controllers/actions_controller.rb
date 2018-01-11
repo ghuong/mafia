@@ -9,7 +9,7 @@ class ActionsController < ApplicationController
     @role = MAFIA_ROLES[@user.role_id]
     @action_options = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)
     @is_ready = @user.is_ready
-    @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed]
+    @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed] + "/#{@room.code}"
   end
 
   def update

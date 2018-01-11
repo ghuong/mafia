@@ -29,8 +29,8 @@ class UsersController < ApplicationController
     def room_is_pregame
       @room = Room.find_by(code: params[:room_code])
       if !@room || !@room.is_pregame?
-        flash.now[:danger] = "That game has already started, or does not exist."
-        render 'static_pages/home'
+        flash[:danger] = "That game has already started, or does not exist."
+        redirect_to root_path
       end
     end
 end
