@@ -3,6 +3,7 @@
   <head>
     <%= tag :meta, name: 'user-id', content: get_current_user_id %>
     <%= tag :meta, name: 'is_host', content: is_current_user_a_host? %>
+    <%= tag :meta, name: 'viewport', content: 'width=device-width, initial-scale=1' %>
 
     <title>Mafia</title>
     <%= csrf_meta_tags %>

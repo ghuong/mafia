@@ -23,7 +23,7 @@ Run the private_pub generator:
 Verify all tests pass:
   `rails test`
 
---- Run ---
+--- Run Locally ---
 
 Start Rack server for private_pub:
   `rackup private_pub.ru -s thin -E production`
@@ -32,6 +32,22 @@ Start Rails server (in separate terminal):
   `rails server`
 
 Visit 'localhost:3000/' to visit homepage
+
+--- Deploy to Heroku ---
+
+Precompile assets:
+  `bundle exec rake assets:precompile`
+
+Commit changes to git
+
+Commit to Heroku
+  `git push heroku master`
+
+Migrate database on Heroku
+  `heroku run rake db:migrate`
+
+Deploy Private Pub project to Heroku in the same manner as a separate project.
+See: http://www.thegreatcodeadventure.com/deploying-private-pub-on-heroku/
 
 === What is this? ===
 
