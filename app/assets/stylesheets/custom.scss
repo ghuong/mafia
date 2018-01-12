@@ -351,23 +351,22 @@ form#new_user {
     .add-role, .remove-role, .kick-user {
       font-size: 2.4em;
       font-weight: bold;
-      position: absolute;
       color: #b5d161;
       text-shadow: 1.5px 1.5px $gray;
       &:hover, &:active, &:visited, &:focus {
         text-decoration: none;
       }
     }
-    .add-role, .remove-role {
-      top: 0.1em;
-    }
-    .add-role {
-      left: 0.5em;
-    }
     .remove-role {
-      left: 2.4em;
+      margin-left: 1.2em;
+    }
+    .role-count-buttons {
+      position: absolute;
+      height: 100%;
+      margin-top: -0.4em;
     }
     .kick-user {
+      position: absolute;
       font-size: 2em;
       color: #c63939;
       right: 0.7em;
