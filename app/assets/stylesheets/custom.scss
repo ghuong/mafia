@@ -17,19 +17,39 @@
   transform: translateY(-50%);
 }
 
+/* Aligner */
+
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Aligner-item {
+  max-width: 50%;
+}
+
+.Aligner-item--top {
+  align-self: flex-start;
+}
+
+.Aligner-item--bottom {
+  align-self: flex-end;
+}
+
 /* universal */
 
 html {
-  height: 100vh;
+  height: 100%;
 }
 
 body {
   background-color: $gray-darker;
-  min-height: 100vh;
+  height: 100%;
 }
 
 #main_container {
-  height: 100vh;
+  height: 100%;
   padding-left: 0;
   padding-right: 0;
 }
@@ -50,20 +70,17 @@ textarea {
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
   color: $gray-lighter;
 }
 
 h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 1.9em;
-  text-align: center;
+  font-size: 300%;
+  margin-bottom: 15%;
 }
 
 p {
-  font-size: 1.1em;
-  line-height: 1.7em;
+  font-size: 110%;
+  // line-height: 1.7em;
 }
 
 /* miscellaneous */
@@ -179,57 +196,60 @@ form#new_user {
   width: 100%;
   background-color: $gray-dark;
   border-bottom: 2px solid $gray;
-  padding-top: 0.5em;
   height: 4.5em;
-  vertical-align: middle;
+  line-height: 4.5em;
+  .container {
+    height: 100%;
+  }
   p {
-    font-size: 1.2em;
+    font-size: 120%;
     display: inline-block;
     color: $gray-light;
     margin: 0;
   }
   #room-code {
-    font-size: 1.8em;
+    font-size: 180%;
     color: $gray-lighter;
     text-transform: uppercase;
     font-weight: bold;
-    margin-left: 0.2em;
     letter-spacing: 3px;
   }
   #day-phase {
-    font-size: 1.8em;
+    font-size: 180%;
     color: $gray-lighter;
     margin-left: 2.3em;
   }
   #day-phase-icon {
-    font-size: 3em;
+    font-size: 300%;
     position: absolute;
-    top: -0.1em;
     color: #a3b1dc;
+    line-height: 160%;
   }
   #day-phase-icon.day {
     color: #fcde83;
   }
-  #start-game, #leave, #role-button {
-    display: inline-block;
+  #header-buttons {    
     float: right;
-    background-color: #804d4d;
-    border-color: $gray-lighter;
-    width: 5em;
-  }
-  #start-game {
-    margin-right: 0.9em;
-  }
-  #start-game.disabled {
-    background-color: #339933;
-    border-color: $gray;
-  }
-  #start-game:not(.disabled) {
-    background-color: #0ac20a;
-    border-color: $gray-lighter;
-  }
-  #role-button {
-    background-color: #7334b2;
+    height: 100%;
+    #start-game, #leave, #role-button {
+      background-color: #804d4d;
+      border-color: $gray-lighter;
+      width: 5em;
+    }
+    #start-game {
+      margin-right: 0.9em;
+    }
+    #start-game.disabled {
+      background-color: #339933;
+      border-color: $gray;
+    }
+    #start-game:not(.disabled) {
+      background-color: #0ac20a;
+      border-color: $gray-lighter;
+    }
+    #role-button {
+      background-color: #7334b2;
+    }
   }
 }
 
