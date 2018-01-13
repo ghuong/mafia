@@ -6,7 +6,7 @@
   Role: <p id="role" name="<%= @role[:name] %>"><%= @role[:name] %></p>
   <p>Day Phase: <%= @room.day_phase %></p>
 
-  <%= render partial: 'actions_list', locals: { action_options: @action_options, is_ready: @is_ready } %>
+  <%= render partial: 'actions_list', locals: { action_options: @action_options, is_ready: @is_ready, day_phase: @room.day_phase } %>
   
 </div>
 

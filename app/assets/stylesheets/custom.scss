@@ -67,6 +67,10 @@ textarea {
   text-align: center;
 }
 
+.btn:focus {
+  outline: none;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -283,7 +287,7 @@ form#new_user {
   }
 }
 
-/* User / Roles List Containers */
+/* User / Roles / Actions List Containers */
 
 #roles-container, #users-container, #actions-container {
   background-color: #435970;
@@ -306,9 +310,18 @@ form#new_user {
 
   #no-roles-msg {
     font-size: 1.2em;
-    color: $gray-lighter;
+    color: #b3b3b3;
     text-align: center;
   }
+}
+
+#actions-container {
+  padding-top: 3%;
+  background-color: #314581;
+}
+
+#actions-container.day {
+  background-color: #7a5d06;
 }
 
 /* Users & Roles List */
@@ -469,10 +482,10 @@ form#actions-form {
       }
 
       #me-ready-text {
-        font-size: 130%;
+        font-size: 120%;
         display: inline-block;
         float: left;
-        color: $gray-lighter;
+        color: #b3b3b3;
       }
     }
 
