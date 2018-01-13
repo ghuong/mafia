@@ -47,7 +47,7 @@ class ActionsController < ApplicationController
 
       if !@room || !@room.is_in_progress? || !has_already_joined?(@room, @user)
         flash.now[:danger] = "That page is unavailable."
-        render 'static_pages/home'
+        redirect_to root_path
       end
     end
 

@@ -234,13 +234,18 @@ form#new_user {
     #start-game, #leave, #role-button {
       background-color: #804d4d;
       border-color: $gray-lighter;
+    }
+    #leave {
       width: 5em;
+    }
+    #start-game, #role-button {
+      width: 7em;
     }
     #start-game {
       margin-right: 0.9em;
     }
     #start-game.disabled {
-      background-color: #339933;
+      background-color: $gray-light;
       border-color: $gray;
     }
     #start-game:not(.disabled) {
@@ -280,7 +285,7 @@ form#new_user {
 
 /* User / Roles List Containers */
 
-#roles-container, #users-container {
+#roles-container, #users-container, #actions-container {
   background-color: #435970;
   border: 1px solid $gray-light;
   padding: 0 3% 3% 3%;
@@ -407,10 +412,6 @@ form#new_user {
 /* New Role form */
 
 form#new-role {
-  #name-label {
-    color: $gray-lighter;
-  }
-
   #role-options {
     width: 70%;
     font-size: 1.6em;
@@ -422,5 +423,73 @@ form#new-role {
     color: $gray-lighter;
     background-color: #5989c0;
     border-color: $gray-light;
+  }
+}
+
+/* Action form */
+
+form#actions-form {
+  margin: 0;
+
+  .action-description {
+    font-size: 1.5em;
+    color: $gray-lighter;
+  }
+
+  .action-options {
+    width: 100%;
+    font-size: 1.6em;
+  }
+
+  #ready-header {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    p {
+      margin: 0;
+    }
+
+    #left-ready {
+      float: left;
+      height: 100%;
+
+      #me-ready-circle {
+        font-size: 300%;
+        display: inline-block;
+        float: left;
+        margin-right: 0.2em;
+        color: #ff0000;
+      }
+
+      #me-ready-circle.ready {
+        color: #00ff00;
+      }
+
+      #me-ready-text {
+        font-size: 130%;
+        display: inline-block;
+        float: left;
+        color: $gray-lighter;
+      }
+    }
+
+    #right-ready {
+      height: 100%;
+      position: absolute;
+      right: 0;
+
+      #submit-actions {
+        width: 7em;
+        background-color: #40bf80;
+        border-color: $gray-lighter;
+      }
+
+      #submit-actions.undo {
+        background-color: #bf6040;
+      }
+    }
   }
 }

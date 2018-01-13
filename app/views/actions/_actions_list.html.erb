@@ -1,5 +1,17 @@
-<%= form_tag actions_path(params[:room_code]), id: 'actions-form', namespace: 'actions' do %>
-  <%= hidden_field_tag :is_ready, !is_ready %>
-  <%= render partial: 'action', collection: action_options %>
-  <%= submit_tag "Ready", id: "submit-actions", class: "btn btn-lg btn-primary", data: { disable_with: false } %>
-<% end %>
+<div id='actions-container' class='jumbotron'>
+  <%= form_tag actions_path(params[:room_code]), id: 'actions-form', namespace: 'actions' do %>
+    <%= hidden_field_tag :is_ready, !is_ready %>
+
+    <div id="ready-header">
+      <div id="left-ready" class="Aligner">
+        <p id="me-ready-circle" class="not-ready">●</p>
+        <p id="me-ready-text">Not Ready</p>
+      </div>
+      <div id="right-ready" class="Aligner">
+        <%= submit_tag "Submit", id: "submit-actions", class: "btn btn-lg btn-primary", data: { disable_with: false } %>
+      </div>
+    </div>
+
+    <%= render partial: 'action', collection: action_options %>
+  <% end %>
+</div>

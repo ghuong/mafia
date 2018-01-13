@@ -87,7 +87,17 @@ function setStartGameButtonDisabledClass() {
 // Toggle whether the actions form submits is_ready as true or false
 function setSubmitActionsButton(is_ready) {
   $('#is_ready').val(!is_ready);
-  $('#submit-actions').val(is_ready ? "Not Ready" : "Ready");
+  if (is_ready) {
+    $('#submit-actions').val("Undo");
+    $('#submit-actions').addClass("undo");
+    $('#me-ready-circle').addClass("ready");
+    $('#me-ready-text').text("Ready");
+  } else {
+    $('#submit-actions').val("Submit");
+    $('#submit-actions').removeClass("undo");
+    $('#me-ready-circle').removeClass("ready");
+    $('#me-ready-text').text("Not Ready");
+  }
 }
 
 function nextDayPhase(room_code) {

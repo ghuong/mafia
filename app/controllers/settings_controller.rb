@@ -71,7 +71,7 @@ class SettingsController < ApplicationController
       @user = current_user
       if !@room || !@room.is_pregame? || !is_host?(@room)
         flash.now[:danger] = "That page is unavailable."
-        render 'static_pages/home'
+        redirect_to root_path
       end
     end
 end
