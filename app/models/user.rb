@@ -51,6 +51,11 @@ class User < ApplicationRecord
     MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:village]
   end
 
+  # Returns true iff user is on his own team
+  def is_solo?
+    MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:solo]
+  end
+
   # Returns the user's target for a specific action
   def get_target(action_name)
     action_options = get_action_options(id, role_id, room.day_phase, room.users)
@@ -64,6 +69,16 @@ class User < ApplicationRecord
   def kill
     self.is_alive = false
     self.save!
+  end
+
+  # Get this user's role
+  def role
+    MAFIA_ROLES[role_id]
+  end
+
+  # Predicate returning true iff player is dead
+  def reveal_role
+    !is_alive
   end
 
   private

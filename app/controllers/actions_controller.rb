@@ -10,6 +10,8 @@ class ActionsController < ApplicationController
     @action_options = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)
     @is_ready = @user.is_ready
     @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed] + "/#{@room.code}"
+    @alive_users = @room.users.select { |user| user.is_alive }
+    @dead_users = @room.users.select { |user| !user.is_alive }
   end
 
   def update
@@ -32,6 +34,8 @@ class ActionsController < ApplicationController
 
   # Show death page if user is dead
   def death
+    @alive_users = @room.users.select { |user| user.is_alive }
+    @dead_users = @room.users.select { |user| !user.is_alive }
   end
 
   private

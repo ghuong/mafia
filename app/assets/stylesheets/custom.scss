@@ -422,6 +422,30 @@ form#new_user {
   }
 }
 
+/* Dead Users List */
+
+#users-container.dead {
+  background-color: $gray-dark;
+
+  #users-list {
+    li.team-Village {
+      background-color: #59a6c0;
+    }
+
+    li.team-Mafia {
+      background-color: #c05959;
+    }
+
+    li.team-Solo {
+      background-color: #c0c059;
+    }
+
+    li.user-yourself {
+      border: 1px solid $gray-lighter;
+    }
+  }
+}
+
 /* New Role form */
 
 form#new-role {

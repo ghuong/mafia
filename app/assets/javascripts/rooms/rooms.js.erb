@@ -52,6 +52,11 @@ $('.actions_controller.edit_action').ready(function() {
   var should_submit_ready = $('#is_ready').val() == 'true';
   setSubmitActionsButton(!should_submit_ready);
 
+  // Highlight current user in user list
+  var current_user_id = $('meta[name=user-id]').attr('content');
+  var current_user_li = $('#user-' + current_user_id);
+  current_user_li.addClass('user-yourself');
+
   // When submit clicked, toggle Ready button
   $('#actions-form').on('submit', function(e) {
     e.preventDefault();
@@ -71,6 +76,13 @@ $('.actions_controller.edit_action').ready(function() {
       }      
     });
   });
+});
+
+$('.actions_controller.death_action').ready(function() {
+  // Highlight current user in user list
+  var current_user_id = $('meta[name=user-id]').attr('content');
+  var current_user_li = $('#user-' + current_user_id);
+  current_user_li.addClass('user-yourself');
 });
 
 // Toggle 'disabled' class on 'Start Game' button depending on if number of roles and users matches

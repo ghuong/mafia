@@ -7,6 +7,12 @@
   <p>Day Phase: <%= @room.day_phase %></p>
 
   <%= render partial: 'actions_list', locals: { action_options: @action_options, is_ready: @is_ready, day_phase: @room.day_phase } %>
+
+  <% if @room.day_phase == "night" %>
+    <%= render partial: 'players_list', locals: { users: @alive_users, current_user: @user, mode: 'alive', title: 'Alive' } %>
+  <% end %>
+
+  <%= render partial: 'players_list', locals: { users: @dead_users, current_user: @user, mode: 'dead', title: 'Dead' } %>
   
 </div>
 

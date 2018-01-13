@@ -1,0 +1,23 @@
+<% if !users.empty? %>
+  <div id='users-container' class='jumbotron <%= mode %>'>
+    <h2><%= title %></h2>
+
+    <hr>
+    <ul id="users-list">
+      <% if users.include? current_user %>
+        <%= render partial: 'player', object: current_user %>
+      <% end %>
+
+      <% if mode == 'alive' %>
+        <%= render partial: 'player', collection: users.select { |user| current_user != user } %>
+      <% elsif mode == 'dead' %>
+        <%= render partial: 'player', collection: users.select { |user| current_user != user && user.is_villager? } %>
+
+        <%= render partial: 'player', collection: users.select { |user| current_user != user && user.is_mafia? } %>
+
+        <%= render partial: 'player', collection: users.select { |user| current_user != user && user.is_solo? } %>
+      <% end %>
+     
+    </ul>
+  </div>
+<% end %>
