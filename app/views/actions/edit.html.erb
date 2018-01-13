@@ -14,6 +14,7 @@
 
   <%= render partial: 'players_list', locals: { users: @dead_users, current_user: @user, mode: 'dead', title: 'Dead' } %>
   
+  <%= render partial: 'shared/roles_list', locals: { roles: @roles, hide_admin_controls: true } %>
 </div>
 
 <%= subscribe_to @day_phase_changed_channel %>

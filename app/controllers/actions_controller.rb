@@ -12,6 +12,7 @@ class ActionsController < ApplicationController
     @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed] + "/#{@room.code}"
     @alive_users = @room.users.select { |user| user.is_alive }
     @dead_users = @room.users.select { |user| !user.is_alive }
+    @roles = @room.get_roles
   end
 
   def update
@@ -36,6 +37,7 @@ class ActionsController < ApplicationController
   def death
     @alive_users = @room.users.select { |user| user.is_alive }
     @dead_users = @room.users.select { |user| !user.is_alive }
+    @roles = @room.get_roles
   end
 
   private

@@ -23,6 +23,4 @@
   <% end %>
 </div>
 
-<% if !is_host?(@room) %>
-  <%= subscribe_to channel %>
-<% end %>
+<%= subscribe_to channel if !is_host?(@room) && local_assigns.has_key?(:channel) %>
