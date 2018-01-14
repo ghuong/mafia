@@ -76,6 +76,22 @@ $('.actions_controller.edit_action').ready(function() {
       }      
     });
   });
+
+  // When Role button clicked, toggle element visibility
+  $('#role-button').on('click', function(e) {
+    e.preventDefault();
+
+    $(this).toggleClass('role-back');
+    if ($(this).text() == 'Role') {
+      $(this).text('← Back');
+    } else {
+      $(this).text('Role');
+    }
+    $('#gameplay-container').toggleClass('hide');
+    $('#role-info-container').toggleClass('hide');
+
+    window.scrollTo(0, 0);
+  });
 });
 
 $('.actions_controller.death_action').ready(function() {
@@ -141,7 +157,6 @@ function addKickUserListener(room_code) {
     e.preventDefault();
 
     var user_id = $(this).data('userId');
-    // alert('kicking user ' + user_id);
     $.post('/publish/' + room_code + '/announce_user_kicked/' + user_id);
   });
 }

@@ -1,3 +1,7 @@
+<% if !local_assigns.has_key?(:hide_admin_controls) %>
+  <% hide_admin_controls = true %>
+<% end %>
+
 <% if role[:count] > 0 %>
   <li id="role-<%= role[:id] %>" class="team-<%= role[:team] %> <%= "host" if !hide_admin_controls && is_host?(@room) %>">
     <% if !hide_admin_controls && is_host?(@room) %>

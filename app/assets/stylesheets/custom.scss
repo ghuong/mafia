@@ -137,7 +137,7 @@ input {
 
 /* Button */
 
-.btn-gray {
+.btn-gray, .btn-gray:visited, .btn-gray:hover, .btn-gray:focus {
   background-color: $gray-light;
   color: $gray-lighter;
 }
@@ -259,6 +259,9 @@ form#new_user {
     #role-button {
       background-color: #7334b2;
     }
+    #role-button.role-back {
+      background-color: #735095;
+    }
   }
 }
 
@@ -289,7 +292,7 @@ form#new_user {
 
 /* User / Roles / Actions List Containers */
 
-#roles-container, #users-container, #actions-container {
+div.panel {
   background-color: #435970;
   border: 1px solid $gray-light;
   padding: 0 3% 3% 3%;
@@ -308,11 +311,18 @@ form#new_user {
     margin: 1em 0;
   }
 
-  #no-roles-msg {
+  p {
     font-size: 1.2em;
     color: #b3b3b3;
+  }
+
+  #no-roles-msg {
     text-align: center;
   }
+}
+
+#roles-container {
+  background-color: #435970;
 }
 
 #actions-container {
@@ -343,10 +353,6 @@ form#new_user {
     line-height: 1.9em;
     height: 100%;
     vertical-align: middle;
-    .role-left {
-      height: 100%;
-      float: left;
-    }
     .user-name, .user-title, .role-name, .role-team, .role-count, .kick-user, .add-role, .remove-role {
       display: inline-block;
     }
@@ -526,6 +532,42 @@ form#actions-form {
 
       #submit-actions.undo {
         background-color: #bf6040;
+      }
+    }
+  }
+}
+
+/* Role Information page */
+
+#role-info-div {
+  .role-info {
+    background-color: #4d3663;
+  }
+
+  #role-information, #teammates {
+    padding-left: 0;
+    li {
+      position: relative;
+      background-color: #8e64b4;
+      list-style-type: none;
+      color: $gray-lighter;
+      padding: 0.4em 1.2em;
+      border-radius: 0.6em;
+      margin-bottom: 0.3em;
+      line-height: 1.9em;
+      height: 100%;
+      vertical-align: middle;
+      .role-name, .role-team, .user-name, .user-title {
+        display: inline-block;
+      }
+      .role-name, .user-name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+      .role-team, .user-title {
+        float: right;
+        color: $gray;
+        text-transform: uppercase;
       }
     }
   }

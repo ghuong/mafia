@@ -1,4 +1,4 @@
-<div id='actions-container' class='jumbotron <%= day_phase %>'>
+<div id='actions-container' class='jumbotron <%= day_phase %> panel'>
   <%= form_tag actions_path(params[:room_code]), id: 'actions-form', namespace: 'actions' do %>
     <%= hidden_field_tag :is_ready, !is_ready %>
 
