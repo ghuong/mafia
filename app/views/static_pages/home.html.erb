@@ -1,12 +1,22 @@
 <div class="center">
   <h1>Mafia</h1>
 
-  <%= form_for(@room, url: join_path) do |f| %>
-    <%= render 'shared/error_messages', object: @room %>
+  <div class="Aligner">
+    <%= form_for(@room, url: join_path, html: { id: "join-room-form" }) do |f| %>
+      <%= render 'shared/error_messages', object: @room %>
+      
 
-    <%= f.text_field :code, class: 'form-control', placeholder: "Room Code" %>
-    <%= f.submit "GO", id: "join-room", class: "btn btn-lg btn-default btn-gray" %>
-  <% end %>
+      <div class="flex-container">
+        <div class="flex-item">
+          <%= f.text_field :code, class: 'form-control flex-item', placeholder: "Room" %>
+        </div>
+        <div class="flex-item">
+        <%= f.submit "GO", id: "join-room", class: "btn btn-lg btn-default btn-gray flex-item" %>
+        </div>
+      </div>
+      
+    <% end %>
+  </div>
 
   <%= link_to "New Room", new_room_path, id: "new-room", class: "btn btn-lg btn-default btn-block btn-gray" %>
   <%= link_to "How to Play", help_path, id: "btnHelp", class: "btn btn-lg btn-default btn-block btn-gray" %>
