@@ -19,6 +19,9 @@ $(".rooms_controller.show_action").ready(function() {
   var current_user_li = $('#user-' + current_user_id);
   current_user_li.addClass('user-yourself');
   current_user_li.find('.user-title').text('YOU');
+
+  $('#back-button').on('click', hideRoleInfo);
+  $('li.role-li').on('click', showRoleInfo);
 });
 
 $('.settings_controller.edit_action').ready(function() {
@@ -40,6 +43,9 @@ $('.settings_controller.edit_action').ready(function() {
   });
 
   addKickUserListener(room_code);
+
+  $('#back-button').on('click', hideRoleInfo);
+  $('li.role-li .role-name').on('click', showRoleInfo);
 });
 
 $('.actions_controller.edit_action').ready(function() {
@@ -78,20 +84,9 @@ $('.actions_controller.edit_action').ready(function() {
   });
 
   // When Role button clicked, toggle element visibility
-  $('#role-button').on('click', function(e) {
-    e.preventDefault();
+  $('#role-button, #back-button').on('click', toggleRoleInfo);
 
-    $(this).toggleClass('role-back');
-    if ($(this).text() == 'Role') {
-      $(this).text('← Back');
-    } else {
-      $(this).text('Role');
-    }
-    $('#gameplay-container').toggleClass('hide');
-    $('#role-info-container').toggleClass('hide');
-
-    window.scrollTo(0, 0);
-  });
+  $('li.role-li').on('click', showRoleInfo);
 });
 
 $('.actions_controller.death_action').ready(function() {
@@ -161,4 +156,66 @@ function addKickUserListener(room_code) {
     var user_id = $(this).data('userId');
     $.post('/publish/' + room_code + '/announce_user_kicked/' + user_id);
   });
+}
+
+function showRoleInfo(e) {
+  e.preventDefault();
+
+  $('#pregame-buttons').addClass('hide');
+  $('#back-button').removeClass('hide');
+  $('#role-button').text('← Back');
+
+  // Fetch data from role
+  var name = $(this).data('name');
+  var team = $(this).data('team');
+  var objective = $(this).data('objective');
+  var ability = $(this).data('ability');
+
+  $('#role-info-container .role-info-name').html(name);
+  $('#role-info-container .role-info-team').html(team);
+  $('#role-info-container .role-info-objective').text(objective);
+  $('#role-info-container .role-info-ability').text(ability);
+
+  if (!ability) {
+    $('#role-info-container .role-info-ability-container').addClass('hide');
+  } else {
+    $('#role-info-container .role-info-ability-container').removeClass('hide');
+  }
+
+  $('#gameplay-container').addClass('hide');
+  $('#role-info-container').removeClass('hide');
+
+  window.scrollTo(0, 0);
+}
+
+function hideRoleInfo(e) {
+  e.preventDefault();
+
+  $('#gameplay-container').removeClass('hide');
+  $('#pregame-buttons').removeClass('hide');
+
+  $('#role-info-container').addClass('hide');
+  $('#back-button').addClass('hide');
+
+  window.scrollTo(0, 0);
+}
+
+function toggleRoleInfo(e) {
+  e.preventDefault();
+
+  $(this).toggleClass('role-back');
+  if ($(this).text() == 'Role') {
+    $(this).text('← Back');
+    $('#gameplay-container').addClass('hide');
+    $('#my-role-info-container').removeClass('hide');
+  } else {
+    $(this).text('Role');
+    $('#gameplay-container').removeClass('hide');
+    $('#my-role-info-container').addClass('hide');
+    $('#role-info-container').addClass('hide');
+    $('#pregame-buttons').removeClass('hide');
+    $('#back-button').addClass('hide');
+  }
+
+  window.scrollTo(0, 0);
 }

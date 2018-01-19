@@ -290,14 +290,14 @@ form#new_user {
   #header-buttons {    
     float: right;
     height: 100%;
-    #start-game, #start-game-small, #leave, #leave-small, #role-button {
+    #start-game, #start-game-small, #leave, #leave-small, #role-button, #back-button {
       background-color: #804d4d;
       border-color: $gray-lighter;
     }
     #leave {
       width: 5em;
     }
-    #start-game, #role-button {
+    #start-game, #role-button, #back-button {
       width: 7em;
     }
     #leave-small {
@@ -321,7 +321,7 @@ form#new_user {
     #role-button {
       background-color: #7334b2;
     }
-    #role-button.role-back {
+    #role-button.role-back, #back-button {
       background-color: #735095;
     }
   }
@@ -378,7 +378,7 @@ div.panel {
     color: #b3b3b3;
   }
 
-  #no-roles-msg {
+  #roles-msg {
     text-align: center;
   }
 }

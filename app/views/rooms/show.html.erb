@@ -2,11 +2,17 @@
 
 <div class="below-header container">
 
-  <div id="roles-list-parent">
-    <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel, hide_admin_controls: true } %>
+  <div id="gameplay-container">
+    <div id="roles-list-parent">
+      <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel, hide_admin_controls: true } %>
+    </div>
+
+    <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel, current_user: @user } %>
   </div>
 
-  <%= render partial: 'shared/user_list', locals: { users: @users, channel: @users_list_channel, current_user: @user } %>
+  <div id="role-info-container" class="hide">
+    <%= render partial: 'shared/role_info', locals: { role: { name: "name", team: "team", ability: "ability", objective: "objective" }, personal: false, reveal_teammates: false, teammates: [] } %>
+  </div>
 
 </div>
 

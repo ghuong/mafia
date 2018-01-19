@@ -17,8 +17,12 @@
     <%= render partial: 'shared/roles_list', locals: { roles: @roles, hide_admin_controls: true } %>
   </div>
 
-  <div id="role-info-container" class="hide">
+  <div id="my-role-info-container" class="hide">
     <%= render partial: 'shared/role_info', locals: { role: @role, personal: true, reveal_teammates: @reveal_teammates, teammates: @teammates } %>
+  </div>
+
+  <div id="role-info-container" class="hide">
+    <%= render partial: 'shared/role_info', locals: { role: { name: "name", team: "team", ability: "ability", objective: "objective" }, personal: false, reveal_teammates: false, teammates: [] } %>
   </div>
 </div>
 

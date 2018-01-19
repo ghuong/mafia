@@ -25,13 +25,17 @@
       <% if has_already_joined?(@room) %>
         <% if @room.is_pregame? %>
 
-          <% if is_host?(@room) %>
-            <%= link_to "Start", start_game_path(room_code), method: :post, class: "btn btn-lg btn-default btn-gray disabled size-large", id: "start-game" %>
-            <%= link_to "GO", start_game_path(room_code), method: :post, class: "btn btn-lg btn-default btn-gray disabled size-small", id: "start-game-small" %>
-          <% end %>  
+          <div id="pregame-buttons">
+            <% if is_host?(@room) %>
+              <%= link_to "Start", start_game_path(room_code), method: :post, class: "btn btn-lg btn-default btn-gray disabled size-large", id: "start-game" %>
+              <%= link_to "GO", start_game_path(room_code), method: :post, class: "btn btn-lg btn-default btn-gray disabled size-small", id: "start-game-small" %>
+            <% end %>  
 
-          <%= link_to "Leave", '#', id: "leave", class: "btn btn-lg btn-default btn-gray size-large" %>
-          <%= link_to "X", '#', id: "leave-small", class: "btn btn-lg btn-default btn-gray size-small" %>
+            <%= link_to "Leave", '#', id: "leave", class: "btn btn-lg btn-default btn-gray size-large" %>
+            <%= link_to "X", '#', id: "leave-small", class: "btn btn-lg btn-default btn-gray size-small" %>
+          </div>
+
+          <%= link_to "← Back", '#', id: "back-button", class: "btn btn-lg btn-default btn-gray hide" %>
           
         <% elsif @room.is_in_progress? && @user.is_alive %>
           <%= link_to "Role", '#', id: "role-button", class: "btn btn-lg btn-default btn-gray" %>

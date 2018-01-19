@@ -4,13 +4,14 @@
   <hr>
 
   <% if roles.reduce(0){|sum, role| sum + role[:count] } == 0 %>
-    <p id="no-roles-msg">No roles added yet</p>
+    <p id="roles-msg">No roles added yet</p>
   <% else %>
     <ul id="roles-list" data-num-roles="<%= roles.reduce(0){|sum, role| sum + role[:count] } %>">
       <%= render partial: 'shared/role', collection: roles.select { |role| role[:team] == MAFIA_TEAMS[:village] }, locals: { hide_admin_controls: hide_admin_controls } %>
       <%= render partial: 'shared/role', collection: roles.select { |role| role[:team] == MAFIA_TEAMS[:mafia] }, locals: { hide_admin_controls: hide_admin_controls } %>
       <%= render partial: 'shared/role', collection: roles.select { |role| role[:team] == MAFIA_TEAMS[:solo] }, locals: { hide_admin_controls: hide_admin_controls } %>
     </ul>
+    <p id="roles-msg">Click on a role to learn more</p>
   <% end %>
   
   <% if !hide_admin_controls && is_host?(@room) %>

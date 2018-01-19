@@ -20,6 +20,6 @@ MAFIA_ROLES = [
     name: "Mafia",
     team: MAFIA_TEAMS[:mafia],
     objective: MAFIA_OBJECTIVES[:mafia],
-    ability: ""
+    ability: "At night, each Mafia votes for a victim. Of the victims with the most votes, one will be killed at random."
   }
 ].freeze

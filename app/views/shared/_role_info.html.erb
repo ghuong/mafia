@@ -6,8 +6,8 @@
 
     <ul id="role-information">
       <li>
-        <div class='role-name'><%= role[:name] %></div>
-        <div class="role-team"><%= role[:team] %></div>
+        <div class='role-name role-info-name'><%= role[:name] %></div>
+        <div class="role-team role-info-team"><%= role[:team] %></div>
       </li>
     </ul>
   </div>
@@ -18,18 +18,18 @@
     <hr>
 
     <div class="container">
-      <p><%= role[:objective] %></p>
+      <p class="role-info-objective"><%= role[:objective] %></p>
     </div>
   </div>
 
   <% if !role[:ability].empty? %>
-    <div class='jumbotron role-info panel'>
+    <div class='jumbotron role-info panel role-info-ability-container'>
       <h2><%= "My " if personal %>Ability</h2>
 
       <hr>
 
       <div class="container">
-        <p><%= role[:ability] %></p>
+        <p class="role-info-ability"><%= role[:ability] %></p>
       </div>
     </div>
   <% end %>
