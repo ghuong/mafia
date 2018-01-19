@@ -83,9 +83,15 @@ $('.actions_controller.edit_action').ready(function() {
     });
   });
 
+  // On action change, submit
+  $('.action-options').change(function() {
+    var is_ready = $('#is_ready').val() == 'true';
+    $('#is_ready').val(!is_ready);
+    $('#actions-form').submit();
+  });
+
   // When Role button clicked, toggle element visibility
   $('#role-button, #back-button').on('click', toggleRoleInfo);
-
   $('li.role-li').on('click', showRoleInfo);
 });
 

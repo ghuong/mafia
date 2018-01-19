@@ -16,7 +16,16 @@ module ActionsHelper
       actions.push(*get_day_actions(living_users))
     end
 
-    actions.each_with_index { |action, idx| action[:id] = idx }
+    user = User.find_by(id: user_id)
+    selected_targets = user.get_action_targets
+    actions.each_with_index do |action, idx|
+      action[:id] = idx
+
+      if !selected_targets.empty?
+        action[:selected] = selected_targets[idx]
+      end
+    end
+
     return actions
   end
 
