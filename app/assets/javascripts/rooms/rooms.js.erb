@@ -170,6 +170,7 @@ function showRoleInfo(e) {
   $('#pregame-buttons').addClass('hide');
   $('#back-button').removeClass('hide');
   $('#role-button').text('← Back');
+  $('#role-button').toggleClass('role-back');
 
   // Fetch data from role
   var name = $(this).data('name');
