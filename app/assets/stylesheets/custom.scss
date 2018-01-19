@@ -17,6 +17,15 @@
   transform: translateY(-50%);
 }
 
+/* Screen Size */
+
+.size-small { display: none; }
+
+@media screen and (max-width: 400px) {
+  .size-small { display: block; }
+  .size-large { display: none; }
+}
+
 /* Aligner */
 
 .Aligner {
@@ -281,7 +290,7 @@ form#new_user {
   #header-buttons {    
     float: right;
     height: 100%;
-    #start-game, #leave, #role-button {
+    #start-game, #start-game-small, #leave, #leave-small, #role-button {
       background-color: #804d4d;
       border-color: $gray-lighter;
     }
@@ -291,14 +300,21 @@ form#new_user {
     #start-game, #role-button {
       width: 7em;
     }
-    #start-game {
+    #leave-small {
+      width: 3em;
+    }
+    #start-game-small {
+      width: 4em;
+    }
+
+    #start-game, #start-game-small {
       margin-right: 0.9em;
     }
-    #start-game.disabled {
+    #start-game.disabled, #start-game-small.disabled {
       background-color: $gray-light;
       border-color: $gray;
     }
-    #start-game:not(.disabled) {
+    #start-game:not(.disabled), #start-game-small:not(.disabled) {
       background-color: #0ac20a;
       border-color: $gray-lighter;
     }

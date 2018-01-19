@@ -5,7 +5,7 @@ $(".rooms_controller.show_action").ready(function() {
   $.post('/publish/' + room_code + '/announce_user_joining');
 
   // When "Leave" button clicked, announce to others
-  $('#leave').on('click', function(e) {
+  $('#leave, #leave-small').on('click', function(e) {
     e.preventDefault();
 
     $.post('/publish/' + room_code + '/announce_user_leaving', function(data) {
@@ -107,8 +107,10 @@ function setStartGameButtonDisabledClass() {
   var num_users = $('#users-list').children().length;
   if (num_roles === num_users) {
     $('#start-game').removeClass('disabled');
+    $('#start-game-small').removeClass('disabled');
   } else {
     $('#start-game').addClass('disabled');
+    $('#start-game-small').addClass('disabled');
   }
 }
 
