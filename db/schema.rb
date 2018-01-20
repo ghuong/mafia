@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180101010326) do
+ActiveRecord::Schema.define(version: 20180120211648) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "code"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180101010326) do
     t.boolean "is_alive", default: true
     t.string "actions", default: ""
     t.boolean "is_winner", default: false
+    t.string "reports", default: ""
   end
 
 end
