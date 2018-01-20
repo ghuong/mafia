@@ -29,9 +29,7 @@ module ActionsHelper
       end
 
       # Show other votes for certain actions
-      if action[:name] == ACTIONS[:kill][:name]
-        add_other_votes(living_users, action, idx, user_id)
-      end
+      add_other_votes(living_users, action, idx, user_id)
     end
 
     return actions
@@ -97,6 +95,8 @@ module ActionsHelper
             user.is_mafia?
           when ACTIONS[:lynch][:name]
             true
+          else
+            false
           end
         end
       end

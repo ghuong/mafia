@@ -394,6 +394,10 @@ div.panel {
 
 #actions-container.day {
   background-color: #7a5d06;
+
+  li.other-votes {
+    background-color: #cc9900;
+  }
 }
 
 /* Users & Roles List */
@@ -421,10 +425,16 @@ div.panel {
     .vote-arrow {
       text-align: center;
       color: $gray;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
     }
     .user-vote {
       float: right;
       color: $gray-lighter;
+      font-size: 1.2em;
     }
     .user-name, .role-name, .role-count, .kick-user  {
       font-weight: bold;
@@ -500,6 +510,10 @@ div.panel {
       margin: 0 2em;
     }
   }
+}
+
+.other-votes-list {
+  margin-top: 0.5em;
 }
 
 /* Dead Users List */
