@@ -59,6 +59,9 @@ class GameEndTest < ActionDispatch::IntegrationTest
     windows.each do |window|
       within_session window do
         if edit_actions_path(@room_code) == current_path
+          if page.has_css?('#role', text: "Mafia")
+            select villagers[0]
+          end
           click_on 'submit-actions'
         end
       end
@@ -76,6 +79,7 @@ class GameEndTest < ActionDispatch::IntegrationTest
         end
       end
     end
+    villagers.shift
 
     # Night actions
     windows.each do |window|
@@ -83,6 +87,10 @@ class GameEndTest < ActionDispatch::IntegrationTest
         visit edit_actions_path(@room_code)
 
         if edit_actions_path(@room_code) == current_path
+          if page.has_css?('#role', text: "Mafia")
+            select villagers[0]
+          end
+
           click_on 'submit-actions'
         end
       end

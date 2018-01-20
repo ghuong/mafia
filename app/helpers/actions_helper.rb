@@ -60,12 +60,23 @@ module ActionsHelper
         format_target(user)
       end
 
+      targets = [
+        { user_id: TARGET_UNDECIDED, name: "" },
+        { user_id: TARGET_NOBODY, name: "Nobody" }
+      ] + targets
+
       [format_action(ACTIONS[:kill][:name], ACTIONS[:kill][:description], targets)]
     end
 
     # Returns a list of the day actions
     def get_day_actions(living_users)
       targets = living_users.map { |user| format_target(user) }
+
+      targets = [
+        { user_id: TARGET_UNDECIDED, name: "" },
+        { user_id: TARGET_NOBODY, name: "Nobody" }
+      ] + targets
+
       [format_action(ACTIONS[:lynch][:name], ACTIONS[:lynch][:description], targets)]
     end
 

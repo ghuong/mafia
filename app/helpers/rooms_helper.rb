@@ -1,4 +1,5 @@
 module RoomsHelper
+  include ActionsHelper
 
   # Process all of the user's actions
   def process_user_actions(day_phase, all_users)

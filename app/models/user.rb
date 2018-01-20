@@ -62,6 +62,19 @@ class User < ApplicationRecord
     self.actions = targets.join(",")
   end
 
+  # Set the target
+  def set_action_target(action_idx, target) 
+    current_targets = get_action_targets
+    if current_targets.empty?
+      current_targets = get_action_options(id, role_id, room.day_phase, room.users).map do |option|
+        TARGET_UNDECIDED
+      end
+    end
+
+    current_targets[action_idx] = target
+    set_action_targets(current_targets)
+  end
+
   # Returns true iff user is on Mafia team
   def is_mafia?
     MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:mafia]
@@ -125,7 +138,8 @@ class User < ApplicationRecord
     # Returns true iff user's name is unique to the Room
     def name_is_unique_in_room
       room = Room.find_by(id: room_id)
-      if room && room.users.any? { |user| user.name.downcase == self.name.strip.downcase }
+      user_name = self.name.strip.downcase
+      if room && (room.users.any? { |user| user.name.downcase == user_name } || user_name == "Nobody")
         errors.add(:name, "is already taken")
       end
     end

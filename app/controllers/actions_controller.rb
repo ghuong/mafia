@@ -54,17 +54,17 @@ class ActionsController < ApplicationController
   # Update a single action (without changing is_ready state)
   def update_single
     if params[:player_action]
-      @user.set_action_targets(player_action_params.to_hash.sort.to_h.values)
-    end
+      @user.set_action_target(player_action_params.keys.first.to_i, player_action_params.values.first)
 
-    if @user.save
-      action_id = params[:player_action].keys.first.to_i
-      action_name = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)[action_id][:name]
+      if @user.save
+        action_id = params[:player_action].keys.first.to_i
+        action_name = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)[action_id][:name]
 
-      render json: {
-        action_name: action_name,
-        action_id: action_id
-      }
+        render json: {
+          action_name: action_name,
+          action_id: action_id
+        }
+      end
     end
   end
 
