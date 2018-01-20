@@ -1,4 +1,6 @@
 class PublishController < ApplicationController
+  include ActionsHelper
+
   before_action :has_joined_room
   before_action :is_host_of_room, only: [:announce_user_kicked, :announce_roles_updated, :announce_game_started]
 
@@ -35,6 +37,14 @@ class PublishController < ApplicationController
     user_kicked = @room.users.find_by(id: params[:user_id])
     @user_kicked_id = user_kicked.id
     user_kicked.destroy
+  end
+
+  def announce_vote_changed
+    @channel = vote_channel(params[:room_code], params[:action_name], params[:user_id])
+    @action_name = params[:action_name]
+    @action_id = params[:action_id]
+    @user_id = params[:user_id]
+    @new_vote = resolve_target(User.find_by(id: @user_id).get_action_target(@action_id.to_i)).name
   end
 
   private

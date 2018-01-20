@@ -1,0 +1,3 @@
+<% publish_to @channel do %>
+  $('li#action-<%= @action_name %>_user-<%= @user_id %>').find('.user-vote').html("<%= @new_vote %>");
+<% end %>

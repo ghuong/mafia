@@ -85,9 +85,16 @@ $('.actions_controller.edit_action').ready(function() {
 
   // On action change, submit
   $('.action-options').change(function() {
-    var is_ready = $('#is_ready').val() == 'true';
-    $('#is_ready').val(!is_ready);
-    $('#actions-form').submit();
+    $.ajax({
+      type: 'POST',
+      url: '/rooms/' + room_code + '/action', 
+      data: $(this).serialize(),
+      success: function(response) {
+        var action_name = response["action_name"];
+        var action_id = response["action_id"]
+        $.post('/publish/' + room_code + '/announce_vote_changed/' + action_id + '/' + action_name + '/' + current_user_id);
+      }
+    });
   });
 
   // When Role button clicked, toggle element visibility

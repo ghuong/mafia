@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/rooms/:room_code/actions/edit',     to: 'actions#edit', as: 'edit_actions'
   post '/rooms/:room_code/actions',         to: 'actions#update', as: 'actions'
   get '/rooms/:room_code/death',            to: 'actions#death', as: 'death'
+  post '/rooms/:room_code/action',          to: 'actions#update_single', as: 'single_action'
 
   # Publish messages with private_pub
   post '/publish/:room_code/announce_user_joining',         to: 'publish#announce_user_joining'
@@ -32,4 +33,5 @@ Rails.application.routes.draw do
   post '/publish/:room_code/announce_game_started',         to: 'publish#announce_game_started'
   post '/publish/:room_code/announce_day_phase_changed',    to: 'publish#announce_day_phase_changed'
   post '/publish/:room_code/announce_user_kicked/:user_id', to: 'publish#announce_user_kicked'
+  post '/publish/:room_code/announce_vote_changed/:action_id/:action_name/:user_id', to: 'publish#announce_vote_changed'
 end

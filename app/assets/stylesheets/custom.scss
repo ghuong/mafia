@@ -402,7 +402,7 @@ div.panel {
   background-color: #4d7043;
 }
 
-#users-list, #roles-list {
+#users-list, #roles-list, .other-votes-list {
   padding-left: 0;
   li {
     position: relative;
@@ -415,10 +415,18 @@ div.panel {
     line-height: 1.9em;
     height: 100%;
     vertical-align: middle;
-    .user-name, .user-title, .role-name, .role-team, .role-count, .kick-user, .add-role, .remove-role {
+    .user-name, .user-title, .role-name, .role-team, .role-count, .kick-user, .add-role, .remove-role, .user-vote {
       display: inline-block;
     }
-    .user-name, .role-name, .role-count, .kick-user {
+    .vote-arrow {
+      text-align: center;
+      color: $gray;
+    }
+    .user-vote {
+      float: right;
+      color: $gray-lighter;
+    }
+    .user-name, .role-name, .role-count, .kick-user  {
       font-weight: bold;
     }
     .user-name, .role-name {
@@ -479,6 +487,10 @@ div.panel {
 
   li.team-Solo {
     background-color: #c0c059;
+  }
+
+  li.other-votes {
+    background-color: #617dd1;
   }
 }
 

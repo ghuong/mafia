@@ -1,0 +1,7 @@
+<li id="action-<%= action_name %>_user-<%= other_vote[:user_id] %>" class="other-votes flex-container">
+  <div class='user-name'><%= other_vote[:user_name] %></div>
+  <div class="flex-item vote-arrow">VOTES →</div>
+  <div class='user-vote'><%= other_vote[:vote] %></div>
+</li>
+
+<%= subscribe_to vote_channel(params[:room_code], action_name, other_vote[:user_id]) %> 

@@ -31,9 +31,16 @@ class ActionsController < ApplicationController
       if all_ready
         @room.next_day_phase
       end
-      render json: { is_ready: @user.is_ready, all_ready: all_ready }
+      
+      render json: { 
+        is_ready: @user.is_ready, 
+        all_ready: all_ready
+      }
     else
-      render json: { is_ready: is_currently_ready, all_ready: false }
+      render json: { 
+        is_ready: is_currently_ready, 
+        all_ready: false
+      }
     end
   end
 
@@ -42,6 +49,23 @@ class ActionsController < ApplicationController
     @alive_users = @room.users.select { |user| user.is_alive }
     @dead_users = @room.users.select { |user| !user.is_alive }
     @roles = @room.get_roles
+  end
+
+  # Update a single action (without changing is_ready state)
+  def update_single
+    if params[:player_action]
+      @user.set_action_targets(player_action_params.to_hash.sort.to_h.values)
+    end
+
+    if @user.save
+      action_id = params[:player_action].keys.first.to_i
+      action_name = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)[action_id][:name]
+
+      render json: {
+        action_name: action_name,
+        action_id: action_id
+      }
+    end
   end
 
   private

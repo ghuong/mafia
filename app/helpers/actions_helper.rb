@@ -1,5 +1,8 @@
 module ActionsHelper
 
+  TARGET_NOBODY = -1.freeze
+  TARGET_UNDECIDED = -2.freeze
+
   # Get array of actions for the given role_id
   def get_action_options(user_id, role_id, day_phase, all_users)
     actions = []
@@ -24,9 +27,29 @@ module ActionsHelper
       if !selected_targets.empty?
         action[:selected] = selected_targets[idx]
       end
+
+      # Show other votes for certain actions
+      if action[:name] == ACTIONS[:kill][:name]
+        add_other_votes(living_users, action, idx, user_id)
+      end
     end
 
     return actions
+  end
+
+  def vote_channel(room_code, action_name, user_id)
+    PRIVATE_PUB_CHANNELS[:other_votes] + "/#{room_code}/#{action_name}/#{user_id}"
+  end
+
+  def resolve_target(target_id)
+    case target_id
+    when TARGET_NOBODY
+      User.new(id: target_id, name: "Nobody")
+    when TARGET_UNDECIDED
+      User.new(id: target_id, name: "Undecided")
+    else
+      User.find_by(id: target_id)
+    end
   end
 
   private
@@ -56,5 +79,31 @@ module ActionsHelper
     # Returns a hash representing a target for an action
     def format_target(user)
       { user_id: user.id, name: user.name }
+    end
+
+    # Returns a hash representing another player's vote of the same action
+    def format_other_vote(user, vote)
+      { user_id: user.id, user_name: user.name, vote: vote }
+    end
+
+    # Adds the other users' votes to this action
+    def add_other_votes(living_users, action, action_idx, current_user_id)
+      user_select_proc = Proc.new do |user|
+        if user.id == current_user_id
+          false
+        else 
+          case action[:name]
+          when ACTIONS[:kill][:name]
+            user.is_mafia?
+          when ACTIONS[:lynch][:name]
+            true
+          end
+        end
+      end
+
+      action[:other_votes] = living_users.select(&user_select_proc).map do |user|
+        vote = resolve_target(user.get_action_target(action_idx)).name
+        format_other_vote(user, vote)
+      end
     end
 end

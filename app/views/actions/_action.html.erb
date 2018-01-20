@@ -1,3 +1,6 @@
 <hr>
 <%= label_tag "player_action[#{action[:id]}]", action[:description], class: 'action-description' %>
 <%= select_tag "player_action[#{action[:id]}]", options_for_select(action[:targets].map {|target| [target[:name], target[:user_id]]}, action[:selected]), class: 'action-options' %>
+<ul class="other-votes-list">
+  <%= render partial: 'other_vote', collection: action[:other_votes], locals: { action_name: action[:name] } %>
+</ul>

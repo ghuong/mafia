@@ -36,6 +36,27 @@ class User < ApplicationRecord
     self.actions.split(",").map { |target| target.to_i }
   end
 
+  def get_action_target(action_idx)
+    if action_idx.nil?
+      return TARGET_UNDECIDED
+    end
+
+    targets = get_action_targets
+    if !targets.empty?
+      targets[action_idx]
+    else
+      TARGET_UNDECIDED
+    end
+  end
+
+  # def get_action_target_by_action_name(action_name)
+  #   action_idx = get_action_options(id, role_id, room.day_phase, room.users).find_index do |option|
+  #     option[:name] == action_name
+  #   end
+
+  #   get_action_target(action_idx)
+  # end
+
   # Set the targets (user ids)
   def set_action_targets(targets)
     self.actions = targets.join(",")
