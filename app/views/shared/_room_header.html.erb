@@ -21,11 +21,11 @@
       <%= room_code %>
     </p>
     
-    <div id="header-buttons" class="Aligner">
+    <div id="header-buttons">
       <% if has_already_joined?(@room) %>
         <% if @room.is_pregame? %>
 
-          <div id="pregame-buttons">
+          <div id="pregame-buttons" class="Aligner">
             <% if is_host?(@room) %>
               <%= link_to "Start", start_game_path(room_code), method: :post, class: "btn btn-lg btn-default btn-gray disabled size-large", id: "start-game" %>
               <%= link_to "GO", start_game_path(room_code), method: :post, class: "btn btn-lg btn-default btn-gray disabled size-small", id: "start-game-small" %>

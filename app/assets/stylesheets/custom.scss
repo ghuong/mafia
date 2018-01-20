@@ -290,6 +290,10 @@ form#new_user {
   #header-buttons {    
     float: right;
     height: 100%;
+    #pregame-buttons {
+      width: 100%;
+      height: 100%;
+    }
     #start-game, #start-game-small, #leave, #leave-small, #role-button, #back-button {
       background-color: #804d4d;
       border-color: $gray-lighter;
