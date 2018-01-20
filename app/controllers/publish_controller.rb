@@ -47,6 +47,16 @@ class PublishController < ApplicationController
     @new_vote = resolve_target(User.find_by(id: @user_id).get_action_target(@action_id.to_i)).name
   end
 
+  def announce_ready
+    @user_id = params[:user_id]
+    @channel = PRIVATE_PUB_CHANNELS[:ready] + "/#{@room.code}/#{@user_id}"
+    @is_ready = false
+    user = User.find_by(id: @user_id)
+    if user
+      @is_ready = user.is_ready
+    end
+  end
+
   private
 
     # Ignore unauthorized requests

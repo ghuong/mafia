@@ -39,6 +39,10 @@ module ActionsHelper
     PRIVATE_PUB_CHANNELS[:other_votes] + "/#{room_code}/#{action_name}/#{user_id}"
   end
 
+  def ready_channel(room_code, user_id)
+    PRIVATE_PUB_CHANNELS[:ready] + "/#{room_code}/#{user_id}"
+  end
+
   def resolve_target(target_id)
     case target_id
     when TARGET_NOBODY
@@ -92,7 +96,7 @@ module ActionsHelper
 
     # Returns a hash representing another player's vote of the same action
     def format_other_vote(user, vote)
-      { user_id: user.id, user_name: user.name, vote: vote }
+      { user_id: user.id, user_name: user.name, vote: vote, is_ready: user.is_ready }
     end
 
     # Adds the other users' votes to this action

@@ -475,6 +475,17 @@ div.panel {
       color: #c63939;
       right: 0.7em;
     }
+    .ready-circle {
+      font-size: 300%;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0.2em;
+      color: #ff0000;
+    }
+    .ready-circle.ready {
+      color: #00ff00;
+    }
   }
 
   li.user-host {
@@ -514,6 +525,10 @@ div.panel {
 
 .other-votes-list {
   margin-top: 0.5em;
+
+  li {
+    padding-left: 3em;
+  }
 }
 
 /* Dead Users List */

@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   post '/publish/:room_code/announce_day_phase_changed',    to: 'publish#announce_day_phase_changed'
   post '/publish/:room_code/announce_user_kicked/:user_id', to: 'publish#announce_user_kicked'
   post '/publish/:room_code/announce_vote_changed/:action_id/:action_name/:user_id', to: 'publish#announce_vote_changed'
+  post '/publish/:room_code/announce_ready/:user_id',       to: 'publish#announce_ready'
 end

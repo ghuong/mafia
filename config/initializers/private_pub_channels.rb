@@ -3,5 +3,6 @@ PRIVATE_PUB_CHANNELS = {
   roles_list: "/roles_list",
   game_started: "/game_started",
   day_phase_changed: "/day_phase_changed",
-  other_votes: "/other_votes"
+  other_votes: "/other_votes",
+  ready: "/ready"
 }.freeze

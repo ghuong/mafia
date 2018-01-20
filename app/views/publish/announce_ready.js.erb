@@ -1,0 +1,9 @@
+<% publish_to @channel do %>
+  <% if @is_ready %>
+    $('.ready-circle.user-<%= @user_id %>').addClass('ready');
+    $('.ready-circle.user-<%= @user_id %>').removeClass('not-ready');
+  <% else %>
+    $('.ready-circle.user-<%= @user_id %>').addClass('not-ready');
+    $('.ready-circle.user-<%= @user_id %>').removeClass('ready');
+  <% end %>
+<% end %>

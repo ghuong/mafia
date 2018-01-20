@@ -1,7 +1,11 @@
 <li id="action-<%= action_name %>_user-<%= other_vote[:user_id] %>" class="other-votes">
+  <div class="<%= other_vote[:is_ready] ? 'ready' : 'not-ready' %> ready-circle user-<%= other_vote[:user_id] %>">●</div>
   <div class='user-name'><%= other_vote[:user_name] %></div>
-  <div class="Aligner vote-arrow">VOTES →</div>
+  <div class="Aligner vote-arrow size-large">VOTES →</div>
+  <div class="Aligner vote-arrow size-small">→</div>
   <div class='user-vote'><%= other_vote[:vote] %></div>
 </li>
 
 <%= subscribe_to vote_channel(params[:room_code], action_name, other_vote[:user_id]) %> 
+
+<%= subscribe_to ready_channel(params[:room_code], other_vote[:user_id]) %> 

@@ -78,6 +78,8 @@ $('.actions_controller.edit_action').ready(function() {
         } else {
           var is_ready = response["is_ready"];
           setSubmitActionsButton(is_ready);
+          // Announce new ready state to others
+          $.post('/publish/' + room_code + '/announce_ready/' + current_user_id);
         }
       }      
     });
