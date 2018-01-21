@@ -21,5 +21,11 @@ MAFIA_ROLES = [
     team: MAFIA_TEAMS[:mafia],
     objective: MAFIA_OBJECTIVES[:mafia],
     ability: "At night, each Mafia votes for a victim. Of the victims with the most votes, one will be killed at random."
+  },
+  {
+    name: "Cop",
+    team: MAFIA_TEAMS[:village],
+    objective: MAFIA_OBJECTIVES[:village],
+    ability: "At night, you investigate another player. In the morning, you learn whether or not they are Mafia."
   }
 ].freeze

@@ -13,6 +13,8 @@ module ActionsHelper
       case role
       when "Mafia"
         actions.push(*get_mafia_actions(living_users))
+      when "Cop"
+        actions.push(*get_cop_actions(user_id, living_users))
       end
 
     elsif day_phase == "day"
@@ -43,6 +45,7 @@ module ActionsHelper
     PRIVATE_PUB_CHANNELS[:ready] + "/#{room_code}/#{user_id}"
   end
 
+  # Retrieve the User corresponding to a target
   def resolve_target(target_id)
     case target_id
     when TARGET_NOBODY
@@ -82,6 +85,19 @@ module ActionsHelper
       ] + targets
 
       [format_action(ACTIONS[:lynch][:name], ACTIONS[:lynch][:description], targets)]
+    end
+
+    def get_cop_actions(cop_id, living_users)
+      targets = living_users.select { |user| user.id != cop_id }.map do |user|
+        format_target(user)
+      end
+
+      targets = [
+        { user_id: TARGET_UNDECIDED, name: "Choose someone:" },
+        { user_id: TARGET_NOBODY, name: "Nobody" }
+      ] + targets
+
+      [format_action(ACTIONS[:investigate][:name], ACTIONS[:investigate][:description], targets)]
     end
 
     # Returns a hash representing an action for a role

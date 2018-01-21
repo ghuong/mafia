@@ -12,6 +12,13 @@ module RoomsHelper
       if victim
         killed_users << victim
       end
+
+      living_users.each do |user|
+        case MAFIA_ROLES[user.role_id][:name]
+        when "Cop"
+          process_cop_investigation(user, living_users)
+        end
+      end
     elsif day_phase == 'day'
       victim = process_lynch(living_users)
       if victim
@@ -59,7 +66,7 @@ module RoomsHelper
     def process_mafia_kill(living_users)
       living_mafia = living_users.select { |user| user.is_mafia? }
       mafia_kill_votes = living_mafia.map do |mafia|
-        mafia.get_target(ACTIONS[:kill][:name]);
+        mafia.get_target(ACTIONS[:kill][:name])
       end
       majority_vote = mode(mafia_kill_votes).first.shuffle.first
       victim = living_users.find { |user| user.id == majority_vote }
@@ -81,6 +88,19 @@ module RoomsHelper
         if victim
           victim.kill
           return victim
+        end
+      end
+    end
+
+    # Process cop investigation
+    def process_cop_investigation(cop, living_users)
+      target_id = cop.get_target(ACTIONS[:investigate][:name])
+      target = living_users.find { |user| user.id == target_id }
+      if target
+        if target.is_mafia?
+          cop.add_report("Cop Report: #{target.name} is a Mafia!")
+        else
+          cop.add_report("Cop Report: #{target.name} is innocent!")
         end
       end
     end
