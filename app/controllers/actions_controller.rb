@@ -17,6 +17,7 @@ class ActionsController < ApplicationController
       u.role[:team] == @user.role[:team] && @user.role[:team] != MAFIA_TEAMS[:solo] && u != @user
     end
     @reveal_teammates = !@user.is_villager?
+    @reports = @user.get_reports
   end
 
   def update

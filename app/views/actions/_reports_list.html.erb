@@ -1,0 +1,8 @@
+<% if !reports.empty? %>
+  <% for report in reports %>
+    <div class='jumbotron panel report container'>
+      <div class="report-icon Aligner">!</div>
+      <div class="report-msg"><%= report %></div>
+    </div>
+  <% end %>
+<% end %>

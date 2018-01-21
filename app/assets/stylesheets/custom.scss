@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 400px) {
   .size-small { display: block; }
-  .size-large { display: none; }
+  .size-large { display: none !important; }
 }
 
 /* Aligner */
@@ -360,7 +360,7 @@ form#new_user {
 
 div.panel {
   background-color: #435970;
-  border: 1px solid $gray-light;
+  border: 2px solid $gray-light;
   padding: 0 3% 3% 3%;
 
   h2 {
@@ -677,5 +677,30 @@ form#actions-form {
         text-transform: uppercase;
       }
     }
+  }
+}
+
+/* Reports */
+div.report {
+  padding: 14px 3%;
+  position: relative;
+  border: 3px solid #d67a5c;
+  background-color: #dddd88;
+  margin-bottom: 30px;
+
+  .report-icon {
+    height: 100%;
+    position: absolute;
+    font-size: 3em;
+    font-weight: bold;
+    top: 0;
+    left: 0.5em;
+    color: #cf4517;
+  }
+
+  .report-msg {
+    margin-left: 2em;
+    font-size: 1.3em;
+    color: $gray-dark;
   }
 }

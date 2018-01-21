@@ -65,7 +65,7 @@ module ActionsHelper
       end
 
       targets = [
-        { user_id: TARGET_UNDECIDED, name: "" },
+        { user_id: TARGET_UNDECIDED, name: "Choose someone:" },
         { user_id: TARGET_NOBODY, name: "Nobody" }
       ] + targets
 
@@ -77,7 +77,7 @@ module ActionsHelper
       targets = living_users.map { |user| format_target(user) }
 
       targets = [
-        { user_id: TARGET_UNDECIDED, name: "" },
+        { user_id: TARGET_UNDECIDED, name: "Choose someone:" },
         { user_id: TARGET_NOBODY, name: "Nobody" }
       ] + targets
 

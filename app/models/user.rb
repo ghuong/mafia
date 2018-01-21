@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include ActionsHelper
 
+  REPORT_DELIMETER = "|".freeze
+
   belongs_to :room
 
   attr_accessor :remember_token
@@ -113,6 +115,25 @@ class User < ApplicationRecord
   # Predicate returning true iff player is dead
   def reveal_role
     !is_alive
+  end
+
+  # Clear all reports for user
+  def clear_reports
+    self.reports = ''
+  end
+
+  # Add new report
+  def add_report(report)
+    if self.reports.empty?
+      self.reports += report
+    else
+      self.reports += REPORT_DELIMETER + report
+    end
+  end
+
+  # Get all Reports for this User
+  def get_reports
+    self.reports.split(REPORT_DELIMETER)
   end
 
   private

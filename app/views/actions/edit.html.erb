@@ -6,6 +6,8 @@
   <p id="role" name="<%= @role[:name] %>" class="hide"><%= @role[:name] %></p>
 
   <div id="gameplay-container">
+    <%= render partial: 'reports_list', locals: { reports: @reports } %>
+
     <%= render partial: 'actions_list', locals: { action_options: @action_options, is_ready: @is_ready, day_phase: @room.day_phase } %>
 
     <% if @room.day_phase == "night" %>

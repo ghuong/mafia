@@ -4,11 +4,30 @@ module RoomsHelper
   # Process all of the user's actions
   def process_user_actions(day_phase, all_users)
     living_users = all_users.select { |user| user.is_alive }
+    killed_users = []
+    lynched_users = []
     
     if day_phase == 'night'
-      process_mafia_kill(living_users)
+      victim = process_mafia_kill(living_users)
+      if victim
+        killed_users << victim
+      end
     elsif day_phase == 'day'
-      process_lynch(living_users)
+      victim = process_lynch(living_users)
+      if victim
+        lynched_users << victim
+      end
+    end
+
+    # Write Reports for the transpired events
+    all_users.each do |user|
+      killed_users.each do |killed_user|
+        user.add_report("#{killed_user.name} was killed!")
+      end
+
+      lynched_users.each do |lynched_user|
+        user.add_report("#{lynched_user.name} was lynched!")
+      end
     end
   end
 
@@ -46,6 +65,7 @@ module RoomsHelper
       victim = living_users.find { |user| user.id == majority_vote }
       if victim
         victim.kill
+        return victim
       end
     end
 
@@ -60,6 +80,7 @@ module RoomsHelper
         victim = living_users.find { |user| user.id == majority_vote }
         if victim
           victim.kill
+          return victim
         end
       end
     end

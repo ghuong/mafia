@@ -103,6 +103,8 @@ class Room < ApplicationRecord
 
   # Progress to next day phase
   def next_day_phase
+    clear_reports
+
     # Process all user actions
     process_user_actions(self.day_phase, self.users)
     
@@ -145,5 +147,10 @@ class Room < ApplicationRecord
     # Set the roles field
     def set_roles(roles)
       self.roles = roles.map { |role| role[:count].to_s }.join(",")
+    end
+
+    # Clear all Reports for users
+    def clear_reports
+      self.users.each { |user| user.clear_reports }
     end
 end
