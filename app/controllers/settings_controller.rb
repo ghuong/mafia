@@ -70,8 +70,7 @@ class SettingsController < ApplicationController
       @room = Room.find_by(code: params[:room_code])
       @user = current_user
       if !@room || !@room.is_pregame? || !is_host?(@room)
-        flash.now[:danger] = "That page is unavailable."
-        redirect_to root_path
+        redirect_to room_path(params[:room_code])
       end
     end
 end

@@ -681,14 +681,14 @@ form#actions-form {
 }
 
 /* Reports */
-div.report {
+div.report, div.help {
   padding: 14px 3%;
   position: relative;
   border: 3px solid #d67a5c;
   background-color: #dddd88;
   margin-bottom: 30px;
 
-  .report-icon {
+  .report-icon, .help-icon {
     height: 100%;
     position: absolute;
     font-size: 3em;
@@ -698,9 +698,23 @@ div.report {
     color: #cf4517;
   }
 
-  .report-msg {
+  .report-msg, .help-msg {
     margin-left: 2em;
     font-size: 1.3em;
+    color: $gray-dark;
+  }
+}
+
+div.help {
+  border-color: #5353ac;
+  background-color: #bfbfd9;
+
+  .help-icon {
+    color: #0a0ac2;
+  }
+
+  .help-msg {
+    margin-left: 3em;
     color: $gray-dark;
   }
 }

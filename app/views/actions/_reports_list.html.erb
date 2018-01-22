@@ -1,8 +1,3 @@
 <% if !reports.empty? %>
-  <% for report in reports %>
-    <div class='jumbotron panel report container'>
-      <div class="report-icon Aligner">!</div>
-      <div class="report-msg"><%= report %></div>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/report_panel', locals: { reports: reports } %>
 <% end %>
