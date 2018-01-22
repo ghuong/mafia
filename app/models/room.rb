@@ -113,6 +113,7 @@ class Room < ApplicationRecord
 
     # Progress to next day phase
     self.day_phase = self.day_phase == 'night' ? 'day' : 'night'
+    self.day_phase_counter += 1
     # Clear all user actions
     self.users.each do |user|
       user.is_ready = false

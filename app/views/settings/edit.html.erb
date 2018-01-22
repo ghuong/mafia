@@ -3,11 +3,13 @@
 <div class="below-header container">
   
   <div id="gameplay-container">
-    <%= render partial: 'shared/help_panel', locals: { messages: [
-      "1. Tell your friends to go to this website on their phone and enter the 4-letter code above, or just link them the url.",
-      "2. Add Roles equal in number to Players.",
-      "3. Button above turns green; press to start game."
-    ]} %>
+    <div class="information">
+      <%= render partial: 'shared/help_panel', locals: { messages: [
+        "1. Tell your friends to go to this website on their phone and enter the 4-letter code above, or just link them the url.",
+        "2. Add Roles equal in number to Players.",
+        "3. Button above turns green; press to start game."
+      ]} %>
+    </div>
 
     <div id="roles-list-parent">
       <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel, hide_admin_controls: false } %>

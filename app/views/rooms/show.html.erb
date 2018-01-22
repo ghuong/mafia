@@ -3,9 +3,11 @@
 <div class="below-header container">
 
   <div id="gameplay-container">
-    <%= render partial: 'shared/help_panel', locals: { messages: [
-      "Wait for the Host to start the game."
-    ]} %>
+    <div class="information">
+      <%= render partial: 'shared/help_panel', locals: { messages: [
+        "Wait for the Host to start the game."
+      ]} %>
+    </div>
 
     <div id="roles-list-parent">
       <%= render partial: 'shared/roles_list', locals: { roles: @roles, channel: @roles_list_channel, hide_admin_controls: true } %>

@@ -686,7 +686,6 @@ div.report, div.help {
   position: relative;
   border: 3px solid #d67a5c;
   background-color: #dddd88;
-  margin-bottom: 30px;
 
   .report-icon, .help-icon {
     height: 100%;
@@ -717,4 +716,8 @@ div.help {
     margin-left: 3em;
     color: $gray-dark;
   }
+}
+
+div.information {
+  margin-bottom: 30px;
 }

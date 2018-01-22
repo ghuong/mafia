@@ -2,11 +2,13 @@
 
 <div class="below-header container">
 
-  <%= render partial: 'shared/report_panel', locals: { reports: [
-    "You are DEAD!",
-    "You cannot speak until the game ends!",
-    "You can still win if your team wins!"
-  ]} %>
+  <div class="information">
+    <%= render partial: 'shared/report_panel', locals: { reports: [
+      "You are DEAD!",
+      "You cannot speak until the game ends!",
+      "You can still win if your team wins!"
+    ]} %>
+  </div>
 
   <%= render partial: 'players_list', locals: { users: @alive_users, current_user: @user, mode: 'alive', title: 'Alive' } %>
 

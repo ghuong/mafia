@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120211648) do
+ActiveRecord::Schema.define(version: 20180122184550) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "code"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180120211648) do
     t.string "roles", default: ""
     t.string "day_phase"
     t.string "winners", default: ""
+    t.integer "day_phase_counter", default: 1
   end
 
   create_table "users", force: :cascade do |t|
