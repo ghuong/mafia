@@ -2,19 +2,32 @@
 
 <div class="below-header container">
 
-  <div class="information">
-    <%= render partial: 'shared/report_panel', locals: { reports: [
-      "You are DEAD!",
-      "You cannot speak until the game ends!",
-      "You can still win if your team wins!"
-    ]} %>
+  <div id="gameplay-container">
+    
+    <div class="information">
+      <%= render partial: 'reports_list', locals: { reports: @reports } %>
+
+      <%= render partial: 'shared/help_panel', locals: { messages: [
+        "You are DEAD!",
+        "You cannot speak until the game ends!",
+        "You can still win if your team wins!"
+      ]} %>
+    </div>
+
+    <%= render partial: 'players_list', locals: { users: @alive_users, current_user: @user, mode: 'alive', title: 'Alive' } %>
+
+    <%= render partial: 'players_list', locals: { users: @dead_users, current_user: @user, mode: 'dead', title: 'Dead' } %>
+
+    <%= render partial: 'shared/roles_list', locals: { roles: @roles, hide_admin_controls: true } %>
   </div>
 
-  <%= render partial: 'players_list', locals: { users: @alive_users, current_user: @user, mode: 'alive', title: 'Alive' } %>
+  <div id="my-role-info-container" class="hide">
+    <%= render partial: 'shared/role_info', locals: { role: @role, personal: true, reveal_teammates: @reveal_teammates, teammates: @teammates } %>
+  </div>
 
-  <%= render partial: 'players_list', locals: { users: @dead_users, current_user: @user, mode: 'dead', title: 'Dead' } %>
-
-  <%= render partial: 'shared/roles_list', locals: { roles: @roles, hide_admin_controls: true } %>
+  <div id="role-info-container" class="hide">
+    <%= render partial: 'shared/role_info', locals: { role: { name: "name", team: "team", ability: "ability", objective: "objective" }, personal: false, reveal_teammates: false, teammates: [] } %>
+  </div>
 </div>
 
 <%= subscribe_to @day_phase_changed_channel %>

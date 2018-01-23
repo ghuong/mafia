@@ -37,7 +37,7 @@
 
           <%= link_to "← Back", '#', id: "back-button", class: "btn btn-lg btn-default btn-gray hide" %>
           
-        <% elsif @room.is_in_progress? && @user.is_alive %>
+        <% elsif @room.is_in_progress? %>
           <%= link_to "Role", '#', id: "role-button", class: "btn btn-lg btn-default btn-gray" %>
 
         <% elsif @room.is_finished? %>

@@ -52,6 +52,13 @@ class ActionsController < ApplicationController
     @alive_users = @room.users.select { |user| user.is_alive }
     @dead_users = @room.users.select { |user| !user.is_alive }
     @roles = @room.get_roles
+    @reports = @user.get_reports
+    @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed] + "/#{@room.code}"
+    @role = MAFIA_ROLES[@user.role_id]
+    @teammates = @room.users.select do |u|
+      u.role[:team] == @user.role[:team] && @user.role[:team] != MAFIA_TEAMS[:solo] && u != @user
+    end
+    @reveal_teammates = !@user.is_villager?
   end
 
   # Update a single action (without changing is_ready state)

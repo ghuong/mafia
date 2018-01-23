@@ -109,6 +109,10 @@ $('.actions_controller.death_action').ready(function() {
   var current_user_id = $('meta[name=user-id]').attr('content');
   var current_user_li = $('#user-' + current_user_id);
   current_user_li.addClass('user-yourself');
+
+  // When Role button clicked, toggle element visibility
+  $('#role-button, #back-button').on('click', toggleRoleInfo);
+  $('li.role-li').on('click', showRoleInfo);
 });
 
 $('.actions_controller.verdict_action').ready(function() {
