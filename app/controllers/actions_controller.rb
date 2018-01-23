@@ -167,13 +167,12 @@ class ActionsController < ApplicationController
     def get_winner_message(winners)
       case winners.length
       when 0
-        return "Nobody wins!"
+        "Nobody wins!"
       when 1
-        winner_text = winners[0]
+        "The #{winners[0]} wins!"
       else
-        winner_text = winners[0..-2].join(", ") + ", and #{winners[-1]}"
+        winner_text = winners[0..-2].join(", ") + " and #{winners[-1]}"
+        "The #{winner_text} win!"
       end
-
-      return "The #{winner_text} wins!"
     end
 end

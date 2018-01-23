@@ -39,6 +39,9 @@
           
         <% elsif @room.is_in_progress? && @user.is_alive %>
           <%= link_to "Role", '#', id: "role-button", class: "btn btn-lg btn-default btn-gray" %>
+
+        <% elsif @room.is_finished? %>
+          <%= link_to "Leave", root_path, id: "leave", class: "btn btn-lg btn-default btn-gray size-large" %>
         <% end %>
       <% end %>
     </div>
