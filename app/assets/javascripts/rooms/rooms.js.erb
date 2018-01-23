@@ -111,6 +111,13 @@ $('.actions_controller.death_action').ready(function() {
   current_user_li.addClass('user-yourself');
 });
 
+$('.actions_controller.verdict_action').ready(function() {
+  // Highlight current user in user list
+  var current_user_id = $('meta[name=user-id]').attr('content');
+  var current_user_li = $('#user-' + current_user_id);
+  current_user_li.addClass('user-yourself');
+});
+
 // Toggle 'disabled' class on 'Start Game' button depending on if number of roles and users matches
 function setStartGameButtonDisabledClass() {
   var num_roles = parseInt($('#roles-list').data('num-roles'));

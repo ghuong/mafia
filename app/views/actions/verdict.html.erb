@@ -1,0 +1,23 @@
+<%= render partial: 'shared/room_header', locals: { room_code: params[:room_code] } %>
+
+<div class="below-header container">
+
+  <p class="hide">Game Over</p>
+
+  <div class="information">
+    <%= render partial: 'reports_list', locals: { reports: @reports } %>
+
+    <%= render partial: 'shared/report_panel', locals: { reports: [
+        "The game has ended!", "#{@winner_message}"
+      ] } %>
+  </div>
+
+  <!-- Winners panel (reveal all roles) -->
+  <%= render partial: 'players_list', locals: { users: @winning_users, current_user: @user, mode: 'winners', title: '~ WINNERS ~' } %>
+
+  <!-- Alive panel (reveal all roles) -->
+  <%= render partial: 'players_list', locals: { users: @alive_users, current_user: @user, mode: 'verdict', title: 'Alive' } %>
+
+  <!-- Dead panel -->
+  <%= render partial: 'players_list', locals: { users: @dead_users, current_user: @user, mode: 'dead', title: 'Dead' } %>
+</div>

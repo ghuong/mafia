@@ -31,12 +31,13 @@ class RoomsController < ApplicationController
 
     if @room
       @users = @room.users
+      @user = current_user
+
       if @room.is_pregame?
         @roles = @room.get_roles
         @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list] + "/#{@room.code}"
         @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list] + "/#{@room.code}"
         @game_started_channel = PRIVATE_PUB_CHANNELS[:game_started] + "/#{@room.code}"
-        @user = current_user
 
         if is_host?(@room) # host accesses settings page for room
           redirect_to edit_settings_path(@room.code) and return
@@ -50,7 +51,7 @@ class RoomsController < ApplicationController
         if @room.is_in_progress? # game already started
           redirect_to edit_actions_path(@room.code) and return
         elsif @room.is_finished? # render the game verdict
-          render_verdict and return
+          redirect_to verdict_path(@room.code) and return
         end
       end
     end
@@ -68,9 +69,5 @@ class RoomsController < ApplicationController
       if user && user.authenticated?(:remember, params[:remember_token])
         remember(user)
       end
-    end
-
-    def render_verdict
-      render :verdict
     end
 end

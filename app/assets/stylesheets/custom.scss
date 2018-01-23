@@ -537,25 +537,25 @@ div.panel {
 
 /* Dead Users List */
 
-#users-container.dead {
-  background-color: $gray-dark;
-
+#users-container.dead, #users-container.verdict, #users-container.winners {
   #users-list {
-    li.team-Village {
-      background-color: #59a6c0;
-    }
-
-    li.team-Mafia {
-      background-color: #c05959;
-    }
-
-    li.team-Solo {
-      background-color: #c0c059;
-    }
-
     li.user-yourself {
       border: 1px solid $gray-lighter;
     }
+  }
+}
+
+#users-container.dead {
+  background-color: $gray-dark;
+}
+
+#users-container.winners {
+  background-color: #ceba7e;
+  border: 3px solid #ae8404;
+  h2 {
+    color: $gray-dark;
+    font-size: 1.9em;
+    text-align: center;
   }
 }
 

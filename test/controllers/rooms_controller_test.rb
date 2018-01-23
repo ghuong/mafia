@@ -38,7 +38,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
   test "should show verdict when game finished" do
     authenticate_as(@user_in_finished_room, @finished_room_code)
     get room_path(@finished_room_code)
-    assert_template 'rooms/verdict'
+    assert_redirected_to verdict_path(@finished_room_code)
   end
 
   test "should show when game non-existent" do

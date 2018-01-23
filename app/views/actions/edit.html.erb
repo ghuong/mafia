@@ -9,44 +9,8 @@
     <div class="information">
       <%= render partial: 'reports_list', locals: { reports: @reports } %>
 
-      <% if @room.day_phase_counter <= 2 %>
-        <%= render partial: 'shared/help_panel', locals: { messages:
-          if @room.day_phase == 'night'
-            [
-              "It is the first Night.",
-              "You cannot speak or look at others during Night.",
-              "Keep your phone screen hidden from others.",
-              "Click 'Role' above to see your role.",
-              "Choose a target if you have special abilities.",
-              "Press 'Submit'. Once everyone is 'Ready', day will begin."
-            ]
-          elsif @room.day_phase == 'day'
-            [
-              "It is the first Day.",
-              "Living players may talk openly, but dead players must be silent.",
-              "Keep your phone screen hidden from others.",
-              "Vote on who you wish to get lynched.",
-              "A player is lynched only if they receive more than half the votes.",
-              "Press 'Submit'. Once everyone is 'Ready', night will begin."
-            ]
-          end
-        } %>
-      <% else %>
-        <%= render partial: 'shared/help_panel', locals: { messages:
-          if @room.day_phase == 'night'
-            [
-              "You cannot speak or look at others during Night.",
-              "Keep your phone screen hidden from others."
-            ]
-          elsif @room.day_phase == 'day'
-            [
-              "Living players may talk openly, but dead players must be silent.",
-              "Keep your phone screen hidden from others.",
-              "Vote on who you wish to get lynched.", 
-              "A player is lynched only if they receive more than half the votes."
-            ]
-          end
-        } %>
+      <% for messages in @help_messages %>
+        <%= render partial: 'shared/help_panel', locals: { messages: messages } %>
       <% end %>
     </div>
 

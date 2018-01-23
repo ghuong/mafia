@@ -43,7 +43,7 @@ module RoomsHelper
     living_users = all_users.select { |user| user.is_alive }
     winners = []
     if do_villagers_win?(living_users)
-      winners << "Villagers"
+      winners << "Village"
       all_users.select { |user| user.is_villager? }.each do |user|
         user.is_winner = true
       end

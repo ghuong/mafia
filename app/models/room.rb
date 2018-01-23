@@ -129,6 +129,10 @@ class Room < ApplicationRecord
     end
   end
 
+  def get_winners
+    self.winners.split(",")
+  end
+
   private
 
     # Generate unique room code

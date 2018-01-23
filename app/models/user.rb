@@ -114,7 +114,7 @@ class User < ApplicationRecord
 
   # Predicate returning true iff player is dead
   def reveal_role
-    !is_alive
+    !is_alive || room.is_finished?
   end
 
   # Clear all reports for user

@@ -1,8 +1,9 @@
 class ActionsController < ApplicationController
   include ActionsHelper
 
-  before_action :is_playing_in_room
-  before_action :is_alive, except: [:death]
+  before_action :is_playing_in_room, except: [:verdict]
+  before_action :is_game_finished, only: [:verdict]
+  before_action :is_alive, except: [:death, :verdict]
   before_action :is_dead, only: [:death]
 
   def edit
@@ -18,6 +19,7 @@ class ActionsController < ApplicationController
     end
     @reveal_teammates = !@user.is_villager?
     @reports = @user.get_reports
+    @help_messages = get_help_messages
   end
 
   def update
@@ -69,6 +71,15 @@ class ActionsController < ApplicationController
     end
   end
 
+  def verdict
+    @reports = @user.get_reports
+    @winners = @room.get_winners
+    @winner_message = get_winner_message(@winners)
+    @alive_users = @room.users.select { |user| user.is_alive }
+    @dead_users = @room.users.select { |user| !user.is_alive }
+    @winning_users = @room.users.select { |user| user.is_winner }
+  end
+
   private
 
     # Redirect unauthorized users
@@ -77,11 +88,24 @@ class ActionsController < ApplicationController
       @user = current_user
 
       if @room && @room.is_finished?
-        redirect_to room_path(params[:room_code]) and return
+        redirect_to verdict_path(params[:room_code]) and return
       end
 
       if !@room || !@room.is_in_progress? || !has_already_joined?(@room, @user)
-        flash.now[:danger] = "That page is unavailable."
+        redirect_to root_path
+      end
+    end
+
+    # Redirect if game not finished
+    def is_game_finished
+      @room = Room.find_by(code: params[:room_code])
+      @user = current_user
+
+      if @room && @room.is_in_progress?
+        redirect_to edit_actions_path(params[:room_code]) and return
+      end
+
+      if !@room || !@room.is_finished? || !has_already_joined?(@room, @user)
         redirect_to root_path
       end
     end
@@ -101,5 +125,55 @@ class ActionsController < ApplicationController
     # Returns the safe parameters
     def player_action_params
       params.require(:player_action).permit!
+    end
+
+    # Get the Help messages to show users
+    def get_help_messages
+      help_messages = []
+      if @room.day_phase_counter <= 2
+        case @room.day_phase
+        when "night"
+          help_messages << [
+            "It is the first Night.",
+            "You cannot speak or look at others during Night.",
+            "Keep your phone screen hidden from others."
+          ]
+          help_messages << [
+            "Click 'Role' above to see your role.",
+            "Choose a target if you have special abilities.",
+            "Press 'Submit'. Once everyone is 'Ready', day will begin."
+          ]
+        when "day"
+          help_messages << [
+            "It is the first Day.",
+            "Living players may talk openly, but dead players must be silent.",
+            "Keep your phone screen hidden from others."
+          ]
+          help_messages << [
+            "Vote on who you wish to get lynched.",
+            "A player is lynched only if they receive more than half the votes.",
+            "Press 'Submit'. Once everyone is 'Ready', night will begin."
+          ]
+        end
+      else
+        case @room.day_phase
+        when "day"
+          help_messages << ["Remember, you need more than half the votes to lynch someone."]
+        end
+      end
+      return help_messages
+    end
+
+    def get_winner_message(winners)
+      case winners.length
+      when 0
+        return "Nobody wins!"
+      when 1
+        winner_text = winners[0]
+      else
+        winner_text = winners[0..-2].join(", ") + ", and #{winners[-1]}"
+      end
+
+      return "The #{winner_text} wins!"
     end
 end

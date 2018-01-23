@@ -10,7 +10,7 @@
 
       <% if mode == 'alive' %>
         <%= render partial: 'player', collection: users.select { |user| current_user != user } %>
-      <% elsif mode == 'dead' %>
+      <% elsif mode == 'dead' || mode == 'verdict' || mode == 'winners' %>
         <%= render partial: 'player', collection: users.select { |user| current_user != user && user.is_villager? } %>
 
         <%= render partial: 'player', collection: users.select { |user| current_user != user && user.is_mafia? } %>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   post '/rooms/:room_code/actions',         to: 'actions#update', as: 'actions'
   get '/rooms/:room_code/death',            to: 'actions#death', as: 'death'
   post '/rooms/:room_code/action',          to: 'actions#update_single', as: 'single_action'
+  get '/rooms/:room_code/verdict',          to: 'actions#verdict', as: 'verdict'
 
   # Publish messages with private_pub
   post '/publish/:room_code/announce_user_joining',         to: 'publish#announce_user_joining'
