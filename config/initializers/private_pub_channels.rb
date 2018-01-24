@@ -4,5 +4,6 @@ PRIVATE_PUB_CHANNELS = {
   game_started: "/game_started",
   day_phase_changed: "/day_phase_changed",
   other_votes: "/other_votes",
-  ready: "/ready"
+  ready: "/ready",
+  room_destroyed: "/room_destroyed"
 }.freeze

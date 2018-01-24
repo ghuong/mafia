@@ -2,7 +2,12 @@ class PublishController < ApplicationController
   include ActionsHelper
 
   before_action :has_joined_room
-  before_action :is_host_of_room, only: [:announce_user_kicked, :announce_roles_updated, :announce_game_started]
+  before_action :is_host_of_room, only: [
+    :announce_user_kicked, 
+    :announce_roles_updated, 
+    :announce_game_started, 
+    :announce_room_destroyed
+  ]
 
   # Announce to all users in room that a new user has joined
   def announce_user_joining
@@ -55,6 +60,11 @@ class PublishController < ApplicationController
     if user
       @is_ready = user.is_ready
     end
+  end
+
+  # Force everyone to leave the room
+  def announce_room_destroyed
+    @channel = PRIVATE_PUB_CHANNELS[:room_destroyed] + "/#{params[:room_code]}"
   end
 
   private

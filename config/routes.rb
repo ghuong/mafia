@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/rooms',             to: 'rooms#create'
   get '/rooms/:room_code',   to: 'rooms#show', as: 'room'
   post '/rooms/join',        to: 'rooms#join', as: 'join'
+  delete '/rooms/:room_code', to: 'rooms#destroy'
 
   # Users
   get '/rooms/:room_code/users/new', to: 'users#new', as: 'new_user'  
@@ -36,4 +37,5 @@ Rails.application.routes.draw do
   post '/publish/:room_code/announce_user_kicked/:user_id', to: 'publish#announce_user_kicked'
   post '/publish/:room_code/announce_vote_changed/:action_id/:action_name/:user_id', to: 'publish#announce_vote_changed'
   post '/publish/:room_code/announce_ready/:user_id',       to: 'publish#announce_ready'
+  post '/publish/:room_code/announce_room_destroyed',       to: 'publish#announce_room_destroyed'
 end

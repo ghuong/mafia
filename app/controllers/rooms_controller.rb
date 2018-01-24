@@ -38,6 +38,7 @@ class RoomsController < ApplicationController
         @users_list_channel = PRIVATE_PUB_CHANNELS[:users_list] + "/#{@room.code}"
         @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list] + "/#{@room.code}"
         @game_started_channel = PRIVATE_PUB_CHANNELS[:game_started] + "/#{@room.code}"
+        @room_destroyed_channel = PRIVATE_PUB_CHANNELS[:room_destroyed] + "/#{@room.code}"
 
         if is_host?(@room) # host accesses settings page for room
           redirect_to edit_settings_path(@room.code) and return
@@ -59,6 +60,12 @@ class RoomsController < ApplicationController
     @room = Room.new
     @room.errors.add(:code, "cannot be joined.")
     render 'static_pages/home'
+  end
+
+  def destroy
+    @room = Room.find_by(code: params[:room_code])
+    @room.destroy unless @room.nil?
+    redirect_to root_path
   end
 
   private

@@ -44,8 +44,19 @@ $('.settings_controller.edit_action').ready(function() {
 
   addKickUserListener(room_code);
 
+  // Clicking on Roles for general info
   $('#back-button').on('click', hideRoleInfo);
   $('li.role-li .role-name').on('click', showRoleInfo);
+
+  // When "Leave" button clicked, announce to everyone to leave room
+  $('#leave, #leave-small').on('click', function(e) {
+    e.preventDefault();
+
+    $.post('/publish/' + room_code + '/announce_room_destroyed', function(data) {
+      // After announcing, actually leave the room
+      httpRequest('/rooms/' + room_code, {}, 'delete');
+    });
+  });
 });
 
 $('.actions_controller.edit_action').ready(function() {
