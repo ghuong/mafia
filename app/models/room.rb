@@ -154,26 +154,26 @@ class Room < ApplicationRecord
       living_users = self.users.select { |u| u.is_alive }
       killed_users = []
       lynched_users = []
+      immune_users = []
       
       case self.day_phase 
       when 'night'
-        victim = process_mafia_kill(living_users)
-        if victim
-          killed_users << victim
-        end
+        immune_users = get_immune_users(living_users)
+        process_mafia_kill(living_users, killed_users)
       when 'day'
-        victim = process_lynch(living_users)
-        if victim
-          lynched_users << victim
-        end
+        process_lynch(living_users, lynched_users)
       end
 
       living_users.each { |user| user.role.process_independent_actions(killed_users) }
 
+      # Kill the users that aren't immune
+      killed_users.each { |user| user.kill unless immune_users.include? user.id }
+      lynched_users.each { |user| user.kill }
+
       # Write Reports for the transpired events
       self.users.each do |user|
         killed_users.each do |killed_user|
-          user.add_report("#{killed_user.name} was killed!")
+          user.add_report("#{killed_user.name} was killed!") unless immune_users.include? killed_user.id
         end
 
         lynched_users.each do |lynched_user|
@@ -204,8 +204,16 @@ class Room < ApplicationRecord
       self.winners = winners.join(",")
     end
 
+    # Return a list of which users are immune to being killed
+    def get_immune_users(living_users)
+      doctors = living_users.select { |user| user.role.name == "Doctor" }
+      return doctors.map do |doctor|
+        doctor.get_target(Role::ACTIONS[:heal][:name])
+      end
+    end
+
     # Process mafia kill
-    def process_mafia_kill(living_users)
+    def process_mafia_kill(living_users, killed_users)
       living_mafia = living_users.select { |user| user.is_mafia? }
       mafia_kill_votes = living_mafia.map do |mafia|
         mafia.get_target(Role::ACTIONS[:kill][:name])
@@ -213,13 +221,12 @@ class Room < ApplicationRecord
       majority_vote = mode(mafia_kill_votes).first.shuffle.first
       victim = living_users.find { |user| user.id == majority_vote }
       if victim
-        victim.kill
-        return victim
+        killed_users << victim
       end
     end
 
     # Process lynch vote
-    def process_lynch(living_users)
+    def process_lynch(living_users, lynched_users)
       lynch_votes = living_users.map do |user|
         user.get_target(Role::ACTIONS[:lynch][:name])
       end
@@ -228,8 +235,7 @@ class Room < ApplicationRecord
       if freq > living_users.length / 2
         victim = living_users.find { |user| user.id == majority_vote }
         if victim
-          victim.kill
-          return victim
+          lynched_users << victim
         end
       end
     end

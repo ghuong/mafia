@@ -15,13 +15,14 @@ class Role
   }.freeze
 
   MAFIA_ROLES = [
-    "Villager", "Mafia", "Cop"
+    "Villager", "Mafia", "Cop", "Doctor"
   ].freeze
 
   ACTIONS = {
     kill: { name: "kill", description: "Vote to Kill" },
     lynch: { name: "lynch", description: "Vote to Lynch" },
-    investigate: { name: "investigate", description: "Investigate" }
+    investigate: { name: "investigate", description: "Investigate" },
+    heal: { name: "heal", description: "Heal" }
   }.freeze
 
   #  Get the role object according to its 'id'
@@ -34,6 +35,8 @@ class Role
       MafiaRole.new(id, user)
     when "Cop"
       Cop.new(id, user)
+    when "Doctor"
+      Doctor.new(id, user)
     end
   end
 
