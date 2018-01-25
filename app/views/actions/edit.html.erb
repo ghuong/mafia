@@ -3,7 +3,7 @@
 <div class="below-header container">
 
   <p id="user" name="<%= @user.name %>" class="hide"><%= @user.name %></p>
-  <p id="role" name="<%= @role[:name] %>" class="hide"><%= @role[:name] %></p>
+  <p id="role" name="<%= @role.name %>" class="hide"><%= @role.name %></p>
 
   <div id="gameplay-container">
     <div class="information">
@@ -30,7 +30,7 @@
   </div>
 
   <div id="role-info-container" class="hide">
-    <%= render partial: 'shared/role_info', locals: { role: { name: "name", team: "team", ability: "ability", objective: "objective" }, personal: false, reveal_teammates: false, teammates: [] } %>
+    <%= render partial: 'shared/role_info', locals: { role: Role.new(0), personal: false, reveal_teammates: false, teammates: [] } %>
   </div>
 </div>
 

@@ -1,3 +1,5 @@
 <% if !reports.empty? %>
-  <%= render partial: 'shared/report_panel', locals: { reports: reports } %>
+  <% for report in reports %>
+    <%= render partial: 'shared/report_panel', locals: { reports: [report] } %>
+  <% end %>
 <% end %>

@@ -1,5 +1,6 @@
 <% publish_to @channel do %>
   <% if @room.is_in_progress? %>
     window.location.reload(true);
+    window.scrollTo(0, 0);
   <% end %>
 <% end %>

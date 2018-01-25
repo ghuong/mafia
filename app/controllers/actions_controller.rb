@@ -1,21 +1,19 @@
 class ActionsController < ApplicationController
-  include ActionsHelper
-
   before_action :is_playing_in_room, except: [:verdict]
   before_action :is_game_finished, only: [:verdict]
   before_action :is_alive, except: [:death, :verdict]
   before_action :is_dead, only: [:death]
 
   def edit
-    @role = MAFIA_ROLES[@user.role_id]
-    @action_options = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)
+    @role = @user.role
+    @action_options = @user.role.get_action_options
     @is_ready = @user.is_ready
     @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed] + "/#{@room.code}"
     @alive_users = @room.users.select { |user| user.is_alive }
     @dead_users = @room.users.select { |user| !user.is_alive }
     @roles = @room.get_roles
     @teammates = @room.users.select do |u|
-      u.role[:team] == @user.role[:team] && @user.role[:team] != MAFIA_TEAMS[:solo] && u != @user
+      u.role.team == @user.role.team && @user.role.team != Role::MAFIA_TEAMS[:solo] && u != @user
     end
     @reveal_teammates = !@user.is_villager?
     @reports = @user.get_reports
@@ -54,9 +52,9 @@ class ActionsController < ApplicationController
     @roles = @room.get_roles
     @reports = @user.get_reports
     @day_phase_changed_channel = PRIVATE_PUB_CHANNELS[:day_phase_changed] + "/#{@room.code}"
-    @role = MAFIA_ROLES[@user.role_id]
+    @role = @user.role
     @teammates = @room.users.select do |u|
-      u.role[:team] == @user.role[:team] && @user.role[:team] != MAFIA_TEAMS[:solo] && u != @user
+      u.role.team == @user.role.team && @user.role.team != Role::MAFIA_TEAMS[:solo] && u != @user
     end
     @reveal_teammates = !@user.is_villager?
   end
@@ -68,7 +66,7 @@ class ActionsController < ApplicationController
 
       if @user.save
         action_id = params[:player_action].keys.first.to_i
-        action_name = get_action_options(@user.id, @user.role_id, @room.day_phase, @room.users)[action_id][:name]
+        action_name = @user.role.get_action_options[action_id][:name]
 
         render json: {
           action_name: action_name,

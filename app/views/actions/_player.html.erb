@@ -1,4 +1,4 @@
-<li id="user-<%= player.id %>" class='<%= "team-#{player.role[:team]}" if player.reveal_role %>'>
+<li id="user-<%= player.id %>" class='<%= "team-#{player.role.team}" if player.reveal_role %> user-<%= player.id %>'>
   <div class='user-name'><%= player.name %></div>
-  <div class='user-title'><%= player.role[:name] if player.reveal_role %></div>
+  <div class='user-title'><%= player.role.name if player.reveal_role %></div>
 </li>

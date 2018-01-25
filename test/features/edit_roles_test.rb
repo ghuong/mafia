@@ -15,13 +15,13 @@ class EditRolesTest < ActionDispatch::IntegrationTest
     end
 
     # Add new role
-    select MAFIA_ROLES[1][:name], from: "role"
+    select "Mafia", from: "role"
     click_on "add-role"
     assert_equal 200, page.status_code
     assert_equal edit_settings_path(room_code), current_path
     # Should see new role
     within('#roles-list') do
-      assert page.has_css?('li', text: MAFIA_ROLES[1][:name])
+      assert page.has_css?('li', text: "Mafia")
       assert page.has_css?('a', id: 'remove-role-1')
     end
 
@@ -29,33 +29,33 @@ class EditRolesTest < ActionDispatch::IntegrationTest
     within_session :guests_window do
       refresh_page
       within('#roles-list') do
-        assert page.has_css?('li', text: MAFIA_ROLES[1][:name])
+        assert page.has_css?('li', text: "Mafia")
         assert_not page.has_css?('a', id: 'remove-role-1')
       end
     end
 
     # Add another role
-    select MAFIA_ROLES[0][:name], from: "role"
+    select "Villager", from: "role"
     click_on "add-role"
 
     # Remove role first role added
     click_on "remove-role-1"
 
     within('#roles-list') do
-      assert page.has_css?('li', text: MAFIA_ROLES[0][:name])
+      assert page.has_css?('li', text: "Villager")
       assert page.has_css?('a', id: 'remove-role-0')
       
-      assert_not page.has_css?('li', text: MAFIA_ROLES[1][:name])
+      assert_not page.has_css?('li', text: "Mafia")
     end
 
     # Guest user should see new role, but not first deleted one
     within_session :guests_window do
       refresh_page
       within('#roles-list') do
-        assert page.has_css?('li', text: MAFIA_ROLES[0][:name])
+        assert page.has_css?('li', text: "Villager")
         assert_not page.has_css?('a', id: 'remove-role-0')
 
-        assert_not page.has_css?('li', text: MAFIA_ROLES[1][:name])
+        assert_not page.has_css?('li', text: "Mafia")
       end
     end
   end

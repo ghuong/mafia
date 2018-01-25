@@ -5,13 +5,13 @@ class StartGameTest < ActionDispatch::IntegrationTest
     room_code = create_room
 
     # Add four roles
-    select MAFIA_ROLES[1][:name], from: "role"
+    select "Mafia", from: "role"
     click_on "add-role"
-    select MAFIA_ROLES[0][:name], from: "role"
+    select "Villager", from: "role"
     click_on "add-role"
-    select MAFIA_ROLES[1][:name], from: "role"
+    select "Mafia", from: "role"
     click_on "add-role"
-    select MAFIA_ROLES[0][:name], from: "role"
+    select "Villager", from: "role"
     click_on "add-role"
 
     # Try to start game, should fail

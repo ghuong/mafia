@@ -26,7 +26,7 @@
   </div>
 
   <div id="role-info-container" class="hide">
-    <%= render partial: 'shared/role_info', locals: { role: { name: "name", team: "team", ability: "ability", objective: "objective" }, personal: false, reveal_teammates: false, teammates: [] } %>
+    <%= render partial: 'shared/role_info', locals: { role: Role.new(0), personal: false, reveal_teammates: false, teammates: [] } %>
   </div>
 </div>
 

@@ -1,6 +1,4 @@
 class Room < ApplicationRecord
-  include RoomsHelper
-
   has_many :users, dependent: :destroy
 
   before_create :generate_room_code
@@ -26,24 +24,16 @@ class Room < ApplicationRecord
   def get_roles
     result = roles.split(",").each_with_index.map do |count, idx|
       { 
-        id: idx, 
-        name: MAFIA_ROLES[idx][:name], 
-        count: count.to_i, 
-        team: MAFIA_ROLES[idx][:team], 
-        objective: MAFIA_ROLES[idx][:objective], 
-        ability: MAFIA_ROLES[idx][:ability] 
+        role: Role.get_role(idx),
+        count: count.to_i
       }
     end
 
-    if result.length < MAFIA_ROLES.length
-      MAFIA_ROLES.each_with_index.map do |role, idx|
+    if result.length < Role::MAFIA_ROLES.length
+      Role::MAFIA_ROLES.length.times.map do |idx|
         { 
-          id: idx, 
-          name: role[:name], 
-          count: 0, 
-          team: role[:team], 
-          objective: role[:objective], 
-          ability: role[:ability] 
+          role: Role.get_role(idx),
+          count: 0
         }
       end
     else
@@ -53,7 +43,7 @@ class Room < ApplicationRecord
 
   # Add role to the room's setup
   def add_role(id)
-    if id < MAFIA_ROLES.length
+    if id < Role::MAFIA_ROLES.length
       roles = get_roles
       roles[id][:count] += 1
       set_roles(roles)
@@ -62,7 +52,7 @@ class Room < ApplicationRecord
 
   # Remove role from the room's setup
   def remove_role(id)
-    if id < MAFIA_ROLES.length
+    if id < Role::MAFIA_ROLES.length
       roles = get_roles
       roles[id][:count] -= roles[id][:count] > 0 ? 1 : 0
       set_roles(roles)
@@ -78,7 +68,7 @@ class Room < ApplicationRecord
 
     role_deck = []
     roles.each do |role|
-      role[:count].times { role_deck << role[:id] }
+      role[:count].times { role_deck << role[:role].id }
     end
     role_deck.shuffle!
 
@@ -106,10 +96,10 @@ class Room < ApplicationRecord
     clear_reports
 
     # Process all user actions
-    process_user_actions(self.day_phase, self.users)
+    process_user_actions
     
     # Determine if the game is over
-    process_game_over(self, self.users)
+    process_game_over
 
     # Progress to next day phase
     self.day_phase = self.day_phase == 'night' ? 'day' : 'night'
@@ -157,5 +147,107 @@ class Room < ApplicationRecord
     # Clear all Reports for users
     def clear_reports
       self.users.each { |user| user.clear_reports }
+    end
+
+    # Process all of the user's actions
+    def process_user_actions
+      living_users = self.users.select { |u| u.is_alive }
+      killed_users = []
+      lynched_users = []
+      
+      case self.day_phase 
+      when 'night'
+        victim = process_mafia_kill(living_users)
+        if victim
+          killed_users << victim
+        end
+      when 'day'
+        victim = process_lynch(living_users)
+        if victim
+          lynched_users << victim
+        end
+      end
+
+      living_users.each { |user| user.role.process_independent_actions(killed_users) }
+
+      # Write Reports for the transpired events
+      self.users.each do |user|
+        killed_users.each do |killed_user|
+          user.add_report("#{killed_user.name} was killed!")
+        end
+
+        lynched_users.each do |lynched_user|
+          user.add_report("#{lynched_user.name} was lynched!")
+        end
+      end
+    end
+
+    # Process if the game is over
+    def process_game_over
+      living_users = self.users.select { |user| user.is_alive }
+      winners = []
+      if do_villagers_win?(living_users)
+        winners << "Village"
+        self.users.select { |user| user.is_villager? }.each do |user|
+          user.is_winner = true
+        end
+      elsif do_mafia_win?(living_users)
+        winners << "Mafia"
+        self.users.select { |user| user.is_mafia? }.each do |user|
+          user.is_winner = true
+        end
+      else
+        return
+      end
+
+      self.state = 'finished'
+      self.winners = winners.join(",")
+    end
+
+    # Process mafia kill
+    def process_mafia_kill(living_users)
+      living_mafia = living_users.select { |user| user.is_mafia? }
+      mafia_kill_votes = living_mafia.map do |mafia|
+        mafia.get_target(Role::ACTIONS[:kill][:name])
+      end
+      majority_vote = mode(mafia_kill_votes).first.shuffle.first
+      victim = living_users.find { |user| user.id == majority_vote }
+      if victim
+        victim.kill
+        return victim
+      end
+    end
+
+    # Process lynch vote
+    def process_lynch(living_users)
+      lynch_votes = living_users.map do |user|
+        user.get_target(Role::ACTIONS[:lynch][:name])
+      end
+      majority_vote, freq = mode(lynch_votes)
+      majority_vote = majority_vote.first
+      if freq > living_users.length / 2
+        victim = living_users.find { |user| user.id == majority_vote }
+        if victim
+          victim.kill
+          return victim
+        end
+      end
+    end
+
+    # Returns an array of the mode values, and the frequency of each
+    def mode(arr)
+      freq = arr.inject(Hash.new(0)) { |h, v| h[v] += 1; h }
+      max = freq.values.max
+      return freq.select { |k, f| f == max }.keys, max
+    end
+
+    # Returns true iff all Mafia are dead, and at least one villager is alive
+    def do_villagers_win?(living_users)
+      living_users.none? { |user| user.is_mafia? } && !living_users.empty?
+    end
+
+    # Returns true iff at least half of the living players are Mafia
+    def do_mafia_win?(living_users)
+      living_users.count { |user| user.is_mafia? } >= (living_users.length + 1) / 2
     end
 end

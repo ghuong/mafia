@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  include ActionsHelper
-
   REPORT_DELIMETER = "|".freeze
 
   belongs_to :room
@@ -40,24 +38,16 @@ class User < ApplicationRecord
 
   def get_action_target(action_idx)
     if action_idx.nil?
-      return TARGET_UNDECIDED
+      return Role::TARGET_UNDECIDED
     end
 
     targets = get_action_targets
     if !targets.empty?
       targets[action_idx]
     else
-      TARGET_UNDECIDED
+      Role::TARGET_UNDECIDED
     end
   end
-
-  # def get_action_target_by_action_name(action_name)
-  #   action_idx = get_action_options(id, role_id, room.day_phase, room.users).find_index do |option|
-  #     option[:name] == action_name
-  #   end
-
-  #   get_action_target(action_idx)
-  # end
 
   # Set the targets (user ids)
   def set_action_targets(targets)
@@ -68,8 +58,8 @@ class User < ApplicationRecord
   def set_action_target(action_idx, target) 
     current_targets = get_action_targets
     if current_targets.empty?
-      current_targets = get_action_options(id, role_id, room.day_phase, room.users).map do |option|
-        TARGET_UNDECIDED
+      current_targets = self.role.get_action_options.map do |option|
+        Role::TARGET_UNDECIDED
       end
     end
 
@@ -79,22 +69,22 @@ class User < ApplicationRecord
 
   # Returns true iff user is on Mafia team
   def is_mafia?
-    MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:mafia]
+    self.role.team == Role::MAFIA_TEAMS[:mafia]
   end
 
   # Returns true iff user is on Villager team
   def is_villager?
-    MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:village]
+    self.role.team == Role::MAFIA_TEAMS[:village]
   end
 
   # Returns true iff user is on his own team
   def is_solo?
-    MAFIA_ROLES[role_id][:team] == MAFIA_TEAMS[:solo]
+    self.role.team == Role::MAFIA_TEAMS[:solo]
   end
 
   # Returns the user's target for a specific action
   def get_target(action_name)
-    action_options = get_action_options(id, role_id, room.day_phase, room.users)
+    action_options = self.role.get_action_options
     action_index = action_options.find_index do |option|
       option[:name] == action_name
     end
@@ -109,7 +99,11 @@ class User < ApplicationRecord
 
   # Get this user's role
   def role
-    MAFIA_ROLES[role_id]
+    if @role_instance.nil?
+      @role_instance = Role::get_role(self.role_id, self)
+    end
+
+    return @role_instance
   end
 
   # Predicate returning true iff player is dead
@@ -169,7 +163,7 @@ class User < ApplicationRecord
     def action_targets_are_valid
       return true if !is_ready || role_id.nil?
 
-      valid_actions = get_action_options(id, role_id, room.day_phase, room.users)
+      valid_actions = self.role.get_action_options
       chosen_targets = get_action_targets
       is_valid = chosen_targets.length == valid_actions.length &&
         chosen_targets.each_with_index.all? do |chosen_target, idx|

@@ -1,5 +1,5 @@
 class PublishController < ApplicationController
-  include ActionsHelper
+  include PublishHelper
 
   before_action :has_joined_room
   before_action :is_host_of_room, only: [
@@ -49,7 +49,7 @@ class PublishController < ApplicationController
     @action_name = params[:action_name]
     @action_id = params[:action_id]
     @user_id = params[:user_id]
-    @new_vote = resolve_target(User.find_by(id: @user_id).get_action_target(@action_id.to_i)).name
+    @new_vote = Role::resolve_target(User.find_by(id: @user_id).get_action_target(@action_id.to_i)).name
   end
 
   def announce_ready
