@@ -57,6 +57,11 @@ $('.settings_controller.edit_action').ready(function() {
       httpRequest('/rooms/' + room_code, {}, 'delete');
     });
   });
+
+  // On role-options change, submit
+  $('#role-options').change(function() {
+    $('#new-role').submit();
+  });
 });
 
 $('.actions_controller.edit_action').ready(function() {

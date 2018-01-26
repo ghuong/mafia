@@ -562,8 +562,10 @@ div.panel {
 /* New Role form */
 
 form#new-role {
+  margin: 2% 0;
+
   #role-options {
-    width: 70%;
+    width: 90%;
     font-size: 1.6em;
     margin: 0 0.5em;
   }

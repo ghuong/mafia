@@ -19,7 +19,7 @@
 
     <%= form_tag(add_role_path(params[:room_code]), id: 'new-role', class: "Aligner") do %>
       <%= select_tag :role, options_for_select(@role_options.map {|role| [role[:name], role[:id]]}), id: 'role-options' %>
-      <%= submit_tag "Add", id: 'add-role', class: "btn btn-lg btn-default" %>
+      <%= submit_tag "Add", id: 'add-role', class: "btn btn-lg btn-default hide" %>
     <% end %>
   <% end %>
 </div>
