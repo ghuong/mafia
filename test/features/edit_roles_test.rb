@@ -22,7 +22,6 @@ class EditRolesTest < ActionDispatch::IntegrationTest
     # Should see new role
     within('#roles-list') do
       assert page.has_css?('li', text: "Mafia")
-      assert page.has_css?('a', id: 'remove-role-1')
     end
 
     # Guest user should see new role too
@@ -30,7 +29,6 @@ class EditRolesTest < ActionDispatch::IntegrationTest
       refresh_page
       within('#roles-list') do
         assert page.has_css?('li', text: "Mafia")
-        assert_not page.has_css?('a', id: 'remove-role-1')
       end
     end
 
@@ -38,14 +36,8 @@ class EditRolesTest < ActionDispatch::IntegrationTest
     select "Villager", from: "role"
     click_on "add-role"
 
-    # Remove role first role added
-    click_on "remove-role-1"
-
     within('#roles-list') do
       assert page.has_css?('li', text: "Villager")
-      assert page.has_css?('a', id: 'remove-role-0')
-      
-      assert_not page.has_css?('li', text: "Mafia")
     end
 
     # Guest user should see new role, but not first deleted one
@@ -53,9 +45,6 @@ class EditRolesTest < ActionDispatch::IntegrationTest
       refresh_page
       within('#roles-list') do
         assert page.has_css?('li', text: "Villager")
-        assert_not page.has_css?('a', id: 'remove-role-0')
-
-        assert_not page.has_css?('li', text: "Mafia")
       end
     end
   end

@@ -6,9 +6,7 @@ class SettingsController < ApplicationController
     @roles_list_channel = PRIVATE_PUB_CHANNELS[:roles_list] + "/#{@room.code}"
     @users = @room.users
     @roles = @room.get_roles
-    @role_options = Role::MAFIA_ROLES.each_with_index.map do |role, idx|
-      { id: idx, name: role }
-    end
+    @role_options = Role::get_role_options
   end
 
   def add_role

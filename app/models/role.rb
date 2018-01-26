@@ -2,6 +2,7 @@ class Role
 
   TARGET_NOBODY = -1.freeze
   TARGET_UNDECIDED = -2.freeze
+  INVALID_ROLE = -1.freeze
 
   MAFIA_TEAMS = {
     village: "Village",
@@ -14,9 +15,18 @@ class Role
     mafia: "All Mafia members win, regardless of whether they're alive, when half the surviving players are Mafia."
   }.freeze
 
-  MAFIA_ROLES = [
-    "Villager", "Mafia", "Cop", "Doctor"
+  TEAM_VILLAGE = [
+    "Villager", "Cop", "Doctor"
   ].freeze
+
+  TEAM_MAFIA = [
+    "Mafia"
+  ].freeze
+
+  TEAM_NEUTRAL = [
+  ].freeze
+
+  MAFIA_ROLES = TEAM_VILLAGE + TEAM_MAFIA + TEAM_NEUTRAL
 
   ACTIONS = {
     kill: { name: "kill", description: "Vote to Kill" },
@@ -38,6 +48,34 @@ class Role
     when "Doctor"
       Doctor.new(id, user)
     end
+  end
+
+  def self.get_role_options
+    options = []
+    
+    options << { id: INVALID_ROLE, name: "Add Role:" }
+    options << { id: INVALID_ROLE, name: "— VILLAGE ROLES —" }
+    TEAM_VILLAGE.each_with_index do |role, idx|
+      options << { id: idx, name: role }
+    end
+
+    options << { id: INVALID_ROLE, name: "— MAFIA ROLES —" }
+    idx_counter = TEAM_VILLAGE.length
+    TEAM_MAFIA.each_with_index do |role, idx|
+      options << { id: idx + idx_counter, name: role }
+    end
+
+    options << { id: INVALID_ROLE, name: "— NEUTRAL ROLES —" }
+    idx_counter += TEAM_MAFIA.length
+    TEAM_NEUTRAL.each_with_index do |role, idx|
+      options << { id: idx + idx_counter, name: role }
+    end
+
+    return options
+  end
+
+  def self.is_role_id(id)
+    id < Role::MAFIA_ROLES.length && id != INVALID_ROLE
   end
 
   def initialize(action_id, user = nil)

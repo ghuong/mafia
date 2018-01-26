@@ -43,7 +43,7 @@ class Room < ApplicationRecord
 
   # Add role to the room's setup
   def add_role(id)
-    if id < Role::MAFIA_ROLES.length
+    if Role::is_role_id(id)
       roles = get_roles
       roles[id][:count] += 1
       set_roles(roles)
@@ -52,7 +52,7 @@ class Room < ApplicationRecord
 
   # Remove role from the room's setup
   def remove_role(id)
-    if id < Role::MAFIA_ROLES.length
+    if Role::is_role_id(id)
       roles = get_roles
       roles[id][:count] -= roles[id][:count] > 0 ? 1 : 0
       set_roles(roles)
