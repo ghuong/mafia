@@ -178,6 +178,7 @@ form#join-room-form {
     padding: 0.5em 0.8em;
     display: block;
     margin-right: 0.2em;
+    text-transform: uppercase;
   }
 
   #join-room {
@@ -207,19 +208,19 @@ form#join-room-form {
   align-items: flex-start;
 }
 
-.flex-item:nth-child(1) {
+.flex-item-1 {
   -webkit-order: 0;
   -ms-flex-order: 0;
   order: 0;
-  -webkit-flex: 3 1 auto;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
+  -webkit-flex: 4 1 auto;
+  -ms-flex: 4 1 auto;
+  flex: 4 1 auto;
   -webkit-align-self: auto;
   -ms-flex-item-align: auto;
   align-self: auto;
 }
 
-.flex-item:nth-child(2) {
+.flex-item-2 {
   -webkit-order: 0;
   -ms-flex-order: 0;
   order: 0;

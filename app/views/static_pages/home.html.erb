@@ -7,11 +7,11 @@
       
 
       <div class="flex-container">
-        <div class="flex-item">
-          <%= f.text_field :code, class: 'form-control flex-item', placeholder: "Room" %>
+        <div class="flex-item-1">
+          <%= f.text_field :code, class: 'form-control', placeholder: "Room", maxlength: 4 %>
         </div>
-        <div class="flex-item">
-          <%= f.submit "GO", id: "join-room", class: "btn btn-lg btn-default btn-gray flex-item" %>
+        <div class="flex-item-2">
+          <%= f.submit "GO", id: "join-room", class: "btn btn-lg btn-default btn-gray" %>
         </div>
       </div>
       
