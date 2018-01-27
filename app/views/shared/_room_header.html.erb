@@ -41,7 +41,7 @@
           <%= link_to "Role", '#', id: "role-button", class: "btn btn-lg btn-default btn-gray" %>
 
         <% elsif @room.is_finished? %>
-          <%= link_to "Leave", root_path, id: "leave", class: "btn btn-lg btn-default btn-gray size-large" %>
+          <%= link_to "Leave", users_path(room_code), method: :delete, id: "leave", class: "btn btn-lg btn-default btn-gray size-large" %>
         <% end %>
       <% end %>
     </div>

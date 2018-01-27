@@ -17,8 +17,8 @@ class RoomCreationTest < ActionDispatch::IntegrationTest
       assert page.has_css?('li', text: host_name)
     end
 
-    # Rejoin room
-    rejoin_room(room_code)
+    # Try to leave room, it won't let you
+    visit root_path
     assert_equal 200, page.status_code
     assert_equal edit_settings_path(room_code), current_path
   end

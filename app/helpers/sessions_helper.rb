@@ -61,4 +61,14 @@ module SessionsHelper
     user ||= current_user
     has_already_joined?(room, user) && user.is_host
   end
+
+  # Returns true iff the current user is in a room
+  def is_in_a_room?
+    user = current_user
+    if user
+      room = Room.find_by(id: user.room_id)
+      return !room.nil?
+    end
+    return false
+  end
 end

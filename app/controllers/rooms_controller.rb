@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_action :not_in_room, only: [:new, :create]
 
   def new
     @room = Room.new
@@ -75,6 +76,12 @@ class RoomsController < ApplicationController
       user = User.find_by(id: params[:user_id])
       if user && user.authenticated?(:remember, params[:remember_token])
         remember(user)
+      end
+    end
+
+    def not_in_room
+      if is_in_a_room?
+        redirect_to room_path(current_user.room.code)
       end
     end
 end
