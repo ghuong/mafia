@@ -6,7 +6,7 @@
 
     <div id='name-fields'>
       <%= f.label :name, "What's your actual name?", id: 'name-label' %>
-      <%= f.text_field :name, class: 'form-control', placeholder: "Your Name", id: 'name-field' %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "Your Name", id: 'name-field', autofocus: true %>
     </div>
     <%= submit_tag "GO", id: 'submit', class: "btn btn-lg btn-default btn-gray" %>
   <% end %>
