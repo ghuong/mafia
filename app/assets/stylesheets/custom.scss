@@ -119,6 +119,11 @@ input {
   height: auto !important;
 }
 
+input[type="text"] {
+  box-shadow: inset 2px 5px 6px rgba(0,0,0,0.25);
+  padding: 0.5em 0.8em;
+}
+
 #error_explanation {
   color: red;
   ul {
@@ -149,6 +154,7 @@ input {
 .btn-gray, .btn-gray:visited, .btn-gray:hover, .btn-gray:focus {
   background-color: $gray-light;
   color: $gray-lighter;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.4)
 }
 
 /* static_pages/home */
@@ -722,4 +728,45 @@ div.help {
 
 div.information {
   margin-bottom: 30px;
+}
+
+/* Copy to clipboard */
+
+div.clipboard-container {
+  width: 100%;
+  text-align: center;
+
+  div.clipboard {
+    display: table;
+    width: 100%;
+
+    #clipboard-target {
+      display: table-cell;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      position: relative;
+      width: 220px;
+      padding: 10px 10px;
+      font-size: 14px;
+      border-color: #e28c36;
+    }
+
+    .copy-to-clipboard {
+      display: table-cell;
+      border-radius: 4px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: -1px;
+      padding: 10px 12px;
+      background-color: #e9a663;
+      background-image: linear-gradient(#f2cca6, #e9a663);
+      border-color: #e28c36;
+
+      .icon {
+        position: relative;
+        display: inline-block;
+        height: 16px;
+      }
+    }
+  }
 }

@@ -16,6 +16,7 @@
 //= require jquery-readyselector
 //= require jquery-http-request
 //= require jquery-append-event
+//= require clipboard.min
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .

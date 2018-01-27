@@ -62,6 +62,9 @@ $('.settings_controller.edit_action').ready(function() {
   $('#role-options').change(function() {
     $('#new-role').submit();
   });
+
+  // Clipboard
+  new Clipboard('.copy-to-clipboard');
 });
 
 $('.actions_controller.edit_action').ready(function() {

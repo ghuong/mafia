@@ -4,6 +4,8 @@
   
   <div id="gameplay-container">
     <div class="information">
+      <%= render partial: 'shared/copy_to_clipboard', locals: { value: "#{room_url(params[:room_code])}" } %>
+
       <%= render partial: 'shared/help_panel', locals: { messages: [
         "1. Tell your friends to go to this website on their phone and enter the 4-letter code above, or just link them the url.",
         "2. Add Roles equal in number to Players.",
