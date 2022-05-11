@@ -1,4 +1,8 @@
-# README
+# Mafia Group Game
+
+Live at [mafia-gary.herokuapp.com](https://mafia-gary.herokuapp.com).
+
+![screenshot](https://live.staticflickr.com/65535/52067027630_93a93badb6_h.jpg)
 
 === Preparation ===
 
